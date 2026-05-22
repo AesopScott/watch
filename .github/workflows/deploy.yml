@@ -1,0 +1,51 @@
+name: Deploy to Mocahost
+
+on:
+  push:
+    branches:
+      - main
+      - stage
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-mocahost-watch-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Determine server directory
+        id: target
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "stage" ]; then
+            echo "dir=/public_html/watch/stage.watchmebuildai.com/" >> "$GITHUB_OUTPUT"
+            echo "env=stage" >> "$GITHUB_OUTPUT"
+          else
+            echo "dir=/public_html/watch/" >> "$GITHUB_OUTPUT"
+            echo "env=prod" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 65.181.111.131
+          username: hivetec1
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          protocol: ftps
+          local-dir: ./
+          server-dir: ${{ steps.target.outputs.dir }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
+            **/.claude/**
+            **/.DS_Store
+            **/README.md
+            cgi-bin/**
+            docs/**

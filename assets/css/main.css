@@ -114,25 +114,22 @@ a:hover { text-decoration: underline; }
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: nowrap;
-    gap: 4px;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-bottom: 32px;
-    overflow: hidden;
 }
 .stage-item {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 5px 14px;
     background: rgba(124,58,237,0.08);
     border: 1px solid rgba(124,58,237,0.2);
     border-radius: 999px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     color: rgba(167,139,250,0.55);
-    letter-spacing: 0;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     white-space: nowrap;
-    flex-shrink: 1;
-    min-width: 0;
 }
 .stage-active {
     background: rgba(124,58,237,0.15);
@@ -141,11 +138,10 @@ a:hover { text-decoration: underline; }
 }
 .stage-sep {
     color: var(--border);
-    font-size: 12px;
+    font-size: 14px;
     flex-shrink: 0;
 }
 @media (max-width: 768px) {
-    .stage-track { flex-wrap: wrap; justify-content: center; }
     .stage-sep { display: none; }
 }
 

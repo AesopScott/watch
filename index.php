@@ -127,6 +127,36 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     </div>
 </section>
 
+<!-- ── Outcomes ── -->
+<section class="section section-alt">
+    <div class="container">
+        <h2 class="section-title">What changes after you subscribe</h2>
+        <p class="section-sub">Not theory. Not motivation. Concrete skills you didn't have before.</p>
+        <div class="value-grid" style="margin-top:0">
+            <div class="value-card">
+                <div class="value-icon">🧠</div>
+                <h3>You think in systems</h3>
+                <p>You'll stop asking "what prompt do I use?" and start asking "how do I architect this pipeline?" — the shift that separates AI tinkerers from AI builders.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">⚙️</div>
+                <h3>You ship real agent pipelines</h3>
+                <p>You'll have watched — and understood — multi-step agent workflows built from scratch. Not a tutorial. A real system, deployed, working.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🗺</div>
+                <h3>You know the decisions behind the code</h3>
+                <p>Every session shows the dead ends, the pivots, the "why not that" moments. You'll internalize judgment that can't come from reading docs.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🚀</div>
+                <h3>You move six months faster</h3>
+                <p>The developers who watch serious builders work get to skip the exploration phase entirely. You'll know what works before you try it.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ── Schedule ── -->
 <section class="section" id="schedule">
     <div class="container">
@@ -158,6 +188,73 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
             <p>Sessions are scheduled weekly. <a href="#subscribe">Subscribe to get notified</a> when the next one is posted.</p>
         </div>
         <?php endif; ?>
+    </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section section-alt" id="faq">
+    <div class="container">
+        <h2 class="section-title">Frequently asked questions</h2>
+        <p class="section-sub">Everything you need to know before subscribing.</p>
+        <div class="faq-list">
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">What actually happens during a session? <span class="faq-chevron">›</span></button>
+                <div class="faq-a">
+                    <p>Each session is a live, unedited Zoom call where Scott builds something real — an agent pipeline, an orchestration layer, a production AI system. You watch the whole process: the planning, the mistakes, the debugging, the decisions. No slides. No script. Just building.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">How do I get the Zoom link? <span class="faq-chevron">›</span></button>
+                <div class="faq-a">
+                    <p>Once you're a subscriber, the Zoom link for every upcoming session appears directly in your member portal. You'll also get an email reminder before each session with the link included.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">What if I miss a session? <span class="faq-chevron">›</span></button>
+                <div class="faq-a">
+                    <p>Every session is recorded and added to the library in your member portal. You can watch at any time, as many times as you want, for as long as your subscription is active.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">What tools or experience do I need? <span class="faq-chevron">›</span></button>
+                <div class="faq-a">
+                    <p>You need a Zoom account to join live. Beyond that: basic programming experience and familiarity with AI concepts. This is not a beginner course — it's for developers who already understand the basics and want to see what serious AI engineering actually looks like.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">How much time does this take per week? <span class="faq-chevron">›</span></button>
+                <div class="faq-a">
+                    <p>Sessions run as long as the build runs — there's no fixed length. You can attend live, catch the recording, or both. There's no homework, no assignments, no required time outside of watching. It fits around your schedule.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">Can I cancel any time? <span class="faq-chevron">›</span></button>
+                <div class="faq-a">
+                    <p>Yes. Cancel any time and you keep access through the end of your current billing period. No questions asked, no hoops to jump through.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">What's the refund policy? <span class="faq-chevron">›</span></button>
+                <div class="faq-a">
+                    <p>You have a 7-day free trial — no charge until it ends. If you decide it's not for you during that window, just cancel and you won't be billed. After the trial, subscriptions are non-refundable but you can cancel to stop future charges.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">What exactly is being built in these sessions? <span class="faq-chevron">›</span></button>
+                <div class="faq-a">
+                    <p>Real production AI systems — agent pipelines, orchestration layers, multi-step workflows, AI-powered tools. Scott is simultaneously building ten companies with AI, and these sessions show exactly how that gets done: the architecture decisions, the tooling choices, the failures and what came after them.</p>
+                </div>
+            </div>
+
+        </div>
     </div>
 </section>
 

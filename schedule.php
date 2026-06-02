@@ -9,37 +9,48 @@ $upcoming       = get_upcoming_sessions(60);
 $meetup_events  = get_meetup_events(60);
 $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-edb630b7733d';
 
-// ── Build event map keyed by YYYY-MM-DD ──────────────────────────────────────
-$event_map = [];
+// Returns top% and height% within the 8am–6pm (600 min) grid
+function cal_event_pos(DateTime $dt, int $duration_min): array {
+    $range_start = 8 * 60;
+    $range_total = 10 * 60;
+    $event_min   = (int) $dt->format('G') * 60 + (int) $dt->format('i');
+    $top    = max(0.0, min(98.0, round(($event_min - $range_start) / $range_total * 100, 2)));
+    $height = max(2.0, round(min($duration_min / $range_total * 100, 100.0 - $top), 2));
+    return ['top' => $top, 'height' => $height];
+}
 
+// ── Build event map keyed by YYYY-MM-DD ──────────────────────────────────────
+$event_map   = [];
 $mountain_tz = new DateTimeZone('America/Denver');
 
 foreach ($upcoming as $s) {
-    $ts  = strtotime($s['date']);
+    $ts = strtotime($s['date']);
     if (!$ts) continue;
     $dt  = (new DateTime('@' . $ts))->setTimezone($mountain_tz);
     $day = $dt->format('Y-m-d');
     $mt  = $dt->format('g:i a T');
     $utc = gmdate('g:i a', $ts) . ' UTC';
     $event_map[$day][] = [
-        'type'   => 'pro',
-        'title'  => $s['title'],
-        'time'   => $mt . ' / ' . $utc,
-        'desc'   => $s['description'] ?? '',
-        'url'    => $logged_in ? '/portal/#session-' . htmlspecialchars($s['id']) : null,
-        'locked' => !$logged_in,
+        'type'     => 'pro',
+        'title'    => $s['title'],
+        'time'     => $mt . ' / ' . $utc,
+        'duration' => '1 hour',
+        'desc'     => $s['description'] ?? '',
+        'url'      => $logged_in ? '/portal/#session-' . htmlspecialchars($s['id']) : null,
+        'locked'   => !$logged_in,
+        'pos'      => cal_event_pos($dt, 60),
     ];
 }
 
 foreach ($meetup_events as $e) {
-    $ts  = strtotime($e['date'] ?? '');
+    $ts = strtotime($e['date'] ?? '');
     if (!$ts) continue;
-    $dt  = (new DateTime('@' . $ts))->setTimezone($mountain_tz);
-    $day = $dt->format('Y-m-d');  // place on the Mountain Time calendar day
+    $dt        = (new DateTime('@' . $ts))->setTimezone($mountain_tz);
+    $day       = $dt->format('Y-m-d');
+    $mt        = $dt->format('g:i a T');
+    $utc       = gmdate('g:i a', $ts) . ' UTC';
     $rsvp_line = $e['rsvps'] > 0 ? $e['rsvps'] . ' RSVPs across the network' : '';
     $desc_full = trim(($e['description'] ?? '') . ($rsvp_line ? "\n\n" . $rsvp_line : ''));
-    $mt  = $dt->format('g:i a T');
-    $utc = gmdate('g:i a', $ts) . ' UTC';
     $event_map[$day][] = [
         'type'     => 'meetup',
         'title'    => $e['title'],
@@ -48,6 +59,7 @@ foreach ($meetup_events as $e) {
         'desc'     => $desc_full ?: $rsvp_line,
         'url'      => !empty($e['eventUrl']) ? $e['eventUrl'] : $e['url'],
         'locked'   => false,
+        'pos'      => cal_event_pos($dt, 120),
     ];
 }
 
@@ -58,24 +70,25 @@ $end    = new DateTime('first day of +3 months', $mountain_tz);
 $end->modify('last day of this month')->setTime(23, 59, 59);
 
 while ($cursor <= $end) {
-    $dow = (int) $cursor->format('N'); // 2=Tue, 4=Thu
+    $dow = (int) $cursor->format('N');
     if ($dow === 2 || $dow === 4) {
         foreach ([8, 15] as $hour) {
-            $dt  = clone $cursor;
+            $dt = clone $cursor;
             $dt->setTime($hour, 0, 0);
-            $ts  = $dt->getTimestamp();
-            if ($ts < $now) { continue; }
+            $ts = $dt->getTimestamp();
+            if ($ts < $now) continue;
             $day = $dt->format('Y-m-d');
             $mt  = $dt->format('g:i a T');
             $utc = gmdate('g:i a', $ts) . ' UTC';
             $event_map[$day][] = [
-                'type'   => 'pro',
-                'title'  => 'Pro Session',
-                'time'   => $mt . ' / ' . $utc,
-                'desc'     => 'Pro Members Only · 1 hour',
+                'type'     => 'pro',
+                'title'    => 'Pro Session',
+                'time'     => $mt . ' / ' . $utc,
                 'duration' => '1 hour',
+                'desc'     => 'Pro Members Only',
                 'url'      => $logged_in ? '/portal/' : null,
                 'locked'   => !$logged_in,
+                'pos'      => cal_event_pos($dt, 60),
             ];
         }
     }
@@ -89,10 +102,10 @@ while ($cursor <= $end) {
     $dow = (int) $cursor->format('N');
     if ($dow === 2 || $dow === 4) {
         foreach ([13, 16] as $hour) {
-            $dt  = clone $cursor;
+            $dt = clone $cursor;
             $dt->setTime($hour, 0, 0);
-            $ts  = $dt->getTimestamp();
-            if ($ts < $now) { continue; }
+            $ts = $dt->getTimestamp();
+            if ($ts < $now) continue;
             $day = $dt->format('Y-m-d');
             $mt  = $dt->format('g:i a T');
             $utc = gmdate('g:i a', $ts) . ' UTC';
@@ -104,6 +117,7 @@ while ($cursor <= $end) {
                 'desc'     => 'Cohort 10 Members Only',
                 'url'      => $logged_in ? '/portal/' : null,
                 'locked'   => !$logged_in,
+                'pos'      => cal_event_pos($dt, 60),
             ];
         }
     }
@@ -120,15 +134,15 @@ function cal_months(int $count = 3): array {
             'label'     => date('F Y', $ts),
             'year'      => (int) date('Y', $ts),
             'month'     => (int) date('n', $ts),
-            'first_dow' => (int) date('w', $ts),   // 0 = Sunday
+            'first_dow' => (int) date('w', $ts),
             'days'      => (int) date('t', $ts),
         ];
     }
     return $months;
 }
 
-$months  = cal_months(3);
-$today   = date('Y-m-d');
+$months = cal_months(3);
+$today  = date('Y-m-d');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -186,9 +200,7 @@ $today   = date('Y-m-d');
             <div class="cal-weekday">Fri</div>
             <div class="cal-weekday">Sat</div>
 
-            <?php
-            // Empty cells before month starts
-            for ($blank = 0; $blank < $m['first_dow']; $blank++): ?>
+            <?php for ($blank = 0; $blank < $m['first_dow']; $blank++): ?>
             <div class="cal-day cal-day-empty"></div>
             <?php endfor; ?>
 
@@ -199,36 +211,38 @@ $today   = date('Y-m-d');
             ?>
             <div class="cal-day<?= $is_today ? ' cal-day-today' : '' ?>">
                 <div class="cal-day-num"><?= $d ?></div>
-                <?php foreach ($events as $ev):
-                    $tip = htmlspecialchars(json_encode([
-                        'title'  => $ev['title'],
-                        'time'   => $ev['time'],
-                        'desc'   => $ev['desc'],
-                        'url'    => $ev['url'],
-                        'locked' => $ev['locked'],
-                        'type'   => $ev['type'],
-                    ]), ENT_QUOTES);
-                ?>
-                <div class="cal-event cal-event-<?= $ev['type'] ?>" data-tip="<?= $tip ?>">
-                    <span class="cal-event-title"><?= htmlspecialchars($ev['title']) ?></span>
-                    <?php if ($ev['time']): ?>
-                    <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?></span>
-                    <?php endif; ?>
-                    <?php if (!empty($ev['duration'])): ?>
-                    <span class="cal-event-duration"><?= htmlspecialchars($ev['duration']) ?></span>
-                    <?php endif; ?>
-                    <?php if ($ev['type'] === 'meetup'): ?>
-                    <span class="cal-event-badge">Meetup · Free</span>
-                    <?php endif; ?>
+                <div class="cal-hour-grid">
+                    <?php foreach ($events as $ev):
+                        $tip = htmlspecialchars(json_encode([
+                            'title'  => $ev['title'],
+                            'time'   => $ev['time'],
+                            'desc'   => $ev['desc'],
+                            'url'    => $ev['url'],
+                            'locked' => $ev['locked'],
+                            'type'   => $ev['type'],
+                        ]), ENT_QUOTES);
+                        $pos = $ev['pos'];
+                    ?>
+                    <div class="cal-event cal-event-<?= $ev['type'] ?>"
+                         data-tip="<?= $tip ?>"
+                         style="top:<?= $pos['top'] ?>%;height:<?= $pos['height'] ?>%">
+                        <span class="cal-event-title"><?= htmlspecialchars($ev['title']) ?></span>
+                        <?php if ($ev['time']): ?>
+                        <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?></span>
+                        <?php endif; ?>
+                        <?php if (!empty($ev['duration'])): ?>
+                        <span class="cal-event-duration"><?= htmlspecialchars($ev['duration']) ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <?php endforeach; ?>
                 </div>
-                <?php endforeach; ?>
             </div>
             <?php endfor; ?>
         </div>
     </div>
     <?php endforeach; ?>
 
-    <!-- Tooltip (hidden, moved by JS) -->
+    <!-- Tooltip -->
     <div id="cal-tooltip" class="cal-tooltip" style="display:none">
         <div class="cal-tip-type"></div>
         <div class="cal-tip-title"></div>
@@ -254,11 +268,18 @@ $today   = date('Y-m-d');
 <script src="/assets/js/main.js?v=<?= filemtime(__DIR__ . '/assets/js/main.js') ?>"></script>
 <script>
 (function () {
-    const tip   = document.getElementById('cal-tooltip');
+    const tip    = document.getElementById('cal-tooltip');
     const events = document.querySelectorAll('.cal-event');
 
+    const typeLabels = {
+        pro:     'Pro Session',
+        cohort:  'Cohort 10 Session',
+        private: 'Private Cohort Session',
+        meetup:  'Meetup Event (Free)',
+    };
+
     function show(el, data) {
-        tip.querySelector('.cal-tip-type').textContent  = data.type === 'pro' ? 'Pro Session' : 'Meetup Event';
+        tip.querySelector('.cal-tip-type').textContent  = typeLabels[data.type] || data.type;
         tip.querySelector('.cal-tip-title').textContent = data.title;
         tip.querySelector('.cal-tip-time').textContent  = data.time;
         tip.querySelector('.cal-tip-desc').textContent  = data.desc || '';
@@ -270,8 +291,8 @@ $today   = date('Y-m-d');
             cta.style.display    = 'none';
             locked.style.display = 'block';
         } else if (data.url) {
-            cta.href         = data.url;
-            cta.textContent  = data.type === 'pro' ? 'Join Session →' : 'RSVP on Meetup →';
+            cta.href             = data.url;
+            cta.textContent      = data.type === 'meetup' ? 'RSVP on Meetup →' : 'Join Session →';
             cta.style.display    = 'inline-flex';
             locked.style.display = 'none';
         } else {
@@ -289,7 +310,6 @@ $today   = date('Y-m-d');
         let   left = rect.left + window.scrollX + rect.width / 2 - tip.offsetWidth / 2;
         let   top  = rect.top  + window.scrollY - tip.offsetHeight - 10;
 
-        // Keep within viewport
         if (left < 8) left = 8;
         if (left + tip.offsetWidth > sw - 8) left = sw - tip.offsetWidth - 8;
         if (top < window.scrollY + 8) top = rect.bottom + window.scrollY + 10;

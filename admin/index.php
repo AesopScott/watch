@@ -93,6 +93,36 @@ if ($authenticated && $_SERVER['REQUEST_METHOD'] === 'POST') {
         write_recordings($recs);
         $flash = 'Recording deleted.';
     }
+
+    if ($action === 'add_subscriber') {
+        $sub_email  = strtolower(trim($_POST['sub_email'] ?? ''));
+        $sub_plan   = trim($_POST['sub_plan'] ?? 'manual');
+        $sub_status = trim($_POST['sub_status'] ?? 'active');
+        if (filter_var($sub_email, FILTER_VALIDATE_EMAIL)) {
+            $path  = __DIR__ . '/../data/subscribers.json';
+            $store = file_exists($path) ? (json_decode(file_get_contents($path), true) ?? []) : [];
+            if (!isset($store['subscribers'])) $store['subscribers'] = [];
+            $store['subscribers'][$sub_email] = [
+                'status'     => $sub_status,
+                'plan'       => $sub_plan,
+                'trial'      => false,
+                'started_at' => date('c'),
+            ];
+            file_put_contents($path, json_encode($store, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
+            $flash = 'Subscriber added: ' . $sub_email;
+        } else {
+            $flash = 'Invalid email address.';
+        }
+    }
+
+    if ($action === 'remove_subscriber') {
+        $sub_email = strtolower(trim($_POST['sub_email'] ?? ''));
+        $path  = __DIR__ . '/../data/subscribers.json';
+        $store = file_exists($path) ? (json_decode(file_get_contents($path), true) ?? []) : [];
+        unset($store['subscribers'][$sub_email]);
+        file_put_contents($path, json_encode($store, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
+        $flash = 'Subscriber removed: ' . $sub_email;
+    }
 }
 
 // ── Data for view ─────────────────────────────────────────────────────────────
@@ -343,11 +373,33 @@ usort($recordings, fn($a, $b) => strtotime($b['date']) <=> strtotime($a['date'])
 <!-- ── Subscribers tab ── -->
 <div id="tab-subscribers" class="tab-content">
     <div class="card">
+        <h2>Add Subscriber Manually</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="add_subscriber">
+            <div class="form-row form-row-3">
+                <div>
+                    <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px">Email</label>
+                    <input type="text" name="sub_email" required placeholder="subscriber@example.com">
+                </div>
+                <div>
+                    <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px">Plan</label>
+                    <input type="text" name="sub_plan" value="manual" placeholder="manual / pro / cohort10 / private">
+                </div>
+                <div>
+                    <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px">Status</label>
+                    <input type="text" name="sub_status" value="active" placeholder="active / inactive">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:4px">Add Subscriber</button>
+        </form>
+    </div>
+
+    <div class="card">
         <h2>Subscribers (<?= count($subscribers) ?>)</h2>
         <?php if ($subscribers): ?>
         <table class="admin-table">
             <thead>
-                <tr><th>Email</th><th>Status</th><th>Trial</th><th>Started</th><th>Ends / Cancelled</th></tr>
+                <tr><th>Email</th><th>Status</th><th>Plan</th><th>Trial</th><th>Started</th><th>Ends / Cancelled</th><th></th></tr>
             </thead>
             <tbody>
                 <?php foreach ($subscribers as $email => $sub): ?>
@@ -362,6 +414,16 @@ usort($recordings, fn($a, $b) => strtotime($b['date']) <=> strtotime($a['date'])
                     <td style="font-size:12px;color:var(--text-muted)"><?= htmlspecialchars($sub['started_at'] ?? '—') ?></td>
                     <td style="font-size:12px;color:var(--text-muted)">
                         <?= htmlspecialchars($sub['ends_at'] ?? $sub['cancelled_at'] ?? '—') ?>
+                    </td>
+                    <td style="font-size:12px;color:var(--text-muted)">
+                        <?= htmlspecialchars($sub['plan'] ?? '—') ?>
+                    </td>
+                    <td>
+                        <form method="POST" onsubmit="return confirm('Remove <?= htmlspecialchars($email) ?>?')">
+                            <input type="hidden" name="action" value="remove_subscriber">
+                            <input type="hidden" name="sub_email" value="<?= htmlspecialchars($email) ?>">
+                            <button type="submit" class="btn btn-sm btn-outline" style="color:var(--red);border-color:var(--red)">Remove</button>
+                        </form>
                     </td>
                 </tr>
                 <?php endforeach; ?>

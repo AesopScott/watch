@@ -49,6 +49,30 @@ function check_subscriber_status(string $email): string {
     return $status === 'active' ? 'active' : 'inactive';
 }
 
+// Returns the raw subscriber record for $email, or [] on missing/error.
+function get_subscriber_data(string $email): array {
+    $store = read_json_file(subscribers_file());
+    return $store['subscribers'][$email] ?? [];
+}
+
+// Records a session claim for the given ISO week key (e.g. "2026-W23").
+// Fail-open: returns false without throwing on any error.
+function record_session_claim(string $email, string $week_key, string $session_id): bool {
+    try {
+        $store = read_json_file(subscribers_file());
+        if (!isset($store['subscribers'][$email])) return false;
+        $claims = $store['subscribers'][$email]['weekly_claims'][$week_key] ?? [];
+        if (!in_array($session_id, $claims, true)) {
+            $claims[] = $session_id;
+        }
+        $store['subscribers'][$email]['weekly_claims'][$week_key] = $claims;
+        write_json_file(subscribers_file(), $store);
+        return true;
+    } catch (Throwable) {
+        return false;
+    }
+}
+
 // Sends a magic link email via Brevo. Returns true, 'not_subscriber', or 'error'.
 function send_magic_link(string $email) {
     $status = check_subscriber_status($email);

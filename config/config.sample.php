@@ -5,8 +5,10 @@
 // Polar.sh
 define('POLAR_HMAC_SECRET',   'your-polar-webhook-signing-secret');
 define('POLAR_PRODUCT_IDS',   [
-    '3bbf8000-9928-486f-890b-edb630b7733d',  // $100/month subscription — 7-day trial
-    // Add additional product IDs here as new plans are created
+    '1995f61c-e56f-4487-8962-78608bd0b56c',  // Weekly
+    '3bbf8000-9928-486f-890b-edb630b7733d',  // Monthly — 7-day trial
+    'a9b65de6-64c2-4921-86d2-443db4eb0a05',  // Cohort 10
+    '5fa68e31-e670-4492-90da-6495fa4170ea',  // Cohort Private
 ]);
 
 // Brevo

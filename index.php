@@ -1,10 +1,8 @@
 <?php
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/lib/auth.php';
-require_once __DIR__ . '/lib/sessions.php';
 
 $logged_in      = is_active_subscriber();
-$upcoming       = get_upcoming_sessions(6);   // public view — no Zoom links
 $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-edb630b7733d';
 ?>
 <!DOCTYPE html>
@@ -25,13 +23,12 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     <div class="nav-inner">
         <a href="/" class="nav-logo">Watch Me Build AI</a>
         <div class="nav-links">
-            <a href="#schedule">Schedule</a>
-            <a href="#pricing">Pricing</a>
+            <a href="/faq.php">FAQ</a>
             <?php if ($logged_in): ?>
                 <a href="/portal/" class="btn btn-sm">Member Portal →</a>
             <?php else: ?>
                 <a href="/login.php" class="btn btn-sm btn-outline">Log In</a>
-                <a href="#subscribe" class="btn btn-sm">Start Free Trial</a>
+                <a href="<?= htmlspecialchars($polar_checkout) ?>" class="btn btn-sm">Start Free Trial</a>
             <?php endif; ?>
         </div>
     </div>
@@ -61,7 +58,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
             the decisions, the dead ends, the agent pipelines that actually ship.
         </p>
         <div class="hero-cta">
-            <a href="#subscribe" class="btn btn-primary btn-lg">Start 7-Day Free Trial</a>
+            <a href="<?= htmlspecialchars($polar_checkout) ?>" class="btn btn-primary btn-lg">Start 7-Day Free Trial</a>
             <span class="hero-cta-note">$100/month after trial &nbsp;·&nbsp; Cancel any time</span>
         </div>
         <div class="hero-proof">
@@ -101,32 +98,6 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     </div>
 </section>
 
-<!-- ── Who it's for ── -->
-<section class="section section-alt">
-    <div class="container">
-        <div class="two-col">
-            <div>
-                <h2>Who this is for</h2>
-                <ul class="check-list">
-                    <li>Developers who've taken AI courses but want to see real-world application</li>
-                    <li>Engineers who want to build with Claude Code SDK, agent orchestration, and multi-step pipelines</li>
-                    <li>People who learn by watching, not just reading docs</li>
-                    <li>Anyone who wants to build their own AI-powered tools and doesn't want to start from scratch</li>
-                </ul>
-            </div>
-            <div>
-                <h2>What you won't find here</h2>
-                <ul class="x-list">
-                    <li>Basic "what is AI" explanations</li>
-                    <li>Pre-recorded, edited, polished content</li>
-                    <li>Things you could learn by just asking ChatGPT</li>
-                    <li>Boring</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- ── Outcomes ── -->
 <section class="section section-alt">
     <div class="container">
@@ -157,136 +128,13 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     </div>
 </section>
 
-<!-- ── Schedule ── -->
-<section class="section" id="schedule">
-    <div class="container">
-        <h2 class="section-title">Upcoming Sessions</h2>
-        <p class="section-sub">No fixed length — sessions run as long as the build runs.</p>
-        <?php if ($upcoming): ?>
-        <div class="session-list">
-            <?php foreach ($upcoming as $session): ?>
-            <div class="session-card">
-                <div class="session-date"><?= htmlspecialchars(format_session_date($session['date'])) ?></div>
-                <div class="session-info">
-                    <div class="session-title"><?= htmlspecialchars($session['title']) ?></div>
-                    <?php if (!empty($session['description'])): ?>
-                    <div class="session-desc"><?= htmlspecialchars($session['description']) ?></div>
-                    <?php endif; ?>
-                </div>
-                <div class="session-lock">
-                    <?php if ($logged_in): ?>
-                        <a href="/portal/#session-<?= htmlspecialchars($session['id']) ?>" class="btn btn-sm">Join →</a>
-                    <?php else: ?>
-                        <span class="lock-badge">🔒 Subscribers only</span>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-        <?php else: ?>
-        <div class="session-empty">
-            <p>Sessions are scheduled weekly. <a href="#subscribe">Subscribe to get notified</a> when the next one is posted.</p>
-        </div>
-        <?php endif; ?>
-    </div>
-</section>
-
-<!-- ── FAQ ── -->
-<section class="section section-alt" id="faq">
-    <div class="container">
-        <h2 class="section-title">Frequently asked questions</h2>
-        <p class="section-sub">Everything you need to know before subscribing.</p>
-        <div class="faq-list">
-
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">What actually happens during a session? <span class="faq-chevron">›</span></button>
-                <div class="faq-a">
-                    <p>Each session is a live, unedited Zoom call where Scott builds something real — an agent pipeline, an orchestration layer, a production AI system. You watch the whole process: the planning, the mistakes, the debugging, the decisions. No slides. No script. Just building.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">How do I get the Zoom link? <span class="faq-chevron">›</span></button>
-                <div class="faq-a">
-                    <p>Once you're a subscriber, the Zoom link for every upcoming session appears directly in your member portal. You'll also get an email reminder before each session with the link included.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">What if I miss a session? <span class="faq-chevron">›</span></button>
-                <div class="faq-a">
-                    <p>Every session is recorded and added to the library in your member portal. You can watch at any time, as many times as you want, for as long as your subscription is active.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">What tools or experience do I need? <span class="faq-chevron">›</span></button>
-                <div class="faq-a">
-                    <p>You need a Zoom account to join live. Beyond that: basic programming experience and familiarity with AI concepts. This is not a beginner course — it's for developers who already understand the basics and want to see what serious AI engineering actually looks like.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">How much time does this take per week? <span class="faq-chevron">›</span></button>
-                <div class="faq-a">
-                    <p>Sessions run as long as the build runs — there's no fixed length. You can attend live, catch the recording, or both. There's no homework, no assignments, no required time outside of watching. It fits around your schedule.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">Can I cancel any time? <span class="faq-chevron">›</span></button>
-                <div class="faq-a">
-                    <p>Yes. Cancel any time and you keep access through the end of your current billing period. No questions asked, no hoops to jump through.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">What's the refund policy? <span class="faq-chevron">›</span></button>
-                <div class="faq-a">
-                    <p>You have a 7-day free trial — no charge until it ends. If you decide it's not for you during that window, just cancel and you won't be billed. After the trial, subscriptions are non-refundable but you can cancel to stop future charges.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">What exactly is being built in these sessions? <span class="faq-chevron">›</span></button>
-                <div class="faq-a">
-                    <p>Real production AI systems — agent pipelines, orchestration layers, multi-step workflows, AI-powered tools. Scott is simultaneously building ten companies with AI, and these sessions show exactly how that gets done: the architecture decisions, the tooling choices, the failures and what came after them.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ── Pricing ── -->
-<section class="section section-pricing" id="pricing">
-    <div class="container">
-        <h2 class="section-title">Simple pricing</h2>
-        <div class="pricing-card" id="subscribe">
-            <div class="pricing-badge">Most popular</div>
-            <div class="pricing-amount">$100<span>/month</span></div>
-            <div class="pricing-trial">Start with a 7-day free trial</div>
-            <ul class="pricing-features">
-                <li>All live sessions</li>
-                <li>Zoom links delivered before each session</li>
-                <li>Full recorded session library</li>
-                <li>Email reminders before every session</li>
-                <li>Cancel any time — access through end of billing month</li>
-            </ul>
-            <a href="<?= htmlspecialchars($polar_checkout) ?>" class="btn btn-primary btn-lg btn-full">
-                Start Free Trial →
-            </a>
-            <p class="pricing-note">You become a subscriber for the next 7 days. No charge until your trial ends.</p>
-        </div>
-    </div>
-</section>
-
 <!-- ── Footer ── -->
 <footer class="footer">
     <div class="container">
         <div class="footer-inner">
             <span class="footer-brand">Watch Me Build AI</span>
             <span class="footer-links">
+                <a href="/faq.php">FAQ</a>
                 <a href="/login.php">Member Login</a>
             </span>
         </div>

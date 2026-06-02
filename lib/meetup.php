@@ -31,8 +31,9 @@ function get_meetup_events(int $limit = 20): array {
     $data = json_decode($body, true);
     if (!($data['ok'] ?? false) || empty($data['breakdown'])) return _meetup_stale_cache($limit);
 
-    $now    = time();
-    $unique = [];
+    $now         = time();
+    $unique      = [];
+    $mountain_tz = new DateTimeZone('America/Denver');
 
     foreach ($data['breakdown'] as $event) {
         $ts = strtotime($event['date'] ?? '');
@@ -42,13 +43,10 @@ function get_meetup_events(int $limit = 20): array {
         $title = preg_replace('/^Global\s*[-–]\s*/i', '', trim($event['title'] ?? ''));
         if (!$title) continue;
 
-        // Deduplicate key: same title + same ISO week + same half-day (AM vs PM UTC).
-        // Events cross-posted across timezones land on different UTC calendar days
-        // (e.g. Friday 6 PM MT = UTC Saturday), so we bucket by week+half-day
-        // to collapse all instances of the same session into one entry.
-        $week     = gmdate('oW', $ts);           // ISO year + week number
-        $half_day = (int) gmdate('G', $ts) >= 12 ? 'pm' : 'am';
-        $key      = strtolower($title) . '|' . $week . '|' . $half_day;
+        // Deduplicate by Mountain Time day + hour so cross-city reposts of the
+        // same session collapse to one entry regardless of UTC offset differences.
+        $mt_dt  = (new DateTime('@' . $ts))->setTimezone($mountain_tz);
+        $key    = strtolower($title) . '|' . $mt_dt->format('Y-m-d') . '|' . $mt_dt->format('H');
 
         if (!isset($unique[$key])) {
             $unique[$key] = [

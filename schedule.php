@@ -216,7 +216,7 @@ $today  = date('Y-m-d');
                 ?>
                 <div class="cal-event cal-event-<?= $ev['type'] ?>" data-tip="<?= $tip ?>">
                     <span class="cal-event-title"><?= htmlspecialchars($ev['title']) ?></span>
-                    <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?></span>
+                    <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?><?= !empty($ev['duration']) ? ' · ' . htmlspecialchars($ev['duration']) : '' ?></span>
                 </div>
                 <?php endforeach; ?>
             </div>

@@ -80,7 +80,7 @@ $plans = [
             'Full recorded session library',
             'Direct access to Scott',
         ],
-        'cta'      => 'Apply for Private Cohort',
+        'cta'      => 'Join Private Cohort',
         'checkout' => 'https://buy.polar.sh/polar_cl_5fa68e31-e670-4492-90da-6495fa4170ea',
     ],
 ];

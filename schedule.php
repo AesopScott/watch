@@ -144,6 +144,9 @@ $today   = date('Y-m-d');
                     <?php if ($ev['time']): ?>
                     <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?></span>
                     <?php endif; ?>
+                    <?php if ($ev['type'] === 'meetup'): ?>
+                    <span class="cal-event-badge">Meetup · Free</span>
+                    <?php endif; ?>
                 </div>
                 <?php endforeach; ?>
             </div>

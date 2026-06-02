@@ -39,3 +39,4 @@ jobs:
             docs/**
             config/config.php
             data/subscribers.json
+            data/tokens.json

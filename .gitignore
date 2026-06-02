@@ -2,3 +2,4 @@ node_modules/
 .mcp.json
 config/config.php
 data/subscribers.json
+data/tokens.json

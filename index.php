@@ -42,9 +42,13 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     <div class="container">
         <div class="stage-track">
             <div class="stage-item">Stage 0 — Aesop AI Academy</div>
+            <div class="stage-sep">›</div>
             <div class="stage-item">Stage 1 — Weekly Meetup Events</div>
+            <div class="stage-sep">›</div>
             <div class="stage-item stage-active">Stage 2 — Interactive Builder Sessions</div>
+            <div class="stage-sep">›</div>
             <div class="stage-item">Stage 3 — Group Cohorts</div>
+            <div class="stage-sep">›</div>
             <div class="stage-item">Stage 4 — Private Cohorts</div>
         </div>
         <h1 class="hero-headline">

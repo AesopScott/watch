@@ -140,6 +140,7 @@ a:hover { text-decoration: underline; }
     padding: 0 6px;
     flex-shrink: 0;
 }
+a.stage-item:hover { text-decoration: none; opacity: 0.85; }
 .stage-track .stage-item:nth-child(1)  { background: #a78bfa; }
 .stage-track .stage-item:nth-child(3)  { background: #8b5cf6; }
 .stage-track .stage-item:nth-child(5)  { background: #7c3aed; }

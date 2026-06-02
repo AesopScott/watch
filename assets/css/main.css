@@ -34,9 +34,9 @@ a:hover { text-decoration: underline; }
 
 /* ── Layout ── */
 .container {
-    max-width: 1100px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 32px;
 }
 
 .section { padding: 80px 0; }
@@ -52,9 +52,9 @@ a:hover { text-decoration: underline; }
     border-bottom: 1px solid var(--border);
 }
 .nav-inner {
-    max-width: 1100px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 32px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -212,19 +212,25 @@ a:hover { text-decoration: underline; }
 /* ── Value grid ── */
 .value-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
     margin-top: 48px;
 }
 .value-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 28px;
+    padding: 20px;
 }
-.value-icon { font-size: 28px; margin-bottom: 14px; }
-.value-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-.value-card p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+.value-icon { font-size: 24px; margin-bottom: 10px; }
+.value-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.value-card p { color: var(--text-muted); font-size: 13px; line-height: 1.6; }
+@media (max-width: 900px) {
+    .value-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+    .value-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* ── Two col ── */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }

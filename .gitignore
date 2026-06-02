@@ -3,3 +3,4 @@ node_modules/
 config/config.php
 data/subscribers.json
 data/tokens.json
+data/firebase_certs.json

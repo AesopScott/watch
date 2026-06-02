@@ -2,6 +2,13 @@
 // Copy this file to config.php and fill in real values.
 // config.php is gitignored and excluded from FTP deploy — upload it manually to the server once.
 
+// Firebase (web config — safe to be public)
+define('FIREBASE_API_KEY',             'AIzaSyB8Y-2L0BZ3f5WvbPstjDB1Gi1dSU1Ij4M');
+define('FIREBASE_PROJECT_ID',          'watch-38b66');
+define('FIREBASE_AUTH_DOMAIN',         'watch-38b66.firebaseapp.com');
+define('FIREBASE_APP_ID',              '1:497659403030:web:c3ba82f57a316a88e2ce37');
+define('FIREBASE_MESSAGING_SENDER_ID', '497659403030');
+
 // Polar.sh
 define('POLAR_HMAC_SECRET',   'your-polar-webhook-signing-secret');
 define('POLAR_PRODUCT_IDS',   [

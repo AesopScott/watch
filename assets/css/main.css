@@ -471,6 +471,26 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
 }
 .login-box button[type="submit"]:hover { background: var(--accent-hover); }
 .login-footer { margin-top: 20px; font-size: 13px; color: var(--text-muted); text-align: center; }
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: var(--text-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.login-divider::before,
+.login-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.btn-google {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    gap: 10px;
+    font-size: 14px;
+}
+.btn-google:hover { background: #f5f5f5; color: #222; text-decoration: none; }
 
 /* ── Portal / Admin shared ── */
 .page-header { padding: 40px 0 24px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }

@@ -13,7 +13,7 @@ $plans = [
         'tagline'  => '1 Pro Session per week',
         'amount'   => '$—',
         'period'   => '/week',
-        'limit'    => 'First 210 members',
+        'limit'    => 'First 20 members',
         'features' => [
             '1 live Pro Session per week',
             'Zoom link delivered before each session',

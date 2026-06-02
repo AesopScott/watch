@@ -65,8 +65,6 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
             <span class="hero-cta-note">$100/month after trial &nbsp;·&nbsp; Cancel any time</span>
         </div>
         <div class="hero-proof">
-            <span>8 live sessions per week</span>
-            <span>·</span>
             <span>Real production systems</span>
             <span>·</span>
             <span>No slides. No theory.</span>

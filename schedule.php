@@ -9,16 +9,6 @@ $upcoming       = get_upcoming_sessions(60);
 $meetup_events  = get_meetup_events(60);
 $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-edb630b7733d';
 
-// Returns top% and height% within the 8am–6pm (600 min) grid
-function cal_event_pos(DateTime $dt, int $duration_min): array {
-    $range_start = 8 * 60;
-    $range_total = 10 * 60;
-    $event_min   = (int) $dt->format('G') * 60 + (int) $dt->format('i');
-    $top    = max(0.0, min(98.0, round(($event_min - $range_start) / $range_total * 100, 2)));
-    $height = max(2.0, round(min($duration_min / $range_total * 100, 100.0 - $top), 2));
-    return ['top' => $top, 'height' => $height];
-}
-
 // ── Build event map keyed by YYYY-MM-DD ──────────────────────────────────────
 $event_map   = [];
 $mountain_tz = new DateTimeZone('America/Denver');
@@ -38,7 +28,6 @@ foreach ($upcoming as $s) {
         'desc'     => $s['description'] ?? '',
         'url'      => $logged_in ? '/portal/#session-' . htmlspecialchars($s['id']) : null,
         'locked'   => !$logged_in,
-        'pos'      => cal_event_pos($dt, 60),
     ];
 }
 
@@ -59,7 +48,6 @@ foreach ($meetup_events as $e) {
         'desc'     => $desc_full ?: $rsvp_line,
         'url'      => !empty($e['eventUrl']) ? $e['eventUrl'] : $e['url'],
         'locked'   => false,
-        'pos'      => cal_event_pos($dt, 120),
     ];
 }
 
@@ -88,7 +76,6 @@ while ($cursor <= $end) {
                 'desc'     => 'Pro Members Only',
                 'url'      => $logged_in ? '/portal/' : null,
                 'locked'   => !$logged_in,
-                'pos'      => cal_event_pos($dt, 60),
             ];
         }
     }
@@ -117,12 +104,17 @@ while ($cursor <= $end) {
                 'desc'     => 'Cohort 10 Members Only',
                 'url'      => $logged_in ? '/portal/' : null,
                 'locked'   => !$logged_in,
-                'pos'      => cal_event_pos($dt, 60),
             ];
         }
     }
     $cursor->modify('+1 day');
 }
+
+// Sort each day's events by time so they appear in chronological order
+foreach ($event_map as &$day_events) {
+    usort($day_events, fn($a, $b) => strcmp($a['time'], $b['time']));
+}
+unset($day_events);
 
 // ── Calendar month builder ────────────────────────────────────────────────────
 function cal_months(int $count = 3): array {
@@ -208,34 +200,25 @@ $today  = date('Y-m-d');
                 $date_key = sprintf('%04d-%02d-%02d', $m['year'], $m['month'], $d);
                 $is_today = $date_key === $today;
                 $events   = $event_map[$date_key] ?? [];
+                $has_events = !empty($events);
             ?>
-            <div class="cal-day<?= $is_today ? ' cal-day-today' : '' ?>">
+            <div class="cal-day<?= $is_today ? ' cal-day-today' : '' ?><?= $has_events ? ' cal-day-active' : '' ?>">
                 <div class="cal-day-num"><?= $d ?></div>
-                <div class="cal-hour-grid">
-                    <?php foreach ($events as $ev):
-                        $tip = htmlspecialchars(json_encode([
-                            'title'  => $ev['title'],
-                            'time'   => $ev['time'],
-                            'desc'   => $ev['desc'],
-                            'url'    => $ev['url'],
-                            'locked' => $ev['locked'],
-                            'type'   => $ev['type'],
-                        ]), ENT_QUOTES);
-                        $pos = $ev['pos'];
-                    ?>
-                    <div class="cal-event cal-event-<?= $ev['type'] ?>"
-                         data-tip="<?= $tip ?>"
-                         style="top:<?= $pos['top'] ?>%;height:<?= $pos['height'] ?>%">
-                        <span class="cal-event-title"><?= htmlspecialchars($ev['title']) ?></span>
-                        <?php if ($ev['time']): ?>
-                        <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?></span>
-                        <?php endif; ?>
-                        <?php if (!empty($ev['duration'])): ?>
-                        <span class="cal-event-duration"><?= htmlspecialchars($ev['duration']) ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <?php endforeach; ?>
+                <?php foreach ($events as $ev):
+                    $tip = htmlspecialchars(json_encode([
+                        'title'  => $ev['title'],
+                        'time'   => $ev['time'],
+                        'desc'   => $ev['desc'],
+                        'url'    => $ev['url'],
+                        'locked' => $ev['locked'],
+                        'type'   => $ev['type'],
+                    ]), ENT_QUOTES);
+                ?>
+                <div class="cal-event cal-event-<?= $ev['type'] ?>" data-tip="<?= $tip ?>">
+                    <span class="cal-event-title"><?= htmlspecialchars($ev['title']) ?></span>
+                    <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?></span>
                 </div>
+                <?php endforeach; ?>
             </div>
             <?php endfor; ?>
         </div>

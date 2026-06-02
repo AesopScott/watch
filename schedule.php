@@ -40,9 +40,12 @@ foreach ($meetup_events as $e) {
     $utc       = gmdate('g:i a', $ts) . ' UTC';
     $rsvp_line = $e['rsvps'] > 0 ? $e['rsvps'] . ' RSVPs across the network' : '';
     $desc_full = trim(($e['description'] ?? '') . ($rsvp_line ? "\n\n" . $rsvp_line : ''));
+    // Convert urlname to readable label, e.g. "advanced-ai-concepts" → "Advanced AI Concepts"
+    $group_label = ucwords(str_replace('-', ' ', $e['group'] ?? ''));
     $event_map[$day][] = [
         'type'     => 'meetup',
         'title'    => $e['title'],
+        'group'    => $group_label,
         'time'     => $mt . ' / ' . $utc,
         'duration' => '2 hours',
         'desc'     => $desc_full ?: $rsvp_line,
@@ -216,6 +219,9 @@ $today  = date('Y-m-d');
                 ?>
                 <div class="cal-event cal-event-<?= $ev['type'] ?>" data-tip="<?= $tip ?>">
                     <span class="cal-event-title"><?= htmlspecialchars($ev['title']) ?></span>
+                    <?php if (!empty($ev['group'])): ?>
+                    <span class="cal-event-group"><?= htmlspecialchars($ev['group']) ?></span>
+                    <?php endif; ?>
                     <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?><?= !empty($ev['duration']) ? ' · ' . htmlspecialchars($ev['duration']) : '' ?></span>
                 </div>
                 <?php endforeach; ?>

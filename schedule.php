@@ -71,9 +71,10 @@ while ($cursor <= $end) {
                 'type'   => 'pro',
                 'title'  => 'Pro Session',
                 'time'   => $mt . ' / ' . $utc,
-                'desc'   => 'Pro Members Only',
-                'url'    => $logged_in ? '/portal/' : null,
-                'locked' => !$logged_in,
+                'desc'     => 'Pro Members Only · 1 hour',
+                'duration' => '1 hour',
+                'url'      => $logged_in ? '/portal/' : null,
+                'locked'   => !$logged_in,
             ];
         }
     }
@@ -183,6 +184,9 @@ $today   = date('Y-m-d');
                     <span class="cal-event-title"><?= htmlspecialchars($ev['title']) ?></span>
                     <?php if ($ev['time']): ?>
                     <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?></span>
+                    <?php endif; ?>
+                    <?php if (!empty($ev['duration'])): ?>
+                    <span class="cal-event-duration"><?= htmlspecialchars($ev['duration']) ?></span>
                     <?php endif; ?>
                     <?php if ($ev['type'] === 'meetup'): ?>
                     <span class="cal-event-badge">Meetup · Free</span>

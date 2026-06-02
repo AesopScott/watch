@@ -340,6 +340,13 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.cal-event-duration {
+    display: block;
+    font-size: 9px;
+    color: var(--text-muted);
+    line-height: 1.2;
+    margin-top: 1px;
+}
 .cal-event-badge {
     display: block;
     font-size: 9px;

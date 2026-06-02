@@ -46,9 +46,9 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
             <div class="stage-sep">›</div>
             <div class="stage-item stage-active">Stage 2 — Interactive Builder Sessions</div>
             <div class="stage-sep">›</div>
-            <a href="/pricing.php" target="_blank" rel="noopener" class="stage-item">Stage 3 — Group Cohorts</a>
+            <a href="/pricing.php" class="stage-item">Stage 3 — Group Cohorts</a>
             <div class="stage-sep">›</div>
-            <a href="/pricing.php" target="_blank" rel="noopener" class="stage-item">Stage 4 — Private Cohorts</a>
+            <a href="/pricing.php" class="stage-item">Stage 4 — Private Cohorts</a>
         </div>
         <h1 class="hero-headline">
             You want to master AI.<br>

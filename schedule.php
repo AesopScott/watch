@@ -12,14 +12,18 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
 // ── Build event map keyed by YYYY-MM-DD ──────────────────────────────────────
 $event_map = [];
 
+$mountain_tz = new DateTimeZone('America/Denver');
+
 foreach ($upcoming as $s) {
     $ts  = strtotime($s['date']);
     if (!$ts) continue;
     $day = date('Y-m-d', $ts);
+    $mt  = (new DateTime('@' . $ts))->setTimezone($mountain_tz)->format('g:i a T');
+    $utc = gmdate('g:i a', $ts) . ' UTC';
     $event_map[$day][] = [
         'type'   => 'pro',
         'title'  => $s['title'],
-        'time'   => date('g:i a', $ts),
+        'time'   => $mt . ' / ' . $utc,
         'desc'   => $s['description'] ?? '',
         'url'    => $logged_in ? '/portal/#session-' . htmlspecialchars($s['id']) : null,
         'locked' => !$logged_in,
@@ -32,10 +36,12 @@ foreach ($meetup_events as $e) {
     $ts  = strtotime($e['date']);
     $rsvp_line = $e['rsvps'] > 0 ? $e['rsvps'] . ' RSVPs across the network' : '';
     $desc_full = trim(($e['description'] ?? '') . ($rsvp_line ? "\n\n" . $rsvp_line : ''));
+    $mt  = $ts ? (new DateTime('@' . $ts))->setTimezone($mountain_tz)->format('g:i a T') : '';
+    $utc = $ts ? gmdate('g:i a', $ts) . ' UTC' : '';
     $event_map[$day][] = [
         'type'   => 'meetup',
         'title'  => $e['title'],
-        'time'   => $ts ? date('g:i a T', $ts) : '',
+        'time'   => $mt && $utc ? $mt . ' / ' . $utc : '',
         'desc'   => $desc_full ?: $rsvp_line,
         'url'    => !empty($e['eventUrl']) ? $e['eventUrl'] : $e['url'],
         'locked' => false,

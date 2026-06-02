@@ -40,7 +40,32 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
 <!-- ── Hero ── -->
 <section class="hero">
     <div class="container">
-        <div class="hero-badge">Stage 2 — Interactive Builder Sessions</div>
+        <div class="stage-track">
+            <div class="stage-item">
+                <span class="stage-num">0</span>
+                <span class="stage-name">Aesop AI Academy</span>
+            </div>
+            <div class="stage-sep">›</div>
+            <div class="stage-item">
+                <span class="stage-num">1</span>
+                <span class="stage-name">Weekly Meetup Events</span>
+            </div>
+            <div class="stage-sep">›</div>
+            <div class="stage-item stage-active">
+                <span class="stage-num">2</span>
+                <span class="stage-name">Interactive Builder Sessions</span>
+            </div>
+            <div class="stage-sep">›</div>
+            <div class="stage-item stage-future">
+                <span class="stage-num">3</span>
+                <span class="stage-name">Group Cohorts</span>
+            </div>
+            <div class="stage-sep">›</div>
+            <div class="stage-item stage-future">
+                <span class="stage-num">4</span>
+                <span class="stage-name">Private Cohorts</span>
+            </div>
+        </div>
         <h1 class="hero-headline">
             You want to master AI.<br>
             <span class="highlight">Watch AI masters build it.</span>

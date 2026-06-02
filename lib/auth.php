@@ -50,7 +50,7 @@ function check_subscriber_status(string $email): string {
 }
 
 // Sends a magic link email via Brevo. Returns true, 'not_subscriber', or 'error'.
-function send_magic_link(string $email): bool|string {
+function send_magic_link(string $email) {
     $status = check_subscriber_status($email);
     if ($status !== 'active') return 'not_subscriber';
 
@@ -73,7 +73,7 @@ function send_magic_link(string $email): bool|string {
 }
 
 // Verifies a magic link token. Returns true, 'expired', 'invalid', or 'not_subscriber'.
-function verify_magic_link(string $email, string $token): bool|string {
+function verify_magic_link(string $email, string $token) {
     $store  = read_json_file(tokens_file());
     $record = $store['tokens'][$email] ?? null;
 
@@ -101,7 +101,7 @@ function verify_magic_link(string $email, string $token): bool|string {
 }
 
 // Sends magic link email via Brevo transactional API.
-function brevo_send_magic_link_email(string $email, string $link): bool|string {
+function brevo_send_magic_link_email(string $email, string $link) {
     $payload = [
         'to'      => [['email' => $email]],
         'sender'  => ['email' => BREVO_SENDER_EMAIL, 'name' => BREVO_SENDER_NAME],

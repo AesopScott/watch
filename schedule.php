@@ -2,9 +2,11 @@
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/lib/auth.php';
 require_once __DIR__ . '/lib/sessions.php';
+require_once __DIR__ . '/lib/meetup.php';
 
 $logged_in      = is_active_subscriber();
 $upcoming       = get_upcoming_sessions(20);
+$meetup_events  = get_meetup_events(30);
 $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-edb630b7733d';
 ?>
 <!DOCTYPE html>
@@ -42,39 +44,74 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
         <h1>Upcoming Sessions</h1>
     </div>
 
-    <p style="color:var(--text-muted);font-size:14px;margin-bottom:32px">
-        Sessions run as long as the build runs — no fixed length.
-        <?php if (!$logged_in): ?>
-            Zoom links are available to subscribers. <a href="<?= htmlspecialchars($polar_checkout) ?>">Start your free trial →</a>
-        <?php endif; ?>
-    </p>
+    <!-- ── Stage 2: Pro Sessions (paywalled) ── -->
+    <section style="margin-bottom:60px">
+        <div class="schedule-section-label">Stage 2 — Pro Sessions</div>
+        <p style="color:var(--text-muted);font-size:14px;margin-bottom:24px">
+            Live build sessions — Zoom links for subscribers only.
+            <?php if (!$logged_in): ?>
+                <a href="<?= htmlspecialchars($polar_checkout) ?>">Start your free trial →</a>
+            <?php endif; ?>
+        </p>
 
-    <?php if ($upcoming): ?>
-    <div class="session-list" style="margin-bottom:80px">
-        <?php foreach ($upcoming as $session): ?>
-        <div class="session-card">
-            <div class="session-date"><?= htmlspecialchars(format_session_date($session['date'])) ?></div>
-            <div class="session-info">
-                <div class="session-title"><?= htmlspecialchars($session['title']) ?></div>
-                <?php if (!empty($session['description'])): ?>
-                <div class="session-desc"><?= htmlspecialchars($session['description']) ?></div>
-                <?php endif; ?>
+        <?php if ($upcoming): ?>
+        <div class="session-list">
+            <?php foreach ($upcoming as $session): ?>
+            <div class="session-card">
+                <div class="session-date"><?= htmlspecialchars(format_session_date($session['date'])) ?></div>
+                <div class="session-info">
+                    <div class="session-title"><?= htmlspecialchars($session['title']) ?></div>
+                    <?php if (!empty($session['description'])): ?>
+                    <div class="session-desc"><?= htmlspecialchars($session['description']) ?></div>
+                    <?php endif; ?>
+                </div>
+                <div class="session-lock">
+                    <?php if ($logged_in): ?>
+                        <a href="/portal/#session-<?= htmlspecialchars($session['id']) ?>" class="btn btn-sm">Join →</a>
+                    <?php else: ?>
+                        <span class="lock-badge">🔒 Subscribers only</span>
+                    <?php endif; ?>
+                </div>
             </div>
-            <div class="session-lock">
-                <?php if ($logged_in): ?>
-                    <a href="/portal/#session-<?= htmlspecialchars($session['id']) ?>" class="btn btn-sm">Join →</a>
-                <?php else: ?>
-                    <span class="lock-badge">🔒 Subscribers only</span>
-                <?php endif; ?>
-            </div>
+            <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
-    </div>
-    <?php else: ?>
-    <div class="session-empty" style="margin-bottom:80px">
-        <p>No sessions scheduled yet — check back soon.</p>
-    </div>
-    <?php endif; ?>
+        <?php else: ?>
+        <div class="session-empty">
+            <p>No Pro Sessions scheduled yet — check back soon.</p>
+        </div>
+        <?php endif; ?>
+    </section>
+
+    <!-- ── Stage 1: Meetup Events (public) ── -->
+    <section style="margin-bottom:80px">
+        <div class="schedule-section-label">Stage 1 — Weekly Meetup Events</div>
+        <p style="color:var(--text-muted);font-size:14px;margin-bottom:24px">
+            Free public events hosted across the Advanced AI Concepts network. No subscription required.
+        </p>
+
+        <?php if ($meetup_events): ?>
+        <div class="session-list">
+            <?php foreach ($meetup_events as $event): ?>
+            <div class="session-card">
+                <div class="session-date"><?= htmlspecialchars(format_meetup_date($event['date'])) ?></div>
+                <div class="session-info">
+                    <div class="session-title"><?= htmlspecialchars($event['title']) ?></div>
+                    <?php if ($event['rsvps'] > 0): ?>
+                    <div class="session-desc"><?= $event['rsvps'] ?> RSVPs across the network</div>
+                    <?php endif; ?>
+                </div>
+                <div class="session-lock">
+                    <a href="<?= htmlspecialchars($event['url']) ?>" target="_blank" rel="noopener" class="btn btn-sm btn-outline">RSVP on Meetup →</a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php else: ?>
+        <div class="session-empty">
+            <p>No upcoming Meetup events found — check <a href="https://www.meetup.com/advanced-ai-concepts/" target="_blank" rel="noopener">Meetup</a> directly.</p>
+        </div>
+        <?php endif; ?>
+    </section>
 </div>
 
 <footer class="footer">

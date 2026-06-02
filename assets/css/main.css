@@ -242,6 +242,16 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
 .check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
 .x-list li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
 
+/* ── Schedule section labels ── */
+.schedule-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
 /* ── Session list ── */
 .session-list { display: flex; flex-direction: column; gap: 12px; }
 .session-card {

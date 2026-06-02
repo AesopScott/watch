@@ -17,8 +17,9 @@ $mountain_tz = new DateTimeZone('America/Denver');
 foreach ($upcoming as $s) {
     $ts  = strtotime($s['date']);
     if (!$ts) continue;
-    $day = date('Y-m-d', $ts);
-    $mt  = (new DateTime('@' . $ts))->setTimezone($mountain_tz)->format('g:i a T');
+    $dt  = (new DateTime('@' . $ts))->setTimezone($mountain_tz);
+    $day = $dt->format('Y-m-d');
+    $mt  = $dt->format('g:i a T');
     $utc = gmdate('g:i a', $ts) . ' UTC';
     $event_map[$day][] = [
         'type'   => 'pro',
@@ -31,17 +32,18 @@ foreach ($upcoming as $s) {
 }
 
 foreach ($meetup_events as $e) {
-    // Use the local date from the ISO string (first 10 chars) for placement
-    $day = substr($e['date'], 0, 10);
-    $ts  = strtotime($e['date']);
+    $ts  = strtotime($e['date'] ?? '');
+    if (!$ts) continue;
+    $dt  = (new DateTime('@' . $ts))->setTimezone($mountain_tz);
+    $day = $dt->format('Y-m-d');  // place on the Mountain Time calendar day
     $rsvp_line = $e['rsvps'] > 0 ? $e['rsvps'] . ' RSVPs across the network' : '';
     $desc_full = trim(($e['description'] ?? '') . ($rsvp_line ? "\n\n" . $rsvp_line : ''));
-    $mt  = $ts ? (new DateTime('@' . $ts))->setTimezone($mountain_tz)->format('g:i a T') : '';
-    $utc = $ts ? gmdate('g:i a', $ts) . ' UTC' : '';
+    $mt  = $dt->format('g:i a T');
+    $utc = gmdate('g:i a', $ts) . ' UTC';
     $event_map[$day][] = [
         'type'   => 'meetup',
         'title'  => $e['title'],
-        'time'   => $mt && $utc ? $mt . ' / ' . $utc : '',
+        'time'   => $mt . ' / ' . $utc,
         'desc'   => $desc_full ?: $rsvp_line,
         'url'    => !empty($e['eventUrl']) ? $e['eventUrl'] : $e['url'],
         'locked' => false,

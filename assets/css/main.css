@@ -113,13 +113,12 @@ a:hover { text-decoration: underline; }
 .stage-track {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
+    flex-wrap: nowrap;
     margin-bottom: 32px;
 }
 .stage-item {
-    display: inline-block;
+    flex: 1;
+    text-align: center;
     padding: 5px 14px;
     background: rgba(124,58,237,0.08);
     border: 1px solid rgba(124,58,237,0.2);
@@ -130,6 +129,8 @@ a:hover { text-decoration: underline; }
     letter-spacing: 0.5px;
     text-transform: uppercase;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .stage-active {
     background: rgba(124,58,237,0.15);
@@ -137,11 +138,14 @@ a:hover { text-decoration: underline; }
     color: #a78bfa;
 }
 .stage-sep {
+    flex: 0 0 auto;
+    padding: 0 6px;
     color: var(--border);
     font-size: 14px;
-    flex-shrink: 0;
 }
 @media (max-width: 768px) {
+    .stage-track { flex-wrap: wrap; gap: 6px; }
+    .stage-item { flex: 0 0 auto; }
     .stage-sep { display: none; }
 }
 

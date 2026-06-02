@@ -5,3 +5,4 @@ data/subscribers.json
 data/tokens.json
 data/firebase_certs.json
 data/meetup_cache.json
+data/attendance.json

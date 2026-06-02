@@ -1,85 +1,85 @@
-{
-  "tasks": [
-    {
-      "id": 1,
-      "title": "Build watchmebuildai.com",
-      "priority": 100,
-      "impact": "standard",
-      "status": "ready",
-      "description": "Build the complete watchmebuildai.com static site — landing page, subscription flow via Polar.sh, Discord role gating via PHP webhook, session calendar, member portal (recorded sessions), and Brevo email integration.",
-      "plan": "## Overview\n\nBuild the full watchmebuildai.com platform: a static marketing site that converts Stage 1 AIStudio.com visitors into $100/month Stage 2 subscribers. Polar.sh handles billing; a PHP webhook at /webhooks/polar.php grants/revokes the Discord Subscriber role and syncs contacts to Brevo. The site includes a landing page, admin calendar interface, and subscriber-gated member portal.\n\n## Phases\n\n1. Infrastructure & Manual Setup — Discord server, Polar.sh product, Google Calendar, Brevo list (all manual, no code)\n2. PHP Webhook — /webhooks/polar.php handles Polar.sh lifecycle events, Discord role sync, Brevo sync\n3. Landing Page — Hero, value prop, Stage 2 framing, Polar.sh CTA, Google Calendar embed\n4. Admin Calendar Interface — Password-protected PHP page to manage session schedule and recordings\n5. Member Portal — Discord OAuth-gated page showing recorded sessions and Discord invite\n6. Deploy & End-to-End Validation — Full subscriber flow test\n\n## First Proof Unit\n\nDiscord server correctly configured. Expected: test account with Subscriber role can access private Stage Channel; without role, cannot. Verify: manual — create test account, grant role, confirm Stage Channel access, remove role, confirm access removed.",
-      "proofUnits": [
-        {
-          "number": 1,
-          "title": "Discord server correctly configured",
-          "expectedBehavior": "A test account with the Subscriber role can access the private Stage Channel; without the role, it cannot.",
-          "proofType": "manual-script",
-          "exactCommand": "1. Create test Discord account. 2. Manually grant Subscriber role. 3. Verify Stage Channel access. 4. Remove role. 5. Verify Stage Channel disappears. 6. Confirm Discord bot is online with Manage Roles permission.",
-          "expectedInitialFailure": "Server does not exist; Stage Channel is public; bot offline or lacks Manage Roles permission.",
-          "expectedPassingEvidence": "Role-gated Stage Channel confirmed working; bot online with correct permissions; role hierarchy correct.",
-          "waiverGuidance": "N/A — manual verification is the only option for Discord server configuration."
-        },
-        {
-          "number": 2,
-          "title": "Polar.sh subscription is live",
-          "expectedBehavior": "The Polar.sh checkout URL shows the $100/month subscription with 7-day free trial.",
-          "proofType": "manual-script",
-          "exactCommand": "1. Navigate to Polar.sh checkout URL. 2. Verify product name, price ($100/month), and trial (7 days). 3. Confirm webhook endpoint is set to https://watchmebuildai.com/webhooks/polar.php. 4. Record HMAC secret.",
-          "expectedInitialFailure": "No Polar.sh product configured; checkout URL returns 404.",
-          "expectedPassingEvidence": "Checkout shows correct product and pricing; webhook URL saved in Polar.sh dashboard.",
-          "waiverGuidance": "N/A"
-        },
-        {
-          "number": 3,
-          "title": "Polar.sh webhook grants Discord role and syncs Brevo",
-          "expectedBehavior": "On subscription.created, polar.php verifies HMAC signature, grants Subscriber Discord role, and creates Brevo contact.",
-          "proofType": "manual-script",
-          "exactCommand": "1. Deploy polar.php. 2. Use Polar.sh dashboard → Webhooks → Send test event (subscription.created). 3. Verify HTTP 200 response. 4. Confirm Subscriber role appears on test Discord user. 5. Confirm new contact in Brevo list.",
-          "expectedInitialFailure": "/webhooks/polar.php returns 404 or HMAC check fails; Discord or Brevo API calls fail.",
-          "expectedPassingEvidence": "HTTP 200 response; Discord Subscriber role granted; Brevo contact created with correct tags.",
-          "waiverGuidance": "N/A"
-        },
-        {
-          "number": 4,
-          "title": "Landing page renders and subscribe CTA works",
-          "expectedBehavior": "Landing page loads with all sections visible and subscribe CTA links to Polar.sh checkout.",
-          "proofType": "ui-check",
-          "exactCommand": "1. Open https://watchmebuildai.com in browser. 2. Verify hero, value prop, and pricing sections render. 3. Click Subscribe CTA — confirm Polar.sh checkout opens. 4. Verify Google Calendar embed is visible. 5. Verify sessions from sessions.json render. 6. DevTools → Console — no JavaScript errors.",
-          "expectedInitialFailure": "Site returns 404; CTA links to wrong URL; console errors present.",
-          "expectedPassingEvidence": "All sections render; CTA links to Polar.sh; calendar embed visible; no console errors.",
-          "waiverGuidance": "N/A"
-        },
-        {
-          "number": 5,
-          "title": "Admin interface saves session and recording data",
-          "expectedBehavior": "Scott can log into /admin/, add a session entry, and it appears in sessions.json and on the landing page.",
-          "proofType": "manual-script",
-          "exactCommand": "1. Navigate to https://watchmebuildai.com/admin/. 2. Enter password — confirm access. 3. Add test session (date, title, description). 4. Submit form; verify entry in /data/sessions.json. 5. Reload landing page — confirm session appears. 6. Add recording with YouTube URL; verify in /data/recordings.json.",
-          "expectedInitialFailure": "/admin/ returns 404; no password protection; save.php fails to write JSON.",
-          "expectedPassingEvidence": "Login works; session and recording entries save correctly; both visible in respective JSON files and on landing page.",
-          "waiverGuidance": "N/A"
-        },
-        {
-          "number": 6,
-          "title": "Member portal gates by Discord subscription status",
-          "expectedBehavior": "A subscriber with the Subscriber Discord role sees the recorded session library; a non-subscriber is redirected to the landing page.",
-          "proofType": "manual-script",
-          "exactCommand": "1. Navigate to https://watchmebuildai.com/portal/. 2. Log in via Discord OAuth with subscriber account. 3. Verify recorded sessions and Discord invite render. 4. Clear session cookie. 5. Log in with non-subscriber account. 6. Confirm redirect to https://watchmebuildai.com/.",
-          "expectedInitialFailure": "/portal/ returns 404; OAuth flow fails; no role check performed.",
-          "expectedPassingEvidence": "Subscriber sees recordings and Discord invite; non-subscriber is redirected; OAuth completes without errors.",
-          "waiverGuidance": "N/A"
-        },
-        {
-          "number": 7,
-          "title": "Full end-to-end subscriber flow",
-          "expectedBehavior": "New user completes entire journey from landing page to live Discord session access without manual intervention from Scott.",
-          "proofType": "manual-script",
-          "exactCommand": "1. Open https://watchmebuildai.com as fresh visitor. 2. Click Start Free Trial → complete Polar.sh checkout with test email. 3. Verify Brevo onboarding email arrives. 4. Confirm Subscriber role on test Discord account. 5. Navigate to /portal/ — confirm access. 6. Join Discord Stage Channel — confirm access. 7. Simulate subscription.canceled in Polar.sh dashboard — confirm role revoked and Brevo contact tagged churned. 8. Trigger trial expiry in Polar.sh dashboard — confirm portal and Discord access revoked.",
-          "expectedInitialFailure": "Any step in the flow fails; role not granted; portal inaccessible; Brevo email not sent.",
-          "expectedPassingEvidence": "All 8 steps complete without error; Scott takes no manual action at any step.",
-          "waiverGuidance": "Step 8 trial expiry must be triggered manually in Polar.sh dashboard — waiting 7 days is impractical during testing."
-        }
-      ]
-    }
-  ]
+﻿{
+    "tasks":  [
+                  {
+                      "id":  1,
+                      "title":  "Build watchmebuildai.com",
+                      "priority":  100,
+                      "impact":  "standard",
+                      "status":  "ready",
+                      "description":  "Build the complete watchmebuildai.com static site — landing page, subscription flow via Polar.sh, Zoom-linked session calendar, subscriber email reminders via Brevo, member portal (recorded sessions), and admin interface for managing sessions.",
+                      "plan":  "## Overview\n\nBuild the full watchmebuildai.com platform: a static marketing site that converts Stage 1 AIStudio.com visitors into $100/month Stage 2 subscribers. Polar.sh handles billing; a PHP webhook at /webhooks/polar.php activates subscriber access records and syncs contacts to Brevo. Live sessions run on Zoom; the join link is visible on the session calendar to logged-in subscribers only. Brevo sends the Zoom link via email before each session.\n\n## Stack\n- HTML/CSS/JS static landing page on Mocahost\n- PHP webhook + PHP session auth (no framework)\n- Polar.sh for billing (existing contract)\n- Zoom for live sessions\n- Brevo for transactional + reminder emails\n- Google Analytics for tracking\n\n## Phases\n\n1. Infrastructure and Manual Setup - Polar.sh product, Brevo list + templates, Zoom account (all manual, no code)\n2. PHP Webhook - /webhooks/polar.php handles Polar.sh lifecycle events, activates/deactivates subscriber record, syncs Brevo\n3. Auth - email magic-link login: subscriber enters email, PHP checks active record, sends Brevo login link, sets session cookie\n4. Landing Page - Hero, value prop, Stage 2 framing, Polar.sh CTA, public session calendar (dates/titles only)\n5. Admin Interface - Password-protected PHP page to manage session schedule (date, title, Zoom link) and recordings\n6. Member Portal - Session calendar with Zoom links + recorded session library (gated by PHP session)\n7. Deploy and End-to-End Validation - Full subscriber flow test",
+                      "proofUnits":  [
+                                         {
+                                             "number":  1,
+                                             "title":  "Polar.sh subscription is live",
+                                             "expectedBehavior":  "The Polar.sh checkout URL shows the $100/month subscription with 7-day free trial.",
+                                             "proofType":  "manual-script",
+                                             "exactCommand":  "1. Navigate to Polar.sh checkout URL. 2. Verify product name, price ($100/month), and trial (7 days). 3. Confirm webhook endpoint is set to https://watchmebuildai.com/webhooks/polar.php. 4. Record HMAC secret.",
+                                             "expectedInitialFailure":  "No Polar.sh product configured; checkout URL returns 404.",
+                                             "expectedPassingEvidence":  "Checkout shows correct product and pricing; webhook URL saved in Polar.sh dashboard.",
+                                             "waiverGuidance":  "N/A"
+                                         },
+                                         {
+                                             "number":  2,
+                                             "title":  "Polar.sh webhook activates subscriber record and syncs Brevo",
+                                             "expectedBehavior":  "On subscription.created, polar.php verifies HMAC signature, writes active subscriber record to /data/subscribers.json, and Brevo onboarding email is sent.",
+                                             "proofType":  "manual-script",
+                                             "exactCommand":  "1. Deploy polar.php. 2. Use Polar.sh dashboard to send test event (subscription.created). 3. Verify HTTP 200 response. 4. Confirm /data/subscribers.json contains subscriber entry with status active. 5. Confirm new contact in Brevo list. 6. Confirm Brevo onboarding email received.",
+                                             "expectedInitialFailure":  "/webhooks/polar.php returns 404 or HMAC check fails; subscribers.json not written; Brevo call fails.",
+                                             "expectedPassingEvidence":  "HTTP 200; subscribers.json updated; Brevo contact created; onboarding email received.",
+                                             "waiverGuidance":  "N/A"
+                                         },
+                                         {
+                                             "number":  3,
+                                             "title":  "Magic-link login grants subscriber session",
+                                             "expectedBehavior":  "Subscriber enters email on login page, receives Brevo magic-link email, clicks link, and gets a PHP session cookie granting portal access.",
+                                             "proofType":  "manual-script",
+                                             "exactCommand":  "1. Navigate to /login. 2. Enter test subscriber email. 3. Confirm Brevo magic-link email received within 30 seconds. 4. Click link — confirm redirect to /portal/ with session cookie set. 5. Repeat with non-subscriber email — confirm not-a-subscriber message shown.",
+                                             "expectedInitialFailure":  "Login page returns 404; no email sent; session not set; non-subscriber not rejected.",
+                                             "expectedPassingEvidence":  "Magic-link email arrives; click sets session cookie; non-subscriber sees error message.",
+                                             "waiverGuidance":  "N/A"
+                                         },
+                                         {
+                                             "number":  4,
+                                             "title":  "Landing page renders and subscribe CTA works",
+                                             "expectedBehavior":  "Landing page loads with all sections visible, subscribe CTA links to Polar.sh checkout, and public calendar shows upcoming session dates/titles without Zoom links.",
+                                             "proofType":  "ui-check",
+                                             "exactCommand":  "1. Open https://watchmebuildai.com as logged-out visitor. 2. Verify hero, value prop, and pricing sections render. 3. Click Subscribe CTA — confirm Polar.sh checkout opens. 4. Verify public calendar shows session dates and titles. 5. Confirm no Zoom links visible. 6. DevTools Console — no JavaScript errors.",
+                                             "expectedInitialFailure":  "Site returns 404; CTA links to wrong URL; Zoom links visible to public; console errors.",
+                                             "expectedPassingEvidence":  "All sections render; CTA links to Polar.sh; public calendar shows dates only; no console errors.",
+                                             "waiverGuidance":  "N/A"
+                                         },
+                                         {
+                                             "number":  5,
+                                             "title":  "Admin interface saves session and recording data",
+                                             "expectedBehavior":  "Scott can log into /admin/, add a session entry with Zoom link, and it appears in sessions.json and on the subscriber calendar.",
+                                             "proofType":  "manual-script",
+                                             "exactCommand":  "1. Navigate to https://watchmebuildai.com/admin/. 2. Enter password — confirm access. 3. Add test session (date, title, description, Zoom link). 4. Submit — verify entry in /data/sessions.json with Zoom link. 5. Log into /portal/ as subscriber — confirm Zoom link visible. 6. Load landing page as logged-out — confirm Zoom link NOT visible.",
+                                             "expectedInitialFailure":  "/admin/ returns 404; no password protection; save.php fails to write JSON; Zoom link exposed publicly.",
+                                             "expectedPassingEvidence":  "Login works; session saves with Zoom link; subscriber sees link; public does not.",
+                                             "waiverGuidance":  "N/A"
+                                         },
+                                         {
+                                             "number":  6,
+                                             "title":  "Member portal gates by subscription status",
+                                             "expectedBehavior":  "A subscriber with a valid PHP session sees the session calendar with Zoom links; a non-subscriber or logged-out user is redirected to the landing page.",
+                                             "proofType":  "manual-script",
+                                             "exactCommand":  "1. Navigate to https://watchmebuildai.com/portal/ without session cookie — confirm redirect to /. 2. Log in as active subscriber via magic link. 3. Verify session calendar shows Zoom links. 4. Clear session cookie. 5. Confirm redirect back to /.",
+                                             "expectedInitialFailure":  "/portal/ returns 404; no redirect for logged-out users; Zoom links visible without login.",
+                                             "expectedPassingEvidence":  "Logged-out users redirected; subscriber sees Zoom links; clearing cookie re-triggers redirect.",
+                                             "waiverGuidance":  "N/A"
+                                         },
+                                         {
+                                             "number":  7,
+                                             "title":  "Full end-to-end subscriber flow",
+                                             "expectedBehavior":  "New user completes entire journey from landing page to Zoom session access without manual intervention from Scott.",
+                                             "proofType":  "manual-script",
+                                             "exactCommand":  "1. Open https://watchmebuildai.com as fresh visitor. 2. Click Start Free Trial — complete Polar.sh checkout. 3. Verify Brevo onboarding email arrives. 4. Navigate to /login — enter test email — receive magic-link — click — confirm portal access with Zoom link. 5. Confirm Brevo session reminder email arrives before scheduled session. 6. Simulate subscription.canceled in Polar.sh — confirm subscribers.json status set to inactive. 7. Attempt portal login — confirm access denied.",
+                                             "expectedInitialFailure":  "Any step fails; onboarding email not sent; portal inaccessible; canceled subscriber retains access.",
+                                             "expectedPassingEvidence":  "All 7 steps complete without error; Scott takes no manual action at any step.",
+                                             "waiverGuidance":  "Step 5 session reminder: test by setting reminder offset to 1 minute and scheduling a session 1 minute out."
+                                         }
+                                     ]
+                  }
+              ]
 }

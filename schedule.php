@@ -41,12 +41,13 @@ foreach ($meetup_events as $e) {
     $mt  = $dt->format('g:i a T');
     $utc = gmdate('g:i a', $ts) . ' UTC';
     $event_map[$day][] = [
-        'type'   => 'meetup',
-        'title'  => $e['title'],
-        'time'   => $mt . ' / ' . $utc,
-        'desc'   => $desc_full ?: $rsvp_line,
-        'url'    => !empty($e['eventUrl']) ? $e['eventUrl'] : $e['url'],
-        'locked' => false,
+        'type'     => 'meetup',
+        'title'    => $e['title'],
+        'time'     => $mt . ' / ' . $utc,
+        'duration' => '2 hours',
+        'desc'     => $desc_full ?: $rsvp_line,
+        'url'      => !empty($e['eventUrl']) ? $e['eventUrl'] : $e['url'],
+        'locked'   => false,
     ];
 }
 

@@ -7,13 +7,13 @@ $logged_in = is_active_subscriber();
 $plans = [
     [
         'id'       => 'weekly',
-        'badge'    => 'Limited Access',
+        'badge'    => 'Pro Lite',
         'badge_color' => '#0891b2',
-        'name'     => 'Weekly',
+        'name'     => 'Pro Lite',
         'tagline'  => '1 Pro Session per week (1 hour)',
         'amount'   => '$25',
         'period'   => '/month',
-        'limit'    => 'First 10 members',
+        'limit'    => '10 seats per live session — first in',
         'features' => [
             '1 live Pro Session per week (1 hour)',
             'Session link in your paywalled calendar',
@@ -28,11 +28,11 @@ $plans = [
         'id'       => 'monthly',
         'badge'    => 'Most Popular',
         'badge_color' => '#7c3aed',
-        'name'     => 'Monthly',
+        'name'     => 'Pro',
         'tagline'  => '8 Pro Sessions per week (1 hour each)',
         'amount'   => '$100',
         'period'   => '/month',
-        'limit'    => 'First 30 members',
+        'limit'    => '30 seats per live session — first in',
         'trial'    => 'Start with a 7-day free trial',
         'features' => [
             '8 live Pro Sessions per week (1 hour each)',
@@ -52,7 +52,6 @@ $plans = [
         'tagline'  => '8 Pro + 4 Cohort Sessions per week',
         'amount'   => '$995',
         'period'   => '/month',
-        'limit'    => 'First 10 members',
         'features' => [
             '8 live Pro Sessions per week (1 hour each)',
             '4 Cohort group sessions per week (1 hour each)',
@@ -73,7 +72,6 @@ $plans = [
         'tagline'  => '4 private sessions per week + all Pro sessions',
         'amount'   => '$4,995',
         'period'   => '/month',
-        'limit'    => 'By application',
         'features' => [
             '4 private 1-on-1 sessions per week (1 hour each)',
             'We work on your product — sessions scheduled by you',
@@ -128,7 +126,9 @@ $plans = [
                 <div class="pc-name"><?= htmlspecialchars($plan['name']) ?></div>
                 <div class="pc-tagline"><?= htmlspecialchars($plan['tagline']) ?></div>
                 <div class="pc-amount"><?= htmlspecialchars($plan['amount']) ?><span><?= htmlspecialchars($plan['period']) ?></span></div>
+                <?php if (!empty($plan['limit'])): ?>
                 <div class="pc-limit">⚡ <?= htmlspecialchars($plan['limit']) ?></div>
+                <?php endif; ?>
                 <?php if (!empty($plan['trial'])): ?>
                 <div class="pricing-trial"><?= htmlspecialchars($plan['trial']) ?></div>
                 <?php endif; ?>

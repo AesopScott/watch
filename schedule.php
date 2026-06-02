@@ -99,8 +99,10 @@ $today   = date('Y-m-d');
 
     <!-- Legend -->
     <div class="cal-legend">
-        <span class="cal-dot cal-dot-pro"></span> Pro Sessions (subscribers)
-        <span class="cal-dot cal-dot-meetup" style="margin-left:20px"></span> Meetup Events (free, public)
+        <span class="cal-dot cal-dot-pro"></span> Pro Sessions
+        <span class="cal-dot cal-dot-cohort"  style="margin-left:20px"></span> Cohort 10
+        <span class="cal-dot cal-dot-private" style="margin-left:20px"></span> Private Cohort
+        <span class="cal-dot cal-dot-meetup"  style="margin-left:20px"></span> Meetup (free, public)
     </div>
 
     <!-- Calendars -->

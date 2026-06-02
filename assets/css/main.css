@@ -258,8 +258,10 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
     border-radius: 50%;
     flex-shrink: 0;
 }
-.cal-dot-pro    { background: var(--accent); }
-.cal-dot-meetup { background: #0d9488; }
+.cal-dot-pro     { background: var(--accent); }
+.cal-dot-meetup  { background: #0d9488; }
+.cal-dot-cohort  { background: #d97706; }
+.cal-dot-private { background: #db2777; }
 
 .cal-month { margin-bottom: 48px; }
 .cal-month-label {
@@ -315,8 +317,10 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
     overflow: hidden;
 }
 .cal-event:hover { opacity: 0.8; }
-.cal-event-pro    { background: rgba(99,102,241,0.18); border-left: 3px solid var(--accent); }
-.cal-event-meetup { background: rgba(13,148,136,0.18); border-left: 3px solid #0d9488; }
+.cal-event-pro     { background: rgba(124,58,237,0.15);  border-left: 3px solid var(--accent); }
+.cal-event-meetup  { background: rgba(13,148,136,0.15);  border-left: 3px solid #0d9488; }
+.cal-event-cohort  { background: rgba(217,119,6,0.15);   border-left: 3px solid #d97706; }
+.cal-event-private { background: rgba(219,39,119,0.15);  border-left: 3px solid #db2777; }
 .cal-event-title {
     display: block;
     font-size: 9px;

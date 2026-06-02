@@ -44,7 +44,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
             <div class="stage-sep">›</div>
             <a href="https://mojoaistudio.com/learn" target="_blank" rel="noopener" class="stage-item">Stage 1 — Weekly Meetup Events</a>
             <div class="stage-sep">›</div>
-            <div class="stage-item stage-active">Stage 2 — Interactive Builder Sessions</div>
+            <a href="/pricing.php" class="stage-item stage-active">Stage 2 — Interactive Builder Sessions</a>
             <div class="stage-sep">›</div>
             <a href="/pricing.php" class="stage-item">Stage 3 — Group Cohorts</a>
             <div class="stage-sep">›</div>

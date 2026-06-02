@@ -21,6 +21,8 @@ $logged_in = is_active_subscriber();
     <div class="nav-inner">
         <a href="/" class="nav-logo">Watch Me Build AI</a>
         <div class="nav-links">
+            <a href="/schedule.php">Schedule</a>
+            <a href="/pricing.php">Pricing</a>
             <a href="/faq.php">FAQ</a>
             <?php if ($logged_in): ?>
                 <a href="/portal/" class="btn btn-sm">Member Portal →</a>

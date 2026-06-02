@@ -23,6 +23,8 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     <div class="nav-inner">
         <a href="/" class="nav-logo">Watch Me Build AI</a>
         <div class="nav-links">
+            <a href="/schedule.php">Schedule</a>
+            <a href="/pricing.php">Pricing</a>
             <a href="/faq.php">FAQ</a>
             <?php if ($logged_in): ?>
                 <a href="/portal/" class="btn btn-sm">Member Portal →</a>

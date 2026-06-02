@@ -32,7 +32,7 @@ $plans = [
         'tagline'  => '8 Pro Sessions per week (1 hour each)',
         'amount'   => '$100',
         'period'   => '/month',
-        'limit'    => '30 seats per live session — first in',
+        'limit'    => '50 seats per live session — first in',
         'trial'    => 'Start with a 7-day free trial',
         'features' => [
             '8 live Pro Sessions per week (1 hour each)',

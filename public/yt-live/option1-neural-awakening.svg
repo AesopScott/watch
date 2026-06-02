@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0a0a2e"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="blur2">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="glow-filter">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bg1)"/>
+
+  <!-- Ambient glow center -->
+  <ellipse cx="960" cy="540" rx="500" ry="400" fill="url(#glow1)"/>
+
+  <!-- Neural network connections (edges) -->
+  <g opacity="0.35" stroke="#a78bfa" stroke-width="1.2" fill="none">
+    <!-- Brain left lobe connections -->
+    <line x1="680" y1="320" x2="760" y2="410"/>
+    <line x1="760" y1="410" x2="840" y2="360"/>
+    <line x1="840" y1="360" x2="920" y2="440"/>
+    <line x1="680" y1="320" x2="720" y2="480"/>
+    <line x1="720" y1="480" x2="800" y2="520"/>
+    <line x1="800" y1="520" x2="880" y2="480"/>
+    <line x1="880" y1="480" x2="920" y2="440"/>
+    <line x1="720" y1="480" x2="680" y2="580"/>
+    <line x1="680" y1="580" x2="760" y2="640"/>
+    <line x1="760" y1="640" x2="800" y2="580"/>
+    <line x1="800" y1="580" x2="800" y2="520"/>
+    <line x1="680" y1="580" x2="700" y2="680"/>
+    <line x1="760" y1="640" x2="800" y2="700"/>
+    <line x1="840" y1="360" x2="880" y2="300"/>
+    <line x1="880" y1="300" x2="960" y2="280"/>
+    <line x1="760" y1="410" x2="800" y2="360"/>
+    <line x1="800" y1="360" x2="840" y2="300"/>
+    <!-- Brain right lobe connections -->
+    <line x1="1240" y1="320" x2="1160" y2="410"/>
+    <line x1="1160" y1="410" x2="1080" y2="360"/>
+    <line x1="1080" y1="360" x2="1000" y2="440"/>
+    <line x1="1240" y1="320" x2="1200" y2="480"/>
+    <line x1="1200" y1="480" x2="1120" y2="520"/>
+    <line x1="1120" y1="520" x2="1040" y2="480"/>
+    <line x1="1040" y1="480" x2="1000" y2="440"/>
+    <line x1="1200" y1="480" x2="1240" y2="580"/>
+    <line x1="1240" y1="580" x2="1160" y2="640"/>
+    <line x1="1160" y1="640" x2="1120" y2="580"/>
+    <line x1="1120" y1="580" x2="1120" y2="520"/>
+    <line x1="1240" y1="580" x2="1220" y2="680"/>
+    <line x1="1160" y1="640" x2="1120" y2="700"/>
+    <line x1="1080" y1="360" x2="1040" y2="300"/>
+    <line x1="1040" y1="300" x2="960" y2="280"/>
+    <line x1="1160" y1="410" x2="1120" y2="360"/>
+    <line x1="1120" y1="360" x2="1080" y2="300"/>
+    <!-- Center cross connections -->
+    <line x1="920" y1="440" x2="960" y2="400"/>
+    <line x1="1000" y1="440" x2="960" y2="400"/>
+    <line x1="880" y1="480" x2="960" y2="460"/>
+    <line x1="1040" y1="480" x2="960" y2="460"/>
+    <line x1="920" y1="440" x2="1000" y2="440"/>
+    <line x1="960" y1="280" x2="960" y2="400"/>
+    <line x1="700" y1="680" x2="800" y2="700"/>
+    <line x1="800" y1="700" x2="900" y2="720"/>
+    <line x1="900" y1="720" x2="960" y2="700"/>
+    <line x1="960" y1="700" x2="1020" y2="720"/>
+    <line x1="1020" y1="720" x2="1120" y2="700"/>
+    <line x1="1120" y1="700" x2="1220" y2="680"/>
+  </g>
+
+  <!-- Outer scattered nodes -->
+  <g opacity="0.5" filter="url(#blur2)">
+    <!-- Far field nodes -->
+    <circle cx="400" cy="200" r="4" fill="#60a5fa"/>
+    <circle cx="350" cy="400" r="3" fill="#818cf8"/>
+    <circle cx="420" cy="620" r="4" fill="#60a5fa"/>
+    <circle cx="500" cy="800" r="3" fill="#a78bfa"/>
+    <circle cx="1520" cy="200" r="4" fill="#60a5fa"/>
+    <circle cx="1570" cy="400" r="3" fill="#818cf8"/>
+    <circle cx="1500" cy="620" r="4" fill="#60a5fa"/>
+    <circle cx="1420" cy="800" r="3" fill="#a78bfa"/>
+    <line x1="400" y1="200" x2="680" y2="320" stroke="#818cf8" stroke-width="0.8" opacity="0.4"/>
+    <line x1="350" y1="400" x2="680" y2="320" stroke="#818cf8" stroke-width="0.8" opacity="0.4"/>
+    <line x1="420" y1="620" x2="680" y2="580" stroke="#818cf8" stroke-width="0.8" opacity="0.4"/>
+    <line x1="500" y1="800" x2="700" y2="680" stroke="#818cf8" stroke-width="0.8" opacity="0.4"/>
+    <line x1="1520" y1="200" x2="1240" y2="320" stroke="#818cf8" stroke-width="0.8" opacity="0.4"/>
+    <line x1="1570" y1="400" x2="1240" y2="320" stroke="#818cf8" stroke-width="0.8" opacity="0.4"/>
+    <line x1="1500" y1="620" x2="1240" y2="580" stroke="#818cf8" stroke-width="0.8" opacity="0.4"/>
+    <line x1="1420" y1="800" x2="1220" y2="680" stroke="#818cf8" stroke-width="0.8" opacity="0.4"/>
+  </g>
+
+  <!-- Bright neural nodes -->
+  <g filter="url(#glow-filter)">
+    <!-- Key brain nodes glowing -->
+    <circle cx="680" cy="320" r="7" fill="#c4b5fd" opacity="0.9"/>
+    <circle cx="760" cy="410" r="6" fill="#a78bfa" opacity="0.9"/>
+    <circle cx="840" cy="360" r="8" fill="#c4b5fd" opacity="1"/>
+    <circle cx="920" cy="440" r="9" fill="#e879f9" opacity="1"/>
+    <circle cx="960" cy="280" r="10" fill="#f0abfc" opacity="1"/>
+    <circle cx="1000" cy="440" r="9" fill="#e879f9" opacity="1"/>
+    <circle cx="1080" cy="360" r="8" fill="#c4b5fd" opacity="1"/>
+    <circle cx="1160" cy="410" r="6" fill="#a78bfa" opacity="0.9"/>
+    <circle cx="1240" cy="320" r="7" fill="#c4b5fd" opacity="0.9"/>
+    <circle cx="720" cy="480" r="7" fill="#818cf8" opacity="0.9"/>
+    <circle cx="800" cy="520" r="8" fill="#a78bfa" opacity="0.9"/>
+    <circle cx="880" cy="480" r="7" fill="#818cf8" opacity="0.9"/>
+    <circle cx="960" cy="460" r="11" fill="#f0abfc" opacity="1"/>
+    <circle cx="1040" cy="480" r="7" fill="#818cf8" opacity="0.9"/>
+    <circle cx="1120" cy="520" r="8" fill="#a78bfa" opacity="0.9"/>
+    <circle cx="1200" cy="480" r="7" fill="#818cf8" opacity="0.9"/>
+    <circle cx="680" cy="580" r="7" fill="#60a5fa" opacity="0.9"/>
+    <circle cx="760" cy="640" r="6" fill="#818cf8" opacity="0.9"/>
+    <circle cx="800" cy="580" r="5" fill="#60a5fa" opacity="0.8"/>
+    <circle cx="800" cy="700" r="7" fill="#60a5fa" opacity="0.9"/>
+    <circle cx="900" cy="720" r="6" fill="#818cf8" opacity="0.9"/>
+    <circle cx="960" cy="700" r="9" fill="#a78bfa" opacity="1"/>
+    <circle cx="1020" cy="720" r="6" fill="#818cf8" opacity="0.9"/>
+    <circle cx="1120" cy="700" r="7" fill="#60a5fa" opacity="0.9"/>
+    <circle cx="1160" cy="640" r="6" fill="#818cf8" opacity="0.9"/>
+    <circle cx="1120" cy="580" r="5" fill="#60a5fa" opacity="0.8"/>
+    <circle cx="1240" cy="580" r="7" fill="#60a5fa" opacity="0.9"/>
+    <circle cx="880" cy="300" r="6" fill="#f0abfc" opacity="0.9"/>
+    <circle cx="1040" cy="300" r="6" fill="#f0abfc" opacity="0.9"/>
+    <circle cx="700" cy="680" r="5" fill="#60a5fa" opacity="0.8"/>
+    <circle cx="1220" cy="680" r="5" fill="#60a5fa" opacity="0.8"/>
+    <circle cx="800" cy="360" r="5" fill="#c4b5fd" opacity="0.8"/>
+    <circle cx="840" cy="300" r="5" fill="#f0abfc" opacity="0.8"/>
+    <circle cx="1120" cy="360" r="5" fill="#c4b5fd" opacity="0.8"/>
+    <circle cx="1080" cy="300" r="5" fill="#f0abfc" opacity="0.8"/>
+    <circle cx="960" cy="400" r="8" fill="#e879f9" opacity="1"/>
+  </g>
+
+  <!-- Floating data particles -->
+  <g fill="#a78bfa" opacity="0.6">
+    <circle cx="200" cy="150" r="2"/>
+    <circle cx="300" cy="250" r="1.5"/>
+    <circle cx="150" cy="500" r="2"/>
+    <circle cx="250" cy="700" r="1.5"/>
+    <circle cx="1700" cy="150" r="2"/>
+    <circle cx="1600" cy="300" r="1.5"/>
+    <circle cx="1750" cy="600" r="2"/>
+    <circle cx="1650" cy="800" r="1.5"/>
+    <circle cx="600" cy="120" r="2"/>
+    <circle cx="1300" cy="120" r="2"/>
+    <circle cx="960" cy="950" r="2"/>
+    <circle cx="500" cy="950" r="1.5"/>
+    <circle cx="1400" cy="950" r="1.5"/>
+  </g>
+
+  <!-- Horizontal scan line (CRT effect subtle) -->
+  <rect x="0" y="0" width="1920" height="1080" fill="url(#scanlines)" opacity="0.05"/>
+
+  <!-- Title text -->
+  <text x="960" y="870" font-family="'Segoe UI', Arial, sans-serif" font-size="88" font-weight="900"
+        text-anchor="middle" fill="white" letter-spacing="8" opacity="0.95">
+    WATCH ME BUILD AI
+  </text>
+
+  <!-- Subtitle -->
+  <text x="960" y="940" font-family="'Segoe UI', Arial, sans-serif" font-size="34"
+        text-anchor="middle" fill="#a78bfa" letter-spacing="12" opacity="0.9">
+    LIVE LEARNING • NEURAL NETWORKS • AI MASTERY
+  </text>
+
+  <!-- Decorative line under title -->
+  <line x1="560" y1="955" x2="1360" y2="955" stroke="#7c3aed" stroke-width="2" opacity="0.6"/>
+
+  <!-- Corner accent marks -->
+  <g stroke="#7c3aed" stroke-width="2" fill="none" opacity="0.7">
+    <polyline points="60,60 60,120 120,120"/>
+    <polyline points="1860,60 1860,120 1800,120"/>
+    <polyline points="60,1020 60,960 120,960"/>
+    <polyline points="1860,1020 1860,960 1800,960"/>
+  </g>
+
+  <!-- Small LIVE badge -->
+  <rect x="830" y="80" width="300" height="60" rx="30" fill="#7c3aed" opacity="0.9"/>
+  <circle cx="875" cy="110" r="8" fill="#f87171"/>
+  <text x="1000" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700"
+        text-anchor="middle" fill="white" letter-spacing="6">● LIVE</text>
+</svg>

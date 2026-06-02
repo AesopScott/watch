@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="wave-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="40%" stop-color="#1e1a4b"/>
+      <stop offset="70%" stop-color="#0c1a3a"/>
+      <stop offset="100%" stop-color="#050c1e"/>
+    </linearGradient>
+    <linearGradient id="wave1-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#6366f1" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#a78bfa" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wave2-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#06b6d4" stop-opacity="0.5"/>
+      <stop offset="65%" stop-color="#38bdf8" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wave3-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#f59e0b" stop-opacity="0.35"/>
+      <stop offset="55%" stop-color="#fb923c" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="title-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a5b4fc"/>
+      <stop offset="25%" stop-color="#e0e7ff"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="75%" stop-color="#e0e7ff"/>
+      <stop offset="100%" stop-color="#a5b4fc"/>
+    </linearGradient>
+    <linearGradient id="sub-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <filter id="wave-blur">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+    <filter id="title-glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="accent-glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="badge-bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3730a3" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.95"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#wave-bg)"/>
+
+  <!-- Wave layers (background glow) -->
+  <!-- Wave 1 - purple, main wave -->
+  <path d="M 0 600
+    C 160 500, 320 450, 480 520
+    C 640 590, 800 660, 960 580
+    C 1120 500, 1280 420, 1440 490
+    C 1600 560, 1760 620, 1920 550
+    L 1920 1080 L 0 1080 Z"
+    fill="url(#wave1-grad)" opacity="0.4" filter="url(#wave-blur)"/>
+
+  <!-- Wave 2 - cyan, second wave -->
+  <path d="M 0 680
+    C 200 600, 380 560, 560 640
+    C 740 720, 880 760, 1040 680
+    C 1200 600, 1360 540, 1520 610
+    C 1680 680, 1800 720, 1920 660
+    L 1920 1080 L 0 1080 Z"
+    fill="url(#wave2-grad)" opacity="0.35" filter="url(#wave-blur)"/>
+
+  <!-- Wave 3 - amber accent wave -->
+  <path d="M 0 780
+    C 240 730, 460 700, 680 760
+    C 900 820, 1020 840, 1200 790
+    C 1380 740, 1560 700, 1760 760
+    L 1920 780 L 1920 1080 L 0 1080 Z"
+    fill="url(#wave3-grad)" opacity="0.3" filter="url(#wave-blur)"/>
+
+  <!-- Wave line strokes (sharper) -->
+  <!-- Purple wave line -->
+  <path d="M 0 600
+    C 160 500, 320 450, 480 520
+    C 640 590, 800 660, 960 580
+    C 1120 500, 1280 420, 1440 490
+    C 1600 560, 1760 620, 1920 550"
+    fill="none" stroke="#818cf8" stroke-width="2.5" opacity="0.7"/>
+
+  <!-- Cyan wave line -->
+  <path d="M 0 680
+    C 200 600, 380 560, 560 640
+    C 740 720, 880 760, 1040 680
+    C 1200 600, 1360 540, 1520 610
+    C 1680 680, 1800 720, 1920 660"
+    fill="none" stroke="#38bdf8" stroke-width="2" opacity="0.6"/>
+
+  <!-- Amber wave line -->
+  <path d="M 0 780
+    C 240 730, 460 700, 680 760
+    C 900 820, 1020 840, 1200 790
+    C 1380 740, 1560 700, 1760 760
+    L 1920 780"
+    fill="none" stroke="#fb923c" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Data dots on wave peaks -->
+  <g filter="url(#accent-glow)">
+    <!-- Purple wave dots -->
+    <circle cx="480" cy="520" r="6" fill="#a78bfa" opacity="0.9"/>
+    <circle cx="960" cy="580" r="8" fill="#c4b5fd" opacity="0.95"/>
+    <circle cx="1440" cy="490" r="6" fill="#a78bfa" opacity="0.9"/>
+    <!-- Cyan wave dots -->
+    <circle cx="560" cy="640" r="5" fill="#38bdf8" opacity="0.9"/>
+    <circle cx="1040" cy="680" r="7" fill="#67e8f9" opacity="0.95"/>
+    <circle cx="1520" cy="610" r="5" fill="#38bdf8" opacity="0.9"/>
+    <!-- Amber wave dots -->
+    <circle cx="680" cy="760" r="5" fill="#fcd34d" opacity="0.85"/>
+    <circle cx="1200" cy="790" r="5" fill="#fb923c" opacity="0.85"/>
+  </g>
+
+  <!-- Top section: scattered knowledge keywords -->
+  <g font-family="'Segoe UI', Arial, sans-serif" opacity="0.22">
+    <text x="100" y="120" font-size="18" fill="#a5b4fc" letter-spacing="3">NEURAL NETWORKS</text>
+    <text x="380" y="80" font-size="16" fill="#67e8f9" letter-spacing="2">DEEP LEARNING</text>
+    <text x="700" y="130" font-size="18" fill="#c4b5fd" letter-spacing="3">TRANSFORMERS</text>
+    <text x="1050" y="85" font-size="16" fill="#a5b4fc" letter-spacing="2">COMPUTER VISION</text>
+    <text x="1370" y="125" font-size="18" fill="#67e8f9" letter-spacing="3">REINFORCEMENT</text>
+    <text x="1620" y="80" font-size="16" fill="#c4b5fd" letter-spacing="2">LLMs</text>
+    <text x="130" y="200" font-size="15" fill="#818cf8" letter-spacing="2">BACKPROPAGATION</text>
+    <text x="480" y="160" font-size="16" fill="#38bdf8" letter-spacing="3">ATTENTION</text>
+    <text x="820" y="195" font-size="15" fill="#a78bfa" letter-spacing="2">EMBEDDINGS</text>
+    <text x="1160" y="170" font-size="16" fill="#38bdf8" letter-spacing="3">FINE-TUNING</text>
+    <text x="1480" y="200" font-size="15" fill="#818cf8" letter-spacing="2">GRADIENT DESCENT</text>
+    <text x="220" y="280" font-size="14" fill="#6366f1" letter-spacing="2">loss(θ) = -Σ y·log(ŷ)</text>
+    <text x="1500" y="290" font-size="14" fill="#0ea5e9" letter-spacing="2">W += α·∇L</text>
+    <text x="700" y="260" font-size="14" fill="#7c3aed" letter-spacing="2">softmax(x) = eˣ/Σeˣ</text>
+  </g>
+
+  <!-- Main titles -->
+  <text x="960" y="420" font-family="'Segoe UI', Arial, sans-serif" font-size="105" font-weight="900"
+        text-anchor="middle" fill="url(#title-gradient)" letter-spacing="8"
+        filter="url(#title-glow)">
+    WATCH ME BUILD AI
+  </text>
+
+  <!-- Separator dots -->
+  <g fill="#a78bfa" filter="url(#accent-glow)" opacity="0.9">
+    <circle cx="740" cy="460" r="4"/>
+    <circle cx="960" cy="460" r="5"/>
+    <circle cx="1180" cy="460" r="4"/>
+  </g>
+
+  <!-- Tagline -->
+  <text x="960" y="530" font-family="'Segoe UI', Arial, sans-serif" font-size="36"
+        text-anchor="middle" fill="url(#sub-gradient)" letter-spacing="8" opacity="0.9">
+    BUILDING · LEARNING · SHIPPING · LIVE
+  </text>
+
+  <!-- Progress bar-style accent below subtitle -->
+  <rect x="360" y="556" width="1200" height="3" rx="2" fill="#1e1b4b" opacity="0.5"/>
+  <rect x="360" y="556" width="756" height="3" rx="2" fill="url(#sub-gradient)" opacity="0.8"/>
+  <circle cx="1116" cy="557" r="5" fill="#a78bfa" filter="url(#accent-glow)" opacity="0.9"/>
+
+  <!-- LIVE badge (modern pill) -->
+  <rect x="840" y="598" width="240" height="52" rx="26" fill="url(#badge-bg)" stroke="#6366f1" stroke-width="1.5"/>
+  <circle cx="882" cy="624" r="7" fill="#ef4444"/>
+  <circle cx="882" cy="624" r="4" fill="#fca5a5"/>
+  <text x="975" y="633" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="700"
+        text-anchor="middle" fill="white" letter-spacing="4">LIVE</text>
+
+  <!-- Corner accent marks (modern style) -->
+  <g stroke="#6366f1" stroke-width="2" fill="none" opacity="0.6" filter="url(#accent-glow)">
+    <line x1="50" y1="50" x2="50" y2="100"/>
+    <line x1="50" y1="50" x2="100" y2="50"/>
+    <line x1="1870" y1="50" x2="1870" y2="100"/>
+    <line x1="1870" y1="50" x2="1820" y2="50"/>
+    <line x1="50" y1="1030" x2="50" y2="980"/>
+    <line x1="50" y1="1030" x2="100" y2="1030"/>
+    <line x1="1870" y1="1030" x2="1870" y2="980"/>
+    <line x1="1870" y1="1030" x2="1820" y2="1030"/>
+  </g>
+
+  <!-- Small floating AI brain icon (top center) -->
+  <g transform="translate(960, 140)" opacity="0.5">
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#a78bfa" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#818cf8" stroke-width="1"/>
+    <!-- Brain nodes in icon -->
+    <circle cx="0" cy="-20" r="5" fill="#c4b5fd"/>
+    <circle cx="-18" cy="5" r="4" fill="#a78bfa"/>
+    <circle cx="18" cy="5" r="4" fill="#a78bfa"/>
+    <circle cx="0" cy="20" r="5" fill="#c4b5fd"/>
+    <circle cx="-12" cy="-10" r="3" fill="#818cf8"/>
+    <circle cx="12" cy="-10" r="3" fill="#818cf8"/>
+    <!-- Connections -->
+    <line x1="0" y1="-20" x2="-18" y2="5" stroke="#a78bfa" stroke-width="1"/>
+    <line x1="0" y1="-20" x2="18" y2="5" stroke="#a78bfa" stroke-width="1"/>
+    <line x1="-18" y1="5" x2="0" y2="20" stroke="#818cf8" stroke-width="1"/>
+    <line x1="18" y1="5" x2="0" y2="20" stroke="#818cf8" stroke-width="1"/>
+    <line x1="-12" y1="-10" x2="12" y2="-10" stroke="#6366f1" stroke-width="1"/>
+    <line x1="-18" y1="5" x2="18" y2="5" stroke="#6366f1" stroke-width="1"/>
+  </g>
+</svg>

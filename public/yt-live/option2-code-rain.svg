@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#001a00"/>
+      <stop offset="50%" stop-color="#000d00"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+    <linearGradient id="textGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ff41"/>
+      <stop offset="50%" stop-color="#00ffaa"/>
+      <stop offset="100%" stop-color="#00ff41"/>
+    </linearGradient>
+    <filter id="green-glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <mask id="fade-bottom">
+      <rect width="1920" height="900" fill="white"/>
+      <rect y="700" width="1920" height="380" fill="url(#fade-grad)"/>
+    </mask>
+    <linearGradient id="fade-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="white"/>
+      <stop offset="100%" stop-color="black"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bg2)"/>
+
+  <!-- Code rain columns - left section -->
+  <g font-family="'Courier New', monospace" font-size="16" fill="#00ff41" mask="url(#fade-bottom)">
+    <!-- Column 1: x=60 -->
+    <text x="60" y="30" opacity="1.0" filter="url(#soft-glow)">1</text>
+    <text x="60" y="50" opacity="0.9">0</text>
+    <text x="60" y="70" opacity="0.8">1</text>
+    <text x="60" y="90" opacity="0.7">A</text>
+    <text x="60" y="110" opacity="0.6">I</text>
+    <text x="60" y="130" opacity="0.5">0</text>
+    <text x="60" y="150" opacity="0.4">1</text>
+    <text x="60" y="170" opacity="0.3">f</text>
+    <text x="60" y="190" opacity="0.25">7</text>
+    <text x="60" y="210" opacity="0.2">3</text>
+    <text x="60" y="230" opacity="0.15">b</text>
+    <text x="60" y="250" opacity="0.1">2</text>
+    <!-- Column 2: x=100 -->
+    <text x="100" y="80" opacity="1.0" filter="url(#soft-glow)">M</text>
+    <text x="100" y="100" opacity="0.9">L</text>
+    <text x="100" y="120" opacity="0.8">0</text>
+    <text x="100" y="140" opacity="0.7">1</text>
+    <text x="100" y="160" opacity="0.6">0</text>
+    <text x="100" y="180" opacity="0.5">1</text>
+    <text x="100" y="200" opacity="0.4">0</text>
+    <text x="100" y="220" opacity="0.3">9</text>
+    <text x="100" y="240" opacity="0.25">e</text>
+    <!-- Column 3: x=140 -->
+    <text x="140" y="20" opacity="1.0" filter="url(#soft-glow)">G</text>
+    <text x="140" y="40" opacity="0.9">P</text>
+    <text x="140" y="60" opacity="0.8">T</text>
+    <text x="140" y="80" opacity="0.7">0</text>
+    <text x="140" y="100" opacity="0.6">1</text>
+    <text x="140" y="120" opacity="0.5">1</text>
+    <text x="140" y="140" opacity="0.4">0</text>
+    <text x="140" y="160" opacity="0.3">4</text>
+    <!-- Column 4: x=180 -->
+    <text x="180" y="110" opacity="1.0" filter="url(#soft-glow)">0</text>
+    <text x="180" y="130" opacity="0.9">1</text>
+    <text x="180" y="150" opacity="0.8">σ</text>
+    <text x="180" y="170" opacity="0.7">∑</text>
+    <text x="180" y="190" opacity="0.6">0</text>
+    <text x="180" y="210" opacity="0.5">1</text>
+    <text x="180" y="230" opacity="0.4">d</text>
+    <text x="180" y="250" opacity="0.3">8</text>
+    <!-- Column 5: x=220 -->
+    <text x="220" y="40" opacity="1.0" filter="url(#soft-glow)">λ</text>
+    <text x="220" y="60" opacity="0.9">∇</text>
+    <text x="220" y="80" opacity="0.8">0</text>
+    <text x="220" y="100" opacity="0.7">1</text>
+    <text x="220" y="120" opacity="0.6">R</text>
+    <text x="220" y="140" opacity="0.5">L</text>
+    <text x="220" y="160" opacity="0.4">0</text>
+    <text x="220" y="180" opacity="0.3">1</text>
+    <!-- Column 6: x=260 -->
+    <text x="260" y="70" opacity="1.0" filter="url(#soft-glow)">W</text>
+    <text x="260" y="90" opacity="0.9">∂</text>
+    <text x="260" y="110" opacity="0.8">0</text>
+    <text x="260" y="130" opacity="0.7">1</text>
+    <text x="260" y="150" opacity="0.6">0</text>
+    <text x="260" y="170" opacity="0.5">6</text>
+    <text x="260" y="190" opacity="0.4">c</text>
+    <!-- Column 7: x=300 -->
+    <text x="300" y="50" opacity="1.0" filter="url(#soft-glow)">∫</text>
+    <text x="300" y="70" opacity="0.9">0</text>
+    <text x="300" y="90" opacity="0.8">1</text>
+    <text x="300" y="110" opacity="0.7">N</text>
+    <text x="300" y="130" opacity="0.6">N</text>
+    <text x="300" y="150" opacity="0.5">0</text>
+    <text x="300" y="170" opacity="0.4">1</text>
+    <text x="300" y="190" opacity="0.3">5</text>
+    <!-- Column 8: x=340 -->
+    <text x="340" y="90" opacity="1.0" filter="url(#soft-glow)">α</text>
+    <text x="340" y="110" opacity="0.9">β</text>
+    <text x="340" y="130" opacity="0.8">0</text>
+    <text x="340" y="150" opacity="0.7">1</text>
+    <text x="340" y="170" opacity="0.6">0</text>
+    <text x="340" y="190" opacity="0.5">γ</text>
+    <text x="340" y="210" opacity="0.4">1</text>
+    <!-- Column 9: x=380 -->
+    <text x="380" y="30" opacity="1.0" filter="url(#soft-glow)">0</text>
+    <text x="380" y="50" opacity="0.9">1</text>
+    <text x="380" y="70" opacity="0.8">θ</text>
+    <text x="380" y="90" opacity="0.7">0</text>
+    <text x="380" y="110" opacity="0.6">1</text>
+    <text x="380" y="130" opacity="0.5">0</text>
+    <text x="380" y="150" opacity="0.4">μ</text>
+    <text x="380" y="170" opacity="0.3">2</text>
+    <!-- Column 10: x=420 -->
+    <text x="420" y="60" opacity="1.0" filter="url(#soft-glow)">π</text>
+    <text x="420" y="80" opacity="0.9">0</text>
+    <text x="420" y="100" opacity="0.8">1</text>
+    <text x="420" y="120" opacity="0.7">e</text>
+    <text x="420" y="140" opacity="0.6">0</text>
+    <text x="420" y="160" opacity="0.5">1</text>
+    <text x="420" y="180" opacity="0.4">A</text>
+    <!-- Column 11: x=460 -->
+    <text x="460" y="20" opacity="1.0" filter="url(#soft-glow)">1</text>
+    <text x="460" y="40" opacity="0.9">0</text>
+    <text x="460" y="60" opacity="0.8">1</text>
+    <text x="460" y="80" opacity="0.7">0</text>
+    <text x="460" y="100" opacity="0.6">ε</text>
+    <text x="460" y="120" opacity="0.5">1</text>
+    <text x="460" y="140" opacity="0.4">0</text>
+    <!-- Right section -->
+    <!-- Column 12: x=1460 -->
+    <text x="1460" y="45" opacity="1.0" filter="url(#soft-glow)">1</text>
+    <text x="1460" y="65" opacity="0.9">0</text>
+    <text x="1460" y="85" opacity="0.8">1</text>
+    <text x="1460" y="105" opacity="0.7">A</text>
+    <text x="1460" y="125" opacity="0.6">I</text>
+    <text x="1460" y="145" opacity="0.5">0</text>
+    <text x="1460" y="165" opacity="0.4">1</text>
+    <!-- Column 13: x=1500 -->
+    <text x="1500" y="85" opacity="1.0" filter="url(#soft-glow)">M</text>
+    <text x="1500" y="105" opacity="0.9">L</text>
+    <text x="1500" y="125" opacity="0.8">0</text>
+    <text x="1500" y="145" opacity="0.7">1</text>
+    <text x="1500" y="165" opacity="0.6">0</text>
+    <text x="1500" y="185" opacity="0.5">1</text>
+    <!-- Column 14: x=1540 -->
+    <text x="1540" y="25" opacity="1.0" filter="url(#soft-glow)">G</text>
+    <text x="1540" y="45" opacity="0.9">P</text>
+    <text x="1540" y="65" opacity="0.8">T</text>
+    <text x="1540" y="85" opacity="0.7">0</text>
+    <text x="1540" y="105" opacity="0.6">1</text>
+    <text x="1540" y="125" opacity="0.5">1</text>
+    <!-- Column 15: x=1580 -->
+    <text x="1580" y="115" opacity="1.0" filter="url(#soft-glow)">σ</text>
+    <text x="1580" y="135" opacity="0.9">∑</text>
+    <text x="1580" y="155" opacity="0.8">0</text>
+    <text x="1580" y="175" opacity="0.7">1</text>
+    <text x="1580" y="195" opacity="0.6">d</text>
+    <!-- Column 16: x=1620 -->
+    <text x="1620" y="50" opacity="1.0" filter="url(#soft-glow)">λ</text>
+    <text x="1620" y="70" opacity="0.9">∇</text>
+    <text x="1620" y="90" opacity="0.8">0</text>
+    <text x="1620" y="110" opacity="0.7">1</text>
+    <text x="1620" y="130" opacity="0.6">R</text>
+    <!-- Column 17: x=1660 -->
+    <text x="1660" y="75" opacity="1.0" filter="url(#soft-glow)">W</text>
+    <text x="1660" y="95" opacity="0.9">∂</text>
+    <text x="1660" y="115" opacity="0.8">0</text>
+    <text x="1660" y="135" opacity="0.7">1</text>
+    <!-- Column 18: x=1700 -->
+    <text x="1700" y="55" opacity="1.0" filter="url(#soft-glow)">∫</text>
+    <text x="1700" y="75" opacity="0.9">0</text>
+    <text x="1700" y="95" opacity="0.8">1</text>
+    <text x="1700" y="115" opacity="0.7">N</text>
+    <!-- Column 19: x=1740 -->
+    <text x="1740" y="95" opacity="1.0" filter="url(#soft-glow)">α</text>
+    <text x="1740" y="115" opacity="0.9">β</text>
+    <text x="1740" y="135" opacity="0.8">0</text>
+    <text x="1740" y="155" opacity="0.7">1</text>
+    <!-- Column 20: x=1780 -->
+    <text x="1780" y="35" opacity="1.0" filter="url(#soft-glow)">0</text>
+    <text x="1780" y="55" opacity="0.9">1</text>
+    <text x="1780" y="75" opacity="0.8">θ</text>
+    <text x="1780" y="95" opacity="0.7">0</text>
+    <!-- Column 21: x=1820 -->
+    <text x="1820" y="65" opacity="1.0" filter="url(#soft-glow)">π</text>
+    <text x="1820" y="85" opacity="0.9">0</text>
+    <text x="1820" y="105" opacity="0.8">1</text>
+    <text x="1820" y="125" opacity="0.7">e</text>
+    <!-- Column 22: x=1860 -->
+    <text x="1860" y="25" opacity="1.0" filter="url(#soft-glow)">1</text>
+    <text x="1860" y="45" opacity="0.9">0</text>
+    <text x="1860" y="65" opacity="0.8">1</text>
+    <text x="1860" y="85" opacity="0.7">ε</text>
+  </g>
+
+  <!-- Bottom rain (dimmer, trailing) -->
+  <g font-family="'Courier New', monospace" font-size="14" fill="#006614" opacity="0.5" mask="url(#fade-bottom)">
+    <!-- Spread across full width at bottom -->
+    <text x="60" y="450">01011010</text>
+    <text x="200" y="520">LEARN AI</text>
+    <text x="380" y="480">11001010</text>
+    <text x="560" y="540">∇LOSS=0</text>
+    <text x="740" y="500">01110100</text>
+    <text x="1100" y="510">10110101</text>
+    <text x="1280" y="470">MODEL.FIT</text>
+    <text x="1460" y="530">00101101</text>
+    <text x="1640" y="490">EPOCH++</text>
+    <text x="1800" y="545">11010011</text>
+  </g>
+
+  <!-- Central glow behind text -->
+  <ellipse cx="960" cy="540" rx="700" ry="200" fill="#001a00" opacity="0.8"/>
+
+  <!-- Main title -->
+  <text x="960" y="500" font-family="'Courier New', monospace" font-size="100" font-weight="900"
+        text-anchor="middle" fill="url(#textGrad2)" letter-spacing="4" filter="url(#green-glow)">
+    WATCH ME BUILD AI
+  </text>
+
+  <!-- Subtitle code line -->
+  <text x="960" y="570" font-family="'Courier New', monospace" font-size="28"
+        text-anchor="middle" fill="#00cc35" letter-spacing="6" opacity="0.9">
+    &gt; import ai; while True: learn()
+  </text>
+
+  <!-- Blinking cursor -->
+  <rect x="1350" y="548" width="18" height="28" fill="#00ff41" opacity="0.9"/>
+
+  <!-- LIVE badge -->
+  <rect x="820" y="610" width="280" height="56" rx="4" fill="#002200" stroke="#00ff41" stroke-width="2" opacity="0.95"/>
+  <circle cx="860" cy="638" r="8" fill="#ff0000" opacity="0.9"/>
+  <text x="970" y="647" font-family="'Courier New', monospace" font-size="26" font-weight="700"
+        text-anchor="middle" fill="#00ff41" letter-spacing="6">● LIVE</text>
+
+  <!-- Corner brackets (terminal style) -->
+  <g stroke="#00ff41" stroke-width="2" fill="none" opacity="0.6">
+    <text x="60" y="80" font-family="'Courier New', monospace" font-size="40" fill="#00cc35" opacity="0.4">/*</text>
+    <text x="1820" y="80" font-family="'Courier New', monospace" font-size="40" fill="#00cc35" opacity="0.4" text-anchor="middle">*/</text>
+    <text x="60" y="1050" font-family="'Courier New', monospace" font-size="40" fill="#00cc35" opacity="0.4">//</text>
+  </g>
+</svg>

@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="space-bg" cx="50%" cy="50%" r="80%">
+      <stop offset="0%" stop-color="#0f0524"/>
+      <stop offset="50%" stop-color="#060110"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="nebula1" cx="30%" cy="40%" r="40%">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#4f46e5" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebula2" cx="70%" cy="60%" r="40%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="20%" stop-color="#e0e7ff" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#818cf8" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="planet1-grad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </radialGradient>
+    <radialGradient id="planet2-grad" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#075985"/>
+    </radialGradient>
+    <filter id="star-glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="core-filter">
+      <feGaussianBlur stdDeviation="20" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="text-glow-strong">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="cosmic-text" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="30%" stop-color="#e0e7ff"/>
+      <stop offset="60%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <clipPath id="ring-clip">
+      <ellipse cx="960" cy="400" rx="320" ry="90"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#space-bg)"/>
+  <rect width="1920" height="1080" fill="url(#nebula1)"/>
+  <rect width="1920" height="1080" fill="url(#nebula2)"/>
+
+  <!-- Stars layer 1 - tiny background stars -->
+  <g fill="white">
+    <circle cx="120" cy="80" r="1" opacity="0.6"/>
+    <circle cx="234" cy="156" r="0.8" opacity="0.5"/>
+    <circle cx="456" cy="43" r="1.2" opacity="0.7"/>
+    <circle cx="678" cy="112" r="0.8" opacity="0.5"/>
+    <circle cx="890" cy="67" r="1" opacity="0.6"/>
+    <circle cx="1134" cy="89" r="0.8" opacity="0.4"/>
+    <circle cx="1356" cy="34" r="1.1" opacity="0.6"/>
+    <circle cx="1567" cy="145" r="0.8" opacity="0.5"/>
+    <circle cx="1780" cy="78" r="1" opacity="0.7"/>
+    <circle cx="167" cy="300" r="0.8" opacity="0.4"/>
+    <circle cx="389" cy="267" r="1" opacity="0.6"/>
+    <circle cx="623" cy="234" r="0.8" opacity="0.5"/>
+    <circle cx="1289" cy="189" r="1" opacity="0.6"/>
+    <circle cx="1489" cy="278" r="0.8" opacity="0.4"/>
+    <circle cx="1723" cy="234" r="1.1" opacity="0.6"/>
+    <circle cx="78" cy="456" r="0.9" opacity="0.5"/>
+    <circle cx="312" cy="512" r="0.8" opacity="0.4"/>
+    <circle cx="1589" cy="523" r="0.9" opacity="0.5"/>
+    <circle cx="1834" cy="478" r="0.8" opacity="0.6"/>
+    <circle cx="145" cy="700" r="1" opacity="0.5"/>
+    <circle cx="378" cy="756" r="0.8" opacity="0.4"/>
+    <circle cx="567" cy="723" r="1" opacity="0.6"/>
+    <circle cx="1356" cy="756" r="0.8" opacity="0.4"/>
+    <circle cx="1578" cy="712" r="1" opacity="0.5"/>
+    <circle cx="1812" cy="734" r="0.9" opacity="0.6"/>
+    <circle cx="234" cy="890" r="0.8" opacity="0.4"/>
+    <circle cx="489" cy="934" r="1" opacity="0.5"/>
+    <circle cx="1423" cy="912" r="0.8" opacity="0.4"/>
+    <circle cx="1689" cy="867" r="1" opacity="0.5"/>
+  </g>
+
+  <!-- Stars layer 2 - brighter accent stars -->
+  <g fill="white" filter="url(#star-glow)">
+    <circle cx="189" cy="189" r="2" opacity="0.9"/>
+    <circle cx="456" cy="300" r="1.8" opacity="0.8"/>
+    <circle cx="1467" cy="223" r="2" opacity="0.9"/>
+    <circle cx="1734" cy="345" r="1.8" opacity="0.8"/>
+    <circle cx="123" cy="600" r="2" opacity="0.8"/>
+    <circle cx="1789" cy="612" r="2" opacity="0.8"/>
+    <circle cx="345" cy="850" r="1.8" opacity="0.7"/>
+    <circle cx="1567" cy="867" r="2" opacity="0.7"/>
+  </g>
+
+  <!-- Orbiting rings around central AI brain core -->
+  <!-- Outer ring (tilted ellipse) -->
+  <ellipse cx="960" cy="400" rx="320" ry="90" fill="none" stroke="#6366f1" stroke-width="1.5" opacity="0.4"/>
+  <!-- Middle ring -->
+  <ellipse cx="960" cy="400" rx="240" ry="65" fill="none" stroke="#818cf8" stroke-width="1" opacity="0.35"/>
+  <!-- Inner ring -->
+  <ellipse cx="960" cy="400" rx="160" ry="45" fill="none" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
+
+  <!-- Orbiting data "planets" -->
+  <!-- Planet 1 on outer ring -->
+  <circle cx="1265" cy="425" r="18" fill="url(#planet1-grad)" opacity="0.9"/>
+  <circle cx="1265" cy="425" r="18" fill="none" stroke="#c4b5fd" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Planet 2 on outer ring (opposite side) -->
+  <circle cx="660" cy="370" r="14" fill="url(#planet2-grad)" opacity="0.9"/>
+  <circle cx="660" cy="370" r="14" fill="none" stroke="#7dd3fc" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Smaller moon on middle ring -->
+  <circle cx="1185" cy="338" r="9" fill="#4f46e5" opacity="0.85"/>
+
+  <!-- Tiny data point on inner ring -->
+  <circle cx="820" cy="416" r="6" fill="#e879f9" opacity="0.9" filter="url(#star-glow)"/>
+
+  <!-- Central core - the AI "sun" -->
+  <circle cx="960" cy="400" r="80" fill="url(#core-glow)" opacity="0.15" filter="url(#core-filter)"/>
+  <circle cx="960" cy="400" r="55" fill="#1e1b4b" opacity="0.95"/>
+  <circle cx="960" cy="400" r="50" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.8"/>
+  <circle cx="960" cy="400" r="40" fill="none" stroke="#6366f1" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Brain/circuit pattern inside core -->
+  <g transform="translate(960,400)" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0.8">
+    <line x1="-25" y1="-15" x2="0" y2="-25"/>
+    <line x1="0" y1="-25" x2="25" y2="-15"/>
+    <line x1="-25" y1="-15" x2="-25" y2="10"/>
+    <line x1="25" y1="-15" x2="25" y2="10"/>
+    <line x1="-25" y1="10" x2="0" y2="20"/>
+    <line x1="25" y1="10" x2="0" y2="20"/>
+    <line x1="0" y1="-25" x2="0" y2="-10"/>
+    <line x1="0" y1="10" x2="0" y2="20"/>
+  </g>
+  <g transform="translate(960,400)" fill="#a78bfa" filter="url(#star-glow)">
+    <circle cx="0" cy="-25" r="4"/>
+    <circle cx="-25" cy="-15" r="3.5"/>
+    <circle cx="25" cy="-15" r="3.5"/>
+    <circle cx="-25" cy="10" r="3.5"/>
+    <circle cx="25" cy="10" r="3.5"/>
+    <circle cx="0" cy="20" r="4"/>
+    <circle cx="0" cy="-10" r="5" fill="#c4b5fd"/>
+    <circle cx="0" cy="10" r="5" fill="#c4b5fd"/>
+  </g>
+
+  <!-- Constellation lines (AI knowledge graph) - left -->
+  <g stroke="#4f46e5" stroke-width="0.8" opacity="0.45" fill="none">
+    <line x1="660" y1="370" x2="480" y2="300"/>
+    <line x1="480" y1="300" x2="360" y2="380"/>
+    <line x1="360" y1="380" x2="280" y2="320"/>
+    <line x1="480" y1="300" x2="520" y2="180"/>
+    <line x1="520" y1="180" x2="640" y2="150"/>
+    <line x1="640" y1="150" x2="720" y2="200"/>
+    <line x1="360" y1="380" x2="300" y2="480"/>
+    <line x1="300" y1="480" x2="200" y2="520"/>
+    <line x1="300" y1="480" x2="380" y2="560"/>
+    <line x1="380" y1="560" x2="460" y2="520"/>
+  </g>
+  <!-- Constellation lines - right -->
+  <g stroke="#0ea5e9" stroke-width="0.8" opacity="0.45" fill="none">
+    <line x1="1265" y1="425" x2="1440" y2="360"/>
+    <line x1="1440" y1="360" x2="1560" y2="420"/>
+    <line x1="1560" y1="420" x2="1640" y2="360"/>
+    <line x1="1440" y1="360" x2="1400" y2="220"/>
+    <line x1="1400" y1="220" x2="1280" y2="200"/>
+    <line x1="1280" y1="200" x2="1200" y2="260"/>
+    <line x1="1560" y1="420" x2="1620" y2="540"/>
+    <line x1="1620" y1="540" x2="1720" y2="560"/>
+    <line x1="1620" y1="540" x2="1540" y2="620"/>
+    <line x1="1540" y1="620" x2="1460" y2="580"/>
+  </g>
+
+  <!-- Constellation nodes -->
+  <g fill="#818cf8" filter="url(#star-glow)" opacity="0.8">
+    <circle cx="480" cy="300" r="5"/>
+    <circle cx="360" cy="380" r="4"/>
+    <circle cx="280" cy="320" r="3"/>
+    <circle cx="520" cy="180" r="4"/>
+    <circle cx="640" cy="150" r="5"/>
+    <circle cx="720" cy="200" r="3.5"/>
+    <circle cx="300" cy="480" r="4"/>
+    <circle cx="200" cy="520" r="3"/>
+    <circle cx="380" cy="560" r="4"/>
+    <circle cx="460" cy="520" r="3"/>
+  </g>
+  <g fill="#38bdf8" filter="url(#star-glow)" opacity="0.8">
+    <circle cx="1440" cy="360" r="5"/>
+    <circle cx="1560" cy="420" r="4"/>
+    <circle cx="1640" cy="360" r="3"/>
+    <circle cx="1400" cy="220" r="4"/>
+    <circle cx="1280" cy="200" r="5"/>
+    <circle cx="1200" cy="260" r="3.5"/>
+    <circle cx="1620" cy="540" r="4"/>
+    <circle cx="1720" cy="560" r="3"/>
+    <circle cx="1540" cy="620" r="4"/>
+    <circle cx="1460" cy="580" r="3"/>
+  </g>
+
+  <!-- Shooting star / data stream lines -->
+  <g opacity="0.5">
+    <line x1="200" y1="150" x2="400" y2="200" stroke="white" stroke-width="1.5"/>
+    <line x1="200" y1="150" x2="220" y2="155" stroke="white" stroke-width="3" opacity="0.8"/>
+    <line x1="1600" y1="800" x2="1750" y2="750" stroke="#a78bfa" stroke-width="1.5"/>
+    <line x1="1750" y1="750" x2="1730" y2="755" stroke="#a78bfa" stroke-width="3" opacity="0.8"/>
+  </g>
+
+  <!-- Title -->
+  <text x="960" y="640" font-family="'Segoe UI', Arial, sans-serif" font-size="92" font-weight="900"
+        text-anchor="middle" fill="url(#cosmic-text)" letter-spacing="5" filter="url(#text-glow-strong)">
+    WATCH ME BUILD AI
+  </text>
+
+  <!-- Tagline -->
+  <text x="960" y="710" font-family="'Segoe UI', Arial, sans-serif" font-size="32"
+        text-anchor="middle" fill="#a5b4fc" letter-spacing="10" opacity="0.85">
+    EXPLORING THE AI COSMOS · LIVE
+  </text>
+
+  <!-- Decorative stars in title area -->
+  <g fill="#e0e7ff" filter="url(#star-glow)" opacity="0.9">
+    <circle cx="440" cy="620" r="3"/>
+    <circle cx="1480" cy="620" r="3"/>
+    <circle cx="380" cy="650" r="2"/>
+    <circle cx="1540" cy="650" r="2"/>
+  </g>
+
+  <!-- LIVE badge (cosmic style) -->
+  <ellipse cx="960" cy="770" rx="160" ry="30" fill="#1e1b4b" stroke="#818cf8" stroke-width="1.5" opacity="0.9"/>
+  <circle cx="828" cy="770" r="7" fill="#f87171" opacity="0.95" filter="url(#star-glow)"/>
+  <text x="970" y="778" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="700"
+        text-anchor="middle" fill="#e0e7ff" letter-spacing="5">● LIVE</text>
+
+  <!-- Bottom constellation decorative line -->
+  <line x1="600" y1="810" x2="1320" y2="810" stroke="#4f46e5" stroke-width="1" opacity="0.4"/>
+  <circle cx="600" cy="810" r="3" fill="#818cf8" opacity="0.6"/>
+  <circle cx="960" cy="810" r="4" fill="#a78bfa" opacity="0.7"/>
+  <circle cx="1320" cy="810" r="3" fill="#818cf8" opacity="0.6"/>
+</svg>

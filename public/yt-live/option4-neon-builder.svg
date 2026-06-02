@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="neon-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0015"/>
+      <stop offset="50%" stop-color="#050010"/>
+      <stop offset="100%" stop-color="#000a15"/>
+    </linearGradient>
+    <linearGradient id="neon-title" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f0abfc"/>
+      <stop offset="40%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#67e8f9"/>
+      <stop offset="100%" stop-color="#f0abfc"/>
+    </linearGradient>
+    <linearGradient id="grid-h" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#4f46e5" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#4f46e5" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="grid-v" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#4f46e5" stop-opacity="0.25"/>
+      <stop offset="70%" stop-color="#4f46e5" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="neon-glow-strong">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="neon-glow-med">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="neon-glow-soft">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="center-pulse" cx="50%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#neon-bg)"/>
+  <rect width="1920" height="1080" fill="url(#center-pulse)"/>
+
+  <!-- Perspective grid floor -->
+  <!-- Horizontal grid lines (perspective) -->
+  <g stroke="url(#grid-h)" stroke-width="1" fill="none">
+    <line x1="0" y1="760" x2="1920" y2="760"/>
+    <line x1="0" y1="790" x2="1920" y2="790"/>
+    <line x1="0" y1="825" x2="1920" y2="825"/>
+    <line x1="0" y1="868" x2="1920" y2="868"/>
+    <line x1="0" y1="922" x2="1920" y2="922"/>
+    <line x1="0" y1="990" x2="1920" y2="990"/>
+    <line x1="0" y1="1080" x2="1920" y2="1080"/>
+  </g>
+
+  <!-- Vertical perspective lines converging to vanishing point at 960, 700 -->
+  <g stroke="url(#grid-v)" stroke-width="1" fill="none" opacity="0.6">
+    <line x1="960" y1="700" x2="0" y2="1080"/>
+    <line x1="960" y1="700" x2="240" y2="1080"/>
+    <line x1="960" y1="700" x2="480" y2="1080"/>
+    <line x1="960" y1="700" x2="720" y2="1080"/>
+    <line x1="960" y1="700" x2="1200" y2="1080"/>
+    <line x1="960" y1="700" x2="1440" y2="1080"/>
+    <line x1="960" y1="700" x2="1680" y2="1080"/>
+    <line x1="960" y1="700" x2="1920" y2="1080"/>
+  </g>
+
+  <!-- Neon circuit board traces on left panel -->
+  <g fill="none" opacity="0.7">
+    <!-- Left circuit -->
+    <polyline points="100,200 200,200 200,300 350,300 350,250 450,250" stroke="#f0abfc" stroke-width="2" filter="url(#neon-glow-soft)"/>
+    <polyline points="100,350 180,350 180,450 300,450 300,400 420,400" stroke="#c084fc" stroke-width="1.5" filter="url(#neon-glow-soft)"/>
+    <polyline points="80,500 160,500 160,580 280,580 280,520 400,520 400,560 480,560" stroke="#a78bfa" stroke-width="2" filter="url(#neon-glow-soft)"/>
+    <polyline points="60,630 140,630 140,700 260,700 260,660 380,660" stroke="#818cf8" stroke-width="1.5" filter="url(#neon-glow-soft)"/>
+    <!-- Circuit nodes -->
+    <circle cx="200" cy="200" r="5" fill="#f0abfc" filter="url(#neon-glow-med)"/>
+    <circle cx="350" cy="300" r="5" fill="#f0abfc" filter="url(#neon-glow-med)"/>
+    <circle cx="180" cy="450" r="4" fill="#c084fc" filter="url(#neon-glow-med)"/>
+    <circle cx="300" cy="450" r="4" fill="#c084fc" filter="url(#neon-glow-med)"/>
+    <circle cx="160" cy="580" r="5" fill="#a78bfa" filter="url(#neon-glow-med)"/>
+    <circle cx="280" cy="580" r="5" fill="#a78bfa" filter="url(#neon-glow-med)"/>
+    <circle cx="400" cy="560" r="4" fill="#818cf8" filter="url(#neon-glow-med)"/>
+    <circle cx="140" cy="700" r="4" fill="#818cf8" filter="url(#neon-glow-med)"/>
+    <circle cx="260" cy="700" r="4" fill="#818cf8" filter="url(#neon-glow-med)"/>
+  </g>
+
+  <!-- Right circuit board traces -->
+  <g fill="none" opacity="0.7">
+    <polyline points="1820,200 1720,200 1720,300 1570,300 1570,250 1470,250" stroke="#67e8f9" stroke-width="2" filter="url(#neon-glow-soft)"/>
+    <polyline points="1820,350 1740,350 1740,450 1620,450 1620,400 1500,400" stroke="#22d3ee" stroke-width="1.5" filter="url(#neon-glow-soft)"/>
+    <polyline points="1840,500 1760,500 1760,580 1640,580 1640,520 1520,520 1520,560 1440,560" stroke="#06b6d4" stroke-width="2" filter="url(#neon-glow-soft)"/>
+    <polyline points="1860,630 1780,630 1780,700 1660,700 1660,660 1540,660" stroke="#0ea5e9" stroke-width="1.5" filter="url(#neon-glow-soft)"/>
+    <!-- Circuit nodes -->
+    <circle cx="1720" cy="200" r="5" fill="#67e8f9" filter="url(#neon-glow-med)"/>
+    <circle cx="1570" cy="300" r="5" fill="#67e8f9" filter="url(#neon-glow-med)"/>
+    <circle cx="1740" cy="450" r="4" fill="#22d3ee" filter="url(#neon-glow-med)"/>
+    <circle cx="1620" cy="450" r="4" fill="#22d3ee" filter="url(#neon-glow-med)"/>
+    <circle cx="1760" cy="580" r="5" fill="#06b6d4" filter="url(#neon-glow-med)"/>
+    <circle cx="1640" cy="580" r="5" fill="#06b6d4" filter="url(#neon-glow-med)"/>
+    <circle cx="1520" cy="560" r="4" fill="#0ea5e9" filter="url(#neon-glow-med)"/>
+    <circle cx="1780" cy="700" r="4" fill="#0ea5e9" filter="url(#neon-glow-med)"/>
+    <circle cx="1660" cy="700" r="4" fill="#0ea5e9" filter="url(#neon-glow-med)"/>
+  </g>
+
+  <!-- Central large neon title -->
+  <text x="960" y="400" font-family="'Segoe UI', Arial, sans-serif" font-size="110" font-weight="900"
+        text-anchor="middle" fill="url(#neon-title)" letter-spacing="6"
+        filter="url(#neon-glow-strong)">
+    WATCH ME
+  </text>
+  <text x="960" y="530" font-family="'Segoe UI', Arial, sans-serif" font-size="110" font-weight="900"
+        text-anchor="middle" fill="url(#neon-title)" letter-spacing="6"
+        filter="url(#neon-glow-strong)">
+    BUILD AI
+  </text>
+
+  <!-- Neon underline accent -->
+  <line x1="340" y1="555" x2="1580" y2="555" stroke="#c084fc" stroke-width="3" filter="url(#neon-glow-med)" opacity="0.8"/>
+  <line x1="440" y1="563" x2="1480" y2="563" stroke="#67e8f9" stroke-width="1.5" filter="url(#neon-glow-soft)" opacity="0.5"/>
+
+  <!-- Subtitle -->
+  <text x="960" y="630" font-family="'Segoe UI', Arial, sans-serif" font-size="34"
+        text-anchor="middle" fill="#c084fc" letter-spacing="10" opacity="0.9"
+        filter="url(#neon-glow-soft)">
+    BUILD IN PUBLIC · LEARN IN PUBLIC
+  </text>
+
+  <!-- Floating neon icons/symbols -->
+  <!-- Left: brackets and symbols -->
+  <g font-family="'Courier New', monospace" font-size="48" fill="#f0abfc" filter="url(#neon-glow-med)" opacity="0.8">
+    <text x="460" y="290">&lt;/&gt;</text>
+    <text x="350" y="490">{ }</text>
+    <text x="430" y="640">[ ]</text>
+  </g>
+  <!-- Right: AI symbols -->
+  <g font-family="'Segoe UI', Arial, sans-serif" font-size="48" fill="#67e8f9" filter="url(#neon-glow-med)" opacity="0.8">
+    <text x="1380" y="290" text-anchor="middle">∇</text>
+    <text x="1490" y="490" text-anchor="middle">σ</text>
+    <text x="1400" y="640" text-anchor="middle">λ</text>
+  </g>
+
+  <!-- LIVE badge neon style -->
+  <rect x="810" y="680" width="300" height="62" rx="6" fill="none" stroke="#f0abfc" stroke-width="2.5" filter="url(#neon-glow-med)" opacity="0.9"/>
+  <circle cx="855" cy="711" r="8" fill="#ff4444" filter="url(#neon-glow-med)" opacity="0.95"/>
+  <text x="980" y="721" font-family="'Segoe UI', Arial, sans-serif" font-size="30" font-weight="700"
+        text-anchor="middle" fill="#f0abfc" letter-spacing="6" filter="url(#neon-glow-soft)">● LIVE</text>
+
+  <!-- Corner neon marks -->
+  <g stroke="#f0abfc" stroke-width="2.5" fill="none" opacity="0.7" filter="url(#neon-glow-soft)">
+    <polyline points="40,40 40,110 110,110"/>
+    <polyline points="1880,40 1880,110 1810,110"/>
+    <polyline points="40,1040 40,970 110,970"/>
+    <polyline points="1880,1040 1880,970 1810,970"/>
+  </g>
+
+  <!-- Scan line suggestion -->
+  <rect x="0" y="0" width="1920" height="1080" fill="none" stroke="none" opacity="0.03"/>
+</svg>

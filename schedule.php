@@ -5,9 +5,60 @@ require_once __DIR__ . '/lib/sessions.php';
 require_once __DIR__ . '/lib/meetup.php';
 
 $logged_in      = is_active_subscriber();
-$upcoming       = get_upcoming_sessions(20);
-$meetup_events  = get_meetup_events(30);
+$upcoming       = get_upcoming_sessions(60);
+$meetup_events  = get_meetup_events(60);
 $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-edb630b7733d';
+
+// ── Build event map keyed by YYYY-MM-DD ──────────────────────────────────────
+$event_map = [];
+
+foreach ($upcoming as $s) {
+    $ts  = strtotime($s['date']);
+    if (!$ts) continue;
+    $day = date('Y-m-d', $ts);
+    $event_map[$day][] = [
+        'type'   => 'pro',
+        'title'  => $s['title'],
+        'time'   => date('g:i a', $ts),
+        'desc'   => $s['description'] ?? '',
+        'url'    => $logged_in ? '/portal/#session-' . htmlspecialchars($s['id']) : null,
+        'locked' => !$logged_in,
+    ];
+}
+
+foreach ($meetup_events as $e) {
+    // Use the local date from the ISO string (first 10 chars) for placement
+    $day = substr($e['date'], 0, 10);
+    $ts  = strtotime($e['date']);
+    $event_map[$day][] = [
+        'type'   => 'meetup',
+        'title'  => $e['title'],
+        'time'   => $ts ? date('g:i a T', $ts) : '',
+        'desc'   => $e['rsvps'] > 0 ? $e['rsvps'] . ' RSVPs across the network' : '',
+        'url'    => $e['url'],
+        'locked' => false,
+    ];
+}
+
+// ── Calendar month builder ────────────────────────────────────────────────────
+function cal_months(int $count = 3): array {
+    $months = [];
+    $base   = strtotime(date('Y-m-01'));
+    for ($i = 0; $i < $count; $i++) {
+        $ts = strtotime("+$i month", $base);
+        $months[] = [
+            'label'     => date('F Y', $ts),
+            'year'      => (int) date('Y', $ts),
+            'month'     => (int) date('n', $ts),
+            'first_dow' => (int) date('w', $ts),   // 0 = Sunday
+            'days'      => (int) date('t', $ts),
+        ];
+    }
+    return $months;
+}
+
+$months  = cal_months(3);
+$today   = date('Y-m-d');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +66,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule — Watch Me Build AI</title>
-    <meta name="description" content="Upcoming live sessions. Zoom links are available to subscribers in the member portal.">
+    <meta name="description" content="Upcoming live sessions and public Meetup events.">
     <link rel="stylesheet" href="/assets/css/main.css?v=<?= filemtime(__DIR__ . '/assets/css/main.css') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -41,77 +92,68 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
 
 <div class="container">
     <div class="page-header">
-        <h1>Upcoming Sessions</h1>
+        <h1>Schedule</h1>
     </div>
 
-    <!-- ── Stage 2: Pro Sessions (paywalled) ── -->
-    <section style="margin-bottom:60px">
-        <div class="schedule-section-label">Stage 2 — Pro Sessions</div>
-        <p style="color:var(--text-muted);font-size:14px;margin-bottom:24px">
-            Live build sessions — Zoom links for subscribers only.
-            <?php if (!$logged_in): ?>
-                <a href="<?= htmlspecialchars($polar_checkout) ?>">Start your free trial →</a>
-            <?php endif; ?>
-        </p>
+    <!-- Legend -->
+    <div class="cal-legend">
+        <span class="cal-dot cal-dot-pro"></span> Pro Sessions (subscribers)
+        <span class="cal-dot cal-dot-meetup" style="margin-left:20px"></span> Meetup Events (free, public)
+    </div>
 
-        <?php if ($upcoming): ?>
-        <div class="session-list">
-            <?php foreach ($upcoming as $session): ?>
-            <div class="session-card">
-                <div class="session-date"><?= htmlspecialchars(format_session_date($session['date'])) ?></div>
-                <div class="session-info">
-                    <div class="session-title"><?= htmlspecialchars($session['title']) ?></div>
-                    <?php if (!empty($session['description'])): ?>
-                    <div class="session-desc"><?= htmlspecialchars($session['description']) ?></div>
-                    <?php endif; ?>
-                </div>
-                <div class="session-lock">
-                    <?php if ($logged_in): ?>
-                        <a href="/portal/#session-<?= htmlspecialchars($session['id']) ?>" class="btn btn-sm">Join →</a>
-                    <?php else: ?>
-                        <span class="lock-badge">🔒 Subscribers only</span>
-                    <?php endif; ?>
-                </div>
+    <!-- Calendars -->
+    <?php foreach ($months as $m): ?>
+    <div class="cal-month">
+        <div class="cal-month-label"><?= $m['label'] ?></div>
+        <div class="cal-grid">
+            <div class="cal-weekday">Sun</div>
+            <div class="cal-weekday">Mon</div>
+            <div class="cal-weekday">Tue</div>
+            <div class="cal-weekday">Wed</div>
+            <div class="cal-weekday">Thu</div>
+            <div class="cal-weekday">Fri</div>
+            <div class="cal-weekday">Sat</div>
+
+            <?php
+            // Empty cells before month starts
+            for ($blank = 0; $blank < $m['first_dow']; $blank++): ?>
+            <div class="cal-day cal-day-empty"></div>
+            <?php endfor; ?>
+
+            <?php for ($d = 1; $d <= $m['days']; $d++):
+                $date_key = sprintf('%04d-%02d-%02d', $m['year'], $m['month'], $d);
+                $is_today = $date_key === $today;
+                $events   = $event_map[$date_key] ?? [];
+            ?>
+            <div class="cal-day<?= $is_today ? ' cal-day-today' : '' ?>">
+                <div class="cal-day-num"><?= $d ?></div>
+                <?php foreach ($events as $ev):
+                    $tip = htmlspecialchars(json_encode([
+                        'title'  => $ev['title'],
+                        'time'   => $ev['time'],
+                        'desc'   => $ev['desc'],
+                        'url'    => $ev['url'],
+                        'locked' => $ev['locked'],
+                        'type'   => $ev['type'],
+                    ]), ENT_QUOTES);
+                ?>
+                <div class="cal-event cal-event-<?= $ev['type'] ?>" data-tip="<?= $tip ?>"></div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
+            <?php endfor; ?>
         </div>
-        <?php else: ?>
-        <div class="session-empty">
-            <p>No Pro Sessions scheduled yet — check back soon.</p>
-        </div>
-        <?php endif; ?>
-    </section>
+    </div>
+    <?php endforeach; ?>
 
-    <!-- ── Stage 1: Meetup Events (public) ── -->
-    <section style="margin-bottom:80px">
-        <div class="schedule-section-label">Stage 1 — Weekly Meetup Events</div>
-        <p style="color:var(--text-muted);font-size:14px;margin-bottom:24px">
-            Free public events hosted across the Advanced AI Concepts network. No subscription required.
-        </p>
-
-        <?php if ($meetup_events): ?>
-        <div class="session-list">
-            <?php foreach ($meetup_events as $event): ?>
-            <div class="session-card">
-                <div class="session-date"><?= htmlspecialchars(format_meetup_date($event['date'])) ?></div>
-                <div class="session-info">
-                    <div class="session-title"><?= htmlspecialchars($event['title']) ?></div>
-                    <?php if ($event['rsvps'] > 0): ?>
-                    <div class="session-desc"><?= $event['rsvps'] ?> RSVPs across the network</div>
-                    <?php endif; ?>
-                </div>
-                <div class="session-lock">
-                    <a href="<?= htmlspecialchars($event['url']) ?>" target="_blank" rel="noopener" class="btn btn-sm btn-outline">RSVP on Meetup →</a>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-        <?php else: ?>
-        <div class="session-empty">
-            <p>No upcoming Meetup events found — check <a href="https://www.meetup.com/advanced-ai-concepts/" target="_blank" rel="noopener">Meetup</a> directly.</p>
-        </div>
-        <?php endif; ?>
-    </section>
+    <!-- Tooltip (hidden, moved by JS) -->
+    <div id="cal-tooltip" class="cal-tooltip" style="display:none">
+        <div class="cal-tip-type"></div>
+        <div class="cal-tip-title"></div>
+        <div class="cal-tip-time"></div>
+        <div class="cal-tip-desc"></div>
+        <a class="cal-tip-cta btn btn-sm btn-primary" href="#" target="_blank" rel="noopener" style="margin-top:10px;display:none"></a>
+        <span class="cal-tip-locked" style="display:none">🔒 Subscribers only — <a href="<?= htmlspecialchars($polar_checkout) ?>">start free trial</a></span>
+    </div>
 </div>
 
 <footer class="footer">
@@ -127,5 +169,61 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
 </footer>
 
 <script src="/assets/js/main.js?v=<?= filemtime(__DIR__ . '/assets/js/main.js') ?>"></script>
+<script>
+(function () {
+    const tip   = document.getElementById('cal-tooltip');
+    const events = document.querySelectorAll('.cal-event');
+
+    function show(el, data) {
+        tip.querySelector('.cal-tip-type').textContent  = data.type === 'pro' ? 'Pro Session' : 'Meetup Event';
+        tip.querySelector('.cal-tip-title').textContent = data.title;
+        tip.querySelector('.cal-tip-time').textContent  = data.time;
+        tip.querySelector('.cal-tip-desc').textContent  = data.desc || '';
+
+        const cta    = tip.querySelector('.cal-tip-cta');
+        const locked = tip.querySelector('.cal-tip-locked');
+
+        if (data.locked) {
+            cta.style.display    = 'none';
+            locked.style.display = 'block';
+        } else if (data.url) {
+            cta.href         = data.url;
+            cta.textContent  = data.type === 'pro' ? 'Join Session →' : 'RSVP on Meetup →';
+            cta.style.display    = 'inline-flex';
+            locked.style.display = 'none';
+        } else {
+            cta.style.display    = 'none';
+            locked.style.display = 'none';
+        }
+
+        tip.style.display = 'block';
+        position(el);
+    }
+
+    function position(el) {
+        const rect = el.getBoundingClientRect();
+        const sw   = window.innerWidth;
+        let   left = rect.left + window.scrollX + rect.width / 2 - tip.offsetWidth / 2;
+        let   top  = rect.top  + window.scrollY - tip.offsetHeight - 10;
+
+        // Keep within viewport
+        if (left < 8) left = 8;
+        if (left + tip.offsetWidth > sw - 8) left = sw - tip.offsetWidth - 8;
+        if (top < window.scrollY + 8) top = rect.bottom + window.scrollY + 10;
+
+        tip.style.left = left + 'px';
+        tip.style.top  = top  + 'px';
+    }
+
+    events.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            try { show(el, JSON.parse(el.dataset.tip)); } catch(e) {}
+        });
+        el.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+    });
+
+    document.addEventListener('scroll', () => { tip.style.display = 'none'; }, { passive: true });
+})();
+</script>
 </body>
 </html>

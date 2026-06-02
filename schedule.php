@@ -5,8 +5,9 @@ require_once __DIR__ . '/lib/sessions.php';
 require_once __DIR__ . '/lib/meetup.php';
 
 $logged_in      = is_active_subscriber();
+$force_refresh  = isset($_GET['refresh']) && $_GET['refresh'] !== 'false';
 $upcoming       = get_upcoming_sessions(60);
-$meetup_events  = get_meetup_events(60);
+$meetup_events  = get_meetup_events(60, $force_refresh);
 $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-edb630b7733d';
 
 // ── Build event map keyed by YYYY-MM-DD ──────────────────────────────────────

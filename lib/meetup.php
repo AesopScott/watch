@@ -7,9 +7,9 @@ define('MEETUP_SOURCE_URL',  'https://mojoaistudio.com/api/meetup-rsvp-count.php
 define('MEETUP_CACHE_FILE',  __DIR__ . '/../data/meetup_cache.json');
 define('MEETUP_CACHE_TTL',   3600); // 1 hour
 
-function get_meetup_events(int $limit = 20): array {
-    // Serve from cache when fresh
-    if (file_exists(MEETUP_CACHE_FILE)) {
+function get_meetup_events(int $limit = 20, bool $force_refresh = false): array {
+    // Serve from cache when fresh (unless refresh forced)
+    if (!$force_refresh && file_exists(MEETUP_CACHE_FILE)) {
         $cached = json_decode(file_get_contents(MEETUP_CACHE_FILE), true);
         if ($cached && ($cached['fetched_at'] ?? 0) > time() - MEETUP_CACHE_TTL) {
             return array_slice($cached['events'] ?? [], 0, $limit);

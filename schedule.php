@@ -50,6 +50,36 @@ foreach ($meetup_events as $e) {
     ];
 }
 
+// ── Recurring Pro Sessions: Tue/Thu 8am and 3pm MT ───────────────────────────
+$now    = time();
+$cursor = new DateTime('today', $mountain_tz);
+$end    = new DateTime('first day of +3 months', $mountain_tz);
+$end->modify('last day of this month')->setTime(23, 59, 59);
+
+while ($cursor <= $end) {
+    $dow = (int) $cursor->format('N'); // 2=Tue, 4=Thu
+    if ($dow === 2 || $dow === 4) {
+        foreach ([8, 15] as $hour) {
+            $dt  = clone $cursor;
+            $dt->setTime($hour, 0, 0);
+            $ts  = $dt->getTimestamp();
+            if ($ts < $now) { continue; }
+            $day = $dt->format('Y-m-d');
+            $mt  = $dt->format('g:i a T');
+            $utc = gmdate('g:i a', $ts) . ' UTC';
+            $event_map[$day][] = [
+                'type'   => 'pro',
+                'title'  => 'Pro Session',
+                'time'   => $mt . ' / ' . $utc,
+                'desc'   => 'Pro Members Only',
+                'url'    => $logged_in ? '/portal/' : null,
+                'locked' => !$logged_in,
+            ];
+        }
+    }
+    $cursor->modify('+1 day');
+}
+
 // ── Calendar month builder ────────────────────────────────────────────────────
 function cal_months(int $count = 3): array {
     $months = [];

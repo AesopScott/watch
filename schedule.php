@@ -82,6 +82,34 @@ while ($cursor <= $end) {
     $cursor->modify('+1 day');
 }
 
+// ── Recurring Cohort 10 Sessions: Tue/Thu 1pm and 4pm MT ─────────────────────
+$cursor = new DateTime('today', $mountain_tz);
+
+while ($cursor <= $end) {
+    $dow = (int) $cursor->format('N');
+    if ($dow === 2 || $dow === 4) {
+        foreach ([13, 16] as $hour) {
+            $dt  = clone $cursor;
+            $dt->setTime($hour, 0, 0);
+            $ts  = $dt->getTimestamp();
+            if ($ts < $now) { continue; }
+            $day = $dt->format('Y-m-d');
+            $mt  = $dt->format('g:i a T');
+            $utc = gmdate('g:i a', $ts) . ' UTC';
+            $event_map[$day][] = [
+                'type'     => 'cohort',
+                'title'    => 'Cohort 10 Session',
+                'time'     => $mt . ' / ' . $utc,
+                'duration' => '1 hour',
+                'desc'     => 'Cohort 10 Members Only',
+                'url'      => $logged_in ? '/portal/' : null,
+                'locked'   => !$logged_in,
+            ];
+        }
+    }
+    $cursor->modify('+1 day');
+}
+
 // ── Calendar month builder ────────────────────────────────────────────────────
 function cal_months(int $count = 3): array {
     $months = [];

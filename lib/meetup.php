@@ -42,9 +42,13 @@ function get_meetup_events(int $limit = 20): array {
         $title = preg_replace('/^Global\s*[-–]\s*/i', '', trim($event['title'] ?? ''));
         if (!$title) continue;
 
-        // Deduplicate key: title + UTC day (events cross-posted at local midnight)
-        $day = gmdate('Y-m-d', $ts);
-        $key = strtolower($title) . '|' . $day;
+        // Deduplicate key: same title + same ISO week + same half-day (AM vs PM UTC).
+        // Events cross-posted across timezones land on different UTC calendar days
+        // (e.g. Friday 6 PM MT = UTC Saturday), so we bucket by week+half-day
+        // to collapse all instances of the same session into one entry.
+        $week     = gmdate('oW', $ts);           // ISO year + week number
+        $half_day = (int) gmdate('G', $ts) >= 12 ? 'pm' : 'am';
+        $key      = strtolower($title) . '|' . $week . '|' . $half_day;
 
         if (!isset($unique[$key])) {
             $unique[$key] = [

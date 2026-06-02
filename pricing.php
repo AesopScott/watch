@@ -105,6 +105,7 @@ $plans = [
             <a href="/schedule.php">Schedule</a>
             <a href="/pricing.php">Pricing</a>
             <a href="/faq.php">FAQ</a>
+            <a href="/why-choose-us.php">Why Choose Us</a>
             <?php if ($logged_in): ?>
                 <a href="/portal/" class="btn btn-sm">Member Portal →</a>
             <?php else: ?>

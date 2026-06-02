@@ -26,6 +26,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
             <a href="/schedule.php">Schedule</a>
             <a href="/pricing.php">Pricing</a>
             <a href="/faq.php">FAQ</a>
+            <a href="/why-choose-us.php">Why Choose Us</a>
             <?php if ($logged_in): ?>
                 <a href="/portal/" class="btn btn-sm">Member Portal →</a>
             <?php else: ?>

@@ -14,7 +14,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watch Me Build AI — Learn by Watching AI Masters Build in Real Time</title>
     <meta name="description" content="Stop learning about AI. Start watching it get built. Live coding sessions, 3x per week, with a senior AI engineer building real production systems.">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/main.css?v=<?= filemtime(__DIR__ . '/assets/css/main.css') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
@@ -198,6 +198,6 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     </div>
 </footer>
 
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js?v=<?= filemtime(__DIR__ . '/assets/js/main.js') ?>"></script>
 </body>
 </html>

@@ -52,12 +52,14 @@ function get_meetup_events(int $limit = 20): array {
 
         if (!isset($unique[$key])) {
             $unique[$key] = [
-                'title' => $title,
-                'date'  => $event['date'],
-                'ts'    => $ts,
-                'rsvps' => (int) ($event['rsvps'] ?? 0),
-                'group' => $event['group'] ?? '',
-                'id'    => $event['id'] ?? '',
+                'title'       => $title,
+                'date'        => $event['date'],
+                'ts'          => $ts,
+                'rsvps'       => (int) ($event['rsvps'] ?? 0),
+                'group'       => $event['group'] ?? '',
+                'id'          => $event['id'] ?? '',
+                'description' => $event['description'] ?? '',
+                'eventUrl'    => $event['eventUrl'] ?? '',
             ];
         } else {
             // Prefer root group; otherwise prefer highest RSVP count
@@ -66,9 +68,11 @@ function get_meetup_events(int $limit = 20): array {
             $prefer_new     = ($new_group === 'advanced-ai-concepts')
                 || ($existing_group !== 'advanced-ai-concepts' && (int)($event['rsvps'] ?? 0) > $unique[$key]['rsvps']);
             if ($prefer_new) {
-                $unique[$key]['group'] = $new_group;
-                $unique[$key]['id']    = $event['id'] ?? '';
-                $unique[$key]['rsvps'] = (int) ($event['rsvps'] ?? 0);
+                $unique[$key]['group']       = $new_group;
+                $unique[$key]['id']          = $event['id'] ?? '';
+                $unique[$key]['rsvps']       = (int) ($event['rsvps'] ?? 0);
+                $unique[$key]['description'] = $event['description'] ?? $unique[$key]['description'];
+                $unique[$key]['eventUrl']    = $event['eventUrl'] ?? $unique[$key]['eventUrl'];
             }
         }
     }

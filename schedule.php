@@ -30,12 +30,14 @@ foreach ($meetup_events as $e) {
     // Use the local date from the ISO string (first 10 chars) for placement
     $day = substr($e['date'], 0, 10);
     $ts  = strtotime($e['date']);
+    $rsvp_line = $e['rsvps'] > 0 ? $e['rsvps'] . ' RSVPs across the network' : '';
+    $desc_full = trim(($e['description'] ?? '') . ($rsvp_line ? "\n\n" . $rsvp_line : ''));
     $event_map[$day][] = [
         'type'   => 'meetup',
         'title'  => $e['title'],
         'time'   => $ts ? date('g:i a T', $ts) : '',
-        'desc'   => $e['rsvps'] > 0 ? $e['rsvps'] . ' RSVPs across the network' : '',
-        'url'    => $e['url'],
+        'desc'   => $desc_full ?: $rsvp_line,
+        'url'    => !empty($e['eventUrl']) ? $e['eventUrl'] : $e['url'],
         'locked' => false,
     ];
 }
@@ -137,7 +139,12 @@ $today   = date('Y-m-d');
                         'type'   => $ev['type'],
                     ]), ENT_QUOTES);
                 ?>
-                <div class="cal-event cal-event-<?= $ev['type'] ?>" data-tip="<?= $tip ?>"></div>
+                <div class="cal-event cal-event-<?= $ev['type'] ?>" data-tip="<?= $tip ?>">
+                    <span class="cal-event-title"><?= htmlspecialchars($ev['title']) ?></span>
+                    <?php if ($ev['time']): ?>
+                    <span class="cal-event-time"><?= htmlspecialchars($ev['time']) ?></span>
+                    <?php endif; ?>
+                </div>
                 <?php endforeach; ?>
             </div>
             <?php endfor; ?>

@@ -13,7 +13,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watch Me Build AI — Learn by Watching AI Masters Build in Real Time</title>
-    <meta name="description" content="Stop learning about AI. Start watching it get built. Live coding sessions, 3x per week, with a senior AI engineer building real production systems.">
+    <meta name="description" content="Stop learning about AI. Start watching it get built. Live coding sessions with a senior AI engineer building real production systems in real time.">
     <link rel="stylesheet" href="/assets/css/main.css?v=<?= filemtime(__DIR__ . '/assets/css/main.css') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -157,7 +157,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
 <section class="section" id="schedule">
     <div class="container">
         <h2 class="section-title">Upcoming Sessions</h2>
-        <p class="section-sub">3 sessions per week. No fixed length — sessions run as long as the build runs.</p>
+        <p class="section-sub">No fixed length — sessions run as long as the build runs.</p>
         <?php if ($upcoming): ?>
         <div class="session-list">
             <?php foreach ($upcoming as $session): ?>
@@ -263,7 +263,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
             <div class="pricing-amount">$100<span>/month</span></div>
             <div class="pricing-trial">Start with a 7-day free trial</div>
             <ul class="pricing-features">
-                <li>All live sessions — 3+ per week</li>
+                <li>All live sessions</li>
                 <li>Zoom links delivered before each session</li>
                 <li>Full recorded session library</li>
                 <li>Email reminders before every session</li>

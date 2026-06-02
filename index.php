@@ -71,35 +71,6 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     </div>
 </section>
 
-<!-- ── Value ── -->
-<section class="section section-value">
-    <div class="container">
-        <h2 class="section-title">There's a better way to learn than just listening.</h2>
-        <div class="value-grid">
-            <div class="value-card">
-                <div class="value-icon">👁</div>
-                <h3>Watch the whole process</h3>
-                <p>Not just the finished product — the thinking, the tooling, the mistakes. Every session is a live, unedited look at how it actually gets done.</p>
-            </div>
-            <div class="value-card">
-                <div class="value-icon">⚡</div>
-                <h3>Go further, faster</h3>
-                <p>In six months you'll know how to build what most developers spend years figuring out — agent pipelines, orchestration, your own AI-powered tools.</p>
-            </div>
-            <div class="value-card">
-                <div class="value-icon">🔬</div>
-                <h3>Beyond basic AI education</h3>
-                <p>Skip the "what is a prompt" videos. This is for developers who already understand AI basics and want to see what serious AI engineering looks like.</p>
-            </div>
-            <div class="value-card">
-                <div class="value-icon">🏗</div>
-                <h3>Real systems, real decisions</h3>
-                <p>Watch ten companies being built with AI simultaneously. See how multi-step agent workflows actually get designed, debugged, and shipped.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- ── Outcomes ── -->
 <section class="section section-alt">
     <div class="container">
@@ -125,6 +96,11 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
                 <div class="value-icon">🚀</div>
                 <h3>You skip six months of trial and error</h3>
                 <p>Watching someone who's already figured it out means you know what works before you try it yourself. That's the entire value of learning by watching.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🔬</div>
+                <h3>This isn't basic AI education</h3>
+                <p>Skip the "what is a prompt" videos. This is for developers who already understand AI basics and want to see what serious AI engineering actually looks like in practice.</p>
             </div>
         </div>
     </div>

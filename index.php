@@ -80,22 +80,22 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
             <div class="value-card">
                 <div class="value-icon">👁</div>
                 <h3>Watch the whole process</h3>
-                <p>Not just the finished product — the thinking, the tooling, the mistakes. Every session is a live, unedited build.</p>
+                <p>Not just the finished product — the thinking, the tooling, the mistakes. Every session is a live, unedited look at how it actually gets done.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">⚡</div>
                 <h3>Go further, faster</h3>
-                <p>In six months you'll be building what most developers spend years working toward — agent pipelines, orchestration, your own AI command center.</p>
+                <p>In six months you'll know how to build what most developers spend years figuring out — agent pipelines, orchestration, your own AI-powered tools.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">🔬</div>
                 <h3>Beyond basic AI education</h3>
-                <p>Skip the "what is a prompt" videos. This is for developers who already understand AI basics and want to build serious systems.</p>
+                <p>Skip the "what is a prompt" videos. This is for developers who already understand AI basics and want to see what serious AI engineering looks like.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">🏗</div>
                 <h3>Real systems, real decisions</h3>
-                <p>Watch ten companies being built simultaneously with AI. See how multi-session agent workflows actually get designed and shipped.</p>
+                <p>Watch ten companies being built with AI simultaneously. See how multi-step agent workflows actually get designed, debugged, and shipped.</p>
             </div>
         </div>
     </div>
@@ -130,28 +130,28 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
 <!-- ── Outcomes ── -->
 <section class="section section-alt">
     <div class="container">
-        <h2 class="section-title">What changes after you subscribe</h2>
-        <p class="section-sub">Not theory. Not motivation. Concrete skills you didn't have before.</p>
+        <h2 class="section-title">What watching does for you</h2>
+        <p class="section-sub">Watching someone build the real thing is the fastest way to learn how to build it yourself.</p>
         <div class="value-grid" style="margin-top:0">
             <div class="value-card">
                 <div class="value-icon">🧠</div>
-                <h3>You think in systems</h3>
+                <h3>You start thinking in systems</h3>
                 <p>You'll stop asking "what prompt do I use?" and start asking "how do I architect this pipeline?" — the shift that separates AI tinkerers from AI builders.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">⚙️</div>
-                <h3>You ship real agent pipelines</h3>
-                <p>You'll have watched — and understood — multi-step agent workflows built from scratch. Not a tutorial. A real system, deployed, working.</p>
+                <h3>You see how real pipelines actually get built</h3>
+                <p>Watch multi-step agent workflows go from idea to working system in real time. Not a demo. Not a cleaned-up tutorial. The actual build.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">🗺</div>
-                <h3>You know the decisions behind the code</h3>
-                <p>Every session shows the dead ends, the pivots, the "why not that" moments. You'll internalize judgment that can't come from reading docs.</p>
+                <h3>You internalize the decisions, not just the code</h3>
+                <p>Every session shows the dead ends, the pivots, the "why not that" moments. That judgment is what you're here to absorb — it can't come from reading docs.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">🚀</div>
-                <h3>You move six months faster</h3>
-                <p>The developers who watch serious builders work get to skip the exploration phase entirely. You'll know what works before you try it.</p>
+                <h3>You skip six months of trial and error</h3>
+                <p>Watching someone who's already figured it out means you know what works before you try it yourself. That's the entire value of learning by watching.</p>
             </div>
         </div>
     </div>

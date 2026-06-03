@@ -62,6 +62,7 @@ switch ($type) {
         set_subscriber_claims($email, ['plan' => $plan, 'status' => 'active', 'trial' => $trial]);
         brevo_upsert_contact($email, 'active', $trial);
         brevo_send_onboarding($email);
+        notify_admin_new_signup($email, $plan, $trial);
         respond(200, 'Subscriber activated');
 
     case 'subscription.updated':
@@ -85,6 +86,21 @@ switch ($type) {
 }
 
 // ── Brevo integration ─────────────────────────────────────────────────────────
+
+function notify_admin_new_signup(string $email, string $plan, bool $trial): void {
+    $plan_label  = ucfirst($plan) . ($trial ? ' (trial)' : '');
+    $subject     = 'New signup: ' . $email . ' — ' . $plan_label;
+    $html        = '<p><strong>New subscriber:</strong> ' . htmlspecialchars($email) . '</p>'
+                 . '<p><strong>Plan:</strong> ' . htmlspecialchars($plan_label) . '</p>'
+                 . '<p><strong>Time:</strong> ' . gmdate('Y-m-d H:i:s') . ' UTC</p>';
+
+    brevo_post('https://api.brevo.com/v3/smtp/email', [
+        'sender'      => ['email' => BREVO_SENDER_EMAIL, 'name' => BREVO_SENDER_NAME],
+        'to'          => [['email' => BREVO_SENDER_EMAIL]],
+        'subject'     => $subject,
+        'htmlContent' => $html,
+    ]);
+}
 
 function brevo_upsert_contact(string $email, string $status, bool $trial): void {
     brevo_post('https://api.brevo.com/v3/contacts', [

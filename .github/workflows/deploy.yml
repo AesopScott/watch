@@ -17,6 +17,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Clear FTP sync state (force fresh comparison)
+        run: |
+          curl --ftp-ssl --user hivetec1:${{ secrets.FTP_PASSWORD }} \
+            ftp://65.181.111.131/public_html/watch/.ftp-deploy-sync-state.json \
+            -Q "DELE /public_html/watch/.ftp-deploy-sync-state.json" \
+            --silent --show-error || true
+
       - name: Deploy via FTP (attempt 1)
         id: deploy1
         continue-on-error: true
@@ -29,6 +36,7 @@ jobs:
           protocol: ftps
           local-dir: ./
           server-dir: /public_html/watch/
+          log-level: verbose
           exclude: |
             **/.git*
             **/.git*/**

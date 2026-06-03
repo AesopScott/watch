@@ -6,15 +6,17 @@ $logged_in = is_active_subscriber();
 
 $plans = [
     [
-        'id'       => 'weekly',
-        'badge'    => 'Pro Lite',
+        'id'          => 'weekly',
+        'badge'       => 'Pro Lite',
         'badge_color' => '#0891b2',
-        'name'     => 'Pro Lite',
-        'tagline'  => '1 Pro Session per week (1 hour)',
-        'amount'   => '$25',
-        'period'   => '/month',
-        'limit'    => '10 seats per live session — first in',
-        'features' => [
+        'name'        => 'Pro Lite',
+        'tagline'     => '1 Pro Session per week (1 hour)',
+        'amount'      => '$25',
+        'period'      => '/month',
+        'limit'       => '10 seats per live session — first in',
+        'callout'     => 'Real client work. Every Pro Session is built around an actual project commissioned by one of our customers — so you learn to ship real AI products, exactly like working at your own AI agency.',
+        'callout_color' => '#0891b2',
+        'features'    => [
             '1 live Pro Session per week (1 hour)',
             'Session link in your paywalled calendar',
             'Access to session recording library',
@@ -25,16 +27,18 @@ $plans = [
         'checkout' => 'https://buy.polar.sh/polar_cl_1995f61c-e56f-4487-8962-78608bd0b56c',
     ],
     [
-        'id'       => 'monthly',
-        'badge'    => 'Most Popular',
+        'id'          => 'monthly',
+        'badge'       => 'Most Popular',
         'badge_color' => '#7c3aed',
-        'name'     => 'Pro',
-        'tagline'  => '8 Pro Sessions per week (1 hour each)',
-        'amount'   => '$100',
-        'period'   => '/month',
-        'limit'    => '30 seats per live session — first in',
-        'trial'    => 'Start with a 7-day free trial',
-        'features' => [
+        'name'        => 'Pro',
+        'tagline'     => '8 Pro Sessions per week (1 hour each)',
+        'amount'      => '$100',
+        'period'      => '/month',
+        'limit'       => '30 seats per live session — first in',
+        'trial'       => 'Start with a 7-day free trial',
+        'callout'     => 'Real client work. Every Pro Session is built around an actual project commissioned by one of our customers — so you learn to ship real AI products, exactly like working at your own AI agency.',
+        'callout_color' => '#7c3aed',
+        'features'    => [
             '8 live Pro Sessions per week (1 hour each)',
             'All session links in your paywalled calendar',
             'Full recorded session library',

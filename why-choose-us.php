@@ -137,17 +137,6 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     </div>
 </section>
 
-<!-- ── Free Sessions ── -->
-<section class="section section-alt">
-    <div class="container">
-        <h2 class="section-title">Upcoming free sessions</h2>
-        <p class="section-sub">Come watch. No signup required. No strings attached.</p>
-        <div style="text-align: center; padding: 60px 20px;">
-            <p style="font-size: 18px; color: #666;">We're scheduling our first free sessions soon. Check back here for the schedule.</p>
-        </div>
-    </div>
-</section>
-
 <!-- ── CTA ── -->
 <section class="section">
     <div class="container" style="text-align: center;">

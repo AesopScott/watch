@@ -51,8 +51,7 @@ if (is_active_subscriber()) {
     <script type="module">
         import { initializeApp }                                    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
         import { getAuth, signInWithEmailAndPassword,
-                 GoogleAuthProvider, signInWithPopup,
-                 sendPasswordResetEmail }                           from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+                 GoogleAuthProvider, signInWithPopup }              from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
         const app  = initializeApp({
             apiKey:            '<?= FIREBASE_API_KEY ?>',
@@ -143,10 +142,14 @@ if (is_active_subscriber()) {
             const email = document.getElementById('email').value.trim();
             if (!email) { showError('Enter your email address above, then click Forgot password.'); return; }
             try {
-                await sendPasswordResetEmail(auth, email);
-                showSuccess('Password reset email sent — check your inbox.');
+                await fetch('/api/send-password-reset.php', {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body:    JSON.stringify({ email }),
+                });
+                showSuccess('If that address has an account, a reset link is on its way.');
             } catch (err) {
-                showError('Could not send reset email. Make sure the address is correct.');
+                showError('Could not send reset email. Please try again.');
             }
         });
     </script>

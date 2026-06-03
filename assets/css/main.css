@@ -574,6 +574,17 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
 .pricing-card-v2 .pricing-trial {
     margin-bottom: 20px;
 }
+.pc-callout {
+    border-left: 3px solid #0d9488;
+    background: rgba(255,255,255,0.04);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 20px;
+}
 .pricing-card-v2 .pricing-features {
     flex: 1;
     margin-bottom: 24px;

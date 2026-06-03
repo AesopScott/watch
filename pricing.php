@@ -45,14 +45,16 @@ $plans = [
         'checkout' => 'https://buy.polar.sh/polar_cl_3bbf8000-9928-486f-890b-edb630b7733d',
     ],
     [
-        'id'       => 'cohort10',
-        'badge'    => 'Cohort',
+        'id'          => 'cohort10',
+        'badge'       => 'Cohort',
         'badge_color' => '#0d9488',
-        'name'     => 'Cohort 10',
-        'tagline'  => '4 Cohort Sessions per week + all Pro Sessions',
-        'amount'   => '$995',
-        'period'   => '/month',
-        'features' => [
+        'name'        => 'Cohort 10',
+        'tagline'     => '4 Cohort Sessions per week + all Pro Sessions',
+        'amount'      => '$995',
+        'period'      => '/month',
+        'callout'     => 'We build YOUR project. Every cohort session is dedicated to what you\'re working on — not a demo, not our idea. You bring the project; we build it together.',
+        'callout_color' => '#0d9488',
+        'features'    => [
             '4 Cohort group sessions per week (1 hour each)',
             'All Pro Sessions included',
             'Schedule your Cohort session via form on the site',
@@ -65,16 +67,17 @@ $plans = [
         'checkout' => 'https://buy.polar.sh/polar_cl_a9b65de6-64c2-4921-86d2-443db4eb0a05',
     ],
     [
-        'id'       => 'private',
-        'badge'    => 'Private',
+        'id'          => 'private',
+        'badge'       => 'Private',
         'badge_color' => '#b45309',
-        'name'     => 'Cohort Private',
-        'tagline'  => '4 private sessions per week + all Pro sessions',
-        'amount'   => '$4,995',
-        'period'   => '/month',
-        'features' => [
+        'name'        => 'Cohort Private',
+        'tagline'     => '4 private sessions per week + all Pro sessions',
+        'amount'      => '$4,995',
+        'period'      => '/month',
+        'callout'     => 'We build YOUR product. Every session is 1-on-1, focused entirely on your vision. You set the agenda; we execute together.',
+        'callout_color' => '#b45309',
+        'features'    => [
             '4 private 1-on-1 sessions per week (1 hour each)',
-            'We work on your product — sessions scheduled by you',
             'All Pro Sessions included',
             'All session links in your paywalled calendar',
             'Full recorded session library',
@@ -141,6 +144,11 @@ $plans = [
                 <?php endif; ?>
                 <?php if (!empty($plan['trial'])): ?>
                 <div class="pricing-trial"><?= htmlspecialchars($plan['trial']) ?></div>
+                <?php endif; ?>
+                <?php if (!empty($plan['callout'])): ?>
+                <div class="pc-callout" style="border-left-color:<?= htmlspecialchars($plan['callout_color']) ?>">
+                    <?= htmlspecialchars($plan['callout']) ?>
+                </div>
                 <?php endif; ?>
                 <ul class="pricing-features">
                     <?php foreach ($plan['features'] as $f): ?>

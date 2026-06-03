@@ -48,10 +48,12 @@ function get_meetup_events(int $limit = 20, bool $force_refresh = false): array 
         $title = preg_replace('/^Global\s*[-–]\s*/i', '', trim($event['title'] ?? ''));
         if (!$title) continue;
 
-        // Deduplicate by Mountain Time day + hour so cross-city reposts of the
-        // same session collapse to one entry regardless of UTC offset differences.
-        $mt_dt  = (new DateTime('@' . $ts))->setTimezone($mountain_tz);
-        $key    = strtolower($title) . '|' . $mt_dt->format('Y-m-d') . '|' . $mt_dt->format('H');
+        // Only include 6 PM (18:00) events
+        $mt_dt = (new DateTime('@' . $ts))->setTimezone($mountain_tz);
+        if ((int)$mt_dt->format('H') !== 18) continue;
+
+        // Deduplicate by Mountain Time day so only one event per day
+        $key    = strtolower($title) . '|' . $mt_dt->format('Y-m-d');
 
         if (!isset($unique[$key])) {
             $unique[$key] = [

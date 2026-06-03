@@ -249,7 +249,13 @@ $today  = date('Y-m-d');
         <div class="cal-tip-time"></div>
         <div class="cal-tip-desc"></div>
         <a class="cal-tip-cta btn btn-sm btn-primary" href="#" target="_blank" rel="noopener" style="margin-top:10px;display:none"></a>
-        <span class="cal-tip-locked" style="display:none">🔒 Subscribers only — <a href="<?= htmlspecialchars($polar_checkout) ?>">start free trial</a></span>
+        <span class="cal-tip-locked" style="display:none">
+            <span style="font-size:12px;color:var(--text-muted)">🔒 Subscribers only</span>
+            <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="/login.php" class="btn btn-sm btn-outline" style="flex:1;text-align:center;font-size:12px">Log In →</a>
+                <a href="<?= htmlspecialchars($polar_checkout) ?>" class="btn btn-sm btn-primary" style="flex:1;text-align:center;font-size:12px">Subscribe</a>
+            </div>
+        </span>
     </div>
 </div>
 

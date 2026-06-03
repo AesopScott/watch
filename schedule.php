@@ -300,6 +300,7 @@ $today  = date('Y-m-d');
             locked.style.display = 'none';
         }
 
+        tip.className = 'cal-tooltip cal-tip-' + data.type;
         tip.style.display = 'block';
         position(el);
     }

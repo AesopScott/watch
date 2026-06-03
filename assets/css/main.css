@@ -393,9 +393,8 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
     max-height: 320px;
     overflow-y: auto;
     box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    pointer-events: none;
+    pointer-events: auto;
 }
-.cal-tooltip a { pointer-events: auto; }
 .cal-tip-type {
     font-size: 10px;
     font-weight: 700;
@@ -432,6 +431,12 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
     margin-top: 10px;
     display: block;
 }
+.cal-tip-cohort .cal-tip-time { color: #fbbf24; }
+.cal-tip-cohort .cal-tip-cta.btn-primary { background: #d97706; border-color: #d97706; }
+.cal-tip-cohort .cal-tip-cta.btn-primary:hover { background: #b45309; }
+.cal-tip-meetup .cal-tip-time { color: #34d399; }
+.cal-tip-meetup .cal-tip-cta.btn-primary { background: #0d9488; border-color: #0d9488; }
+.cal-tip-meetup .cal-tip-cta.btn-primary:hover { background: #0f766e; }
 @media (max-width: 600px) {
     .cal-day { padding: 5px 4px; min-height: 80px; gap: 3px; }
     .cal-day-num { font-size: 11px; }

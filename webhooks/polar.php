@@ -10,26 +10,83 @@ function respond(int $code, string $message): void {
     exit;
 }
 
-function read_json(string $path): array {
-    if (!file_exists($path)) return [];
-    $data = json_decode(file_get_contents($path), true);
-    return is_array($data) ? $data : [];
+// ── Firebase Admin helpers ────────────────────────────────────────────────────
+
+function firebase_admin_token(): string {
+    $key = json_decode(file_get_contents(FIREBASE_ADMIN_KEY_PATH), true);
+    $now = time();
+    $header  = rtrim(strtr(base64_encode(json_encode(['alg' => 'RS256', 'typ' => 'JWT'])), '+/', '-_'), '=');
+    $payload = rtrim(strtr(base64_encode(json_encode([
+        'iss'   => $key['client_email'],
+        'scope' => 'https://www.googleapis.com/auth/identitytoolkit https://www.googleapis.com/auth/firebase',
+        'aud'   => 'https://oauth2.googleapis.com/token',
+        'iat'   => $now,
+        'exp'   => $now + 3600,
+    ])), '+/', '-_'), '=');
+    openssl_sign($header . '.' . $payload, $sig, $key['private_key'], 'sha256WithRSAEncryption');
+    $sig = rtrim(strtr(base64_encode($sig), '+/', '-_'), '=');
+
+    $ch = curl_init('https://oauth2.googleapis.com/token');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => http_build_query([
+            'grant_type' => 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+            'assertion'  => $header . '.' . $payload . '.' . $sig,
+        ]),
+        CURLOPT_HTTPHEADER => ['Content-Type: application/x-www-form-urlencoded'],
+        CURLOPT_TIMEOUT => 10,
+    ]);
+    $resp = json_decode(curl_exec($ch), true);
+    curl_close($ch);
+    return $resp['access_token'] ?? '';
 }
 
-function write_json(string $path, array $data): void {
-    file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
+function firebase_uid_for_email(string $token, string $email): string {
+    $ch = curl_init('https://identitytoolkit.googleapis.com/v1/projects/' . FIREBASE_PROJECT_ID . '/accounts:lookup');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode(['email' => [$email]]),
+        CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . $token, 'Content-Type: application/json'],
+        CURLOPT_TIMEOUT => 10,
+    ]);
+    $resp = json_decode(curl_exec($ch), true);
+    curl_close($ch);
+    return $resp['users'][0]['localId'] ?? '';
 }
 
-function subscribers_path(): string {
-    return __DIR__ . '/../data/subscribers.json';
+function firebase_set_claims(string $token, string $uid, array $claims): bool {
+    $ch = curl_init('https://identitytoolkit.googleapis.com/v1/projects/' . FIREBASE_PROJECT_ID . '/accounts:update');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode(['localId' => $uid, 'customAttributes' => json_encode($claims)]),
+        CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . $token, 'Content-Type: application/json'],
+        CURLOPT_TIMEOUT => 10,
+    ]);
+    $resp = json_decode(curl_exec($ch), true);
+    curl_close($ch);
+    return isset($resp['localId']);
+}
+
+function set_subscriber_claims(string $email, array $claims): void {
+    try {
+        $token = firebase_admin_token();
+        if (!$token) return;
+        $uid = firebase_uid_for_email($token, $email);
+        if ($uid) firebase_set_claims($token, $uid, $claims);
+    } catch (Throwable $e) {
+        // Fail open — don't block webhook response on Firebase errors
+    }
+}
+
+function plan_for_product(string $product_id): string {
+    return POLAR_PRODUCT_PLANS[$product_id] ?? 'pro';
 }
 
 // ── Signature verification ────────────────────────────────────────────────────
 
-$raw_body = file_get_contents('php://input');
+$raw_body  = file_get_contents('php://input');
 $signature = $_SERVER['HTTP_WEBHOOK_SIGNATURE'] ?? '';
-
-$expected = 'sha256=' . hash_hmac('sha256', $raw_body, POLAR_HMAC_SECRET);
+$expected  = 'sha256=' . hash_hmac('sha256', $raw_body, POLAR_HMAC_SECRET);
 if (!hash_equals($expected, $signature)) {
     respond(401, 'Invalid signature');
 }
@@ -39,90 +96,43 @@ if (!$event || !isset($event['type'], $event['data'])) {
     respond(400, 'Malformed payload');
 }
 
-$type = $event['type'];
-$data = $event['data'];
-
-// ── Route events ──────────────────────────────────────────────────────────────
-
+$type       = $event['type'];
+$data       = $event['data'];
 $email      = strtolower(trim($data['customer']['email'] ?? ''));
 $product_id = $data['product_id'] ?? ($data['product']['id'] ?? '');
-$sub_id     = $data['id'] ?? '';
-$ends_at    = $data['current_period_end'] ?? null;
 $trial      = ($data['started_with_trial'] ?? false) === true;
 
-if (!$email) {
-    respond(400, 'No customer email in payload');
-}
+if (!$email) respond(400, 'No customer email in payload');
 
-// Only process events for known product IDs
 if ($product_id && !in_array($product_id, POLAR_PRODUCT_IDS, true)) {
     respond(200, 'Product not managed by this webhook');
 }
 
-$store    = read_json(subscribers_path());
-$subs     = $store['subscribers'] ?? [];
+$plan = plan_for_product($product_id);
+
+// ── Route events ──────────────────────────────────────────────────────────────
 
 switch ($type) {
 
     case 'subscription.created':
-        $subs[$email] = [
-            'status'         => 'active',
-            'polar_sub_id'   => $sub_id,
-            'polar_product'  => $product_id,
-            'trial'          => $trial,
-            'started_at'     => date('c'),
-            'ends_at'        => $ends_at,
-            'cancelled_at'   => null,
-        ];
-        write_json(subscribers_path(), ['subscribers' => $subs]);
+        set_subscriber_claims($email, ['plan' => $plan, 'status' => 'active', 'trial' => $trial]);
         brevo_upsert_contact($email, 'active', $trial);
         brevo_send_onboarding($email);
         respond(200, 'Subscriber activated');
 
     case 'subscription.updated':
-        if (isset($subs[$email])) {
-            $subs[$email]['polar_sub_id']  = $sub_id;
-            $subs[$email]['polar_product'] = $product_id;
-            $subs[$email]['ends_at']       = $ends_at;
-            // Reactivate if they were cancelled but renewed
-            if ($subs[$email]['status'] === 'cancelled' || $subs[$email]['status'] === 'inactive') {
-                $subs[$email]['status']       = 'active';
-                $subs[$email]['cancelled_at'] = null;
-            }
-        } else {
-            // Subscriber not found locally — create record
-            $subs[$email] = [
-                'status'        => 'active',
-                'polar_sub_id'  => $sub_id,
-                'polar_product' => $product_id,
-                'trial'         => $trial,
-                'started_at'    => date('c'),
-                'ends_at'       => $ends_at,
-                'cancelled_at'  => null,
-            ];
-        }
-        write_json(subscribers_path(), ['subscribers' => $subs]);
+        set_subscriber_claims($email, ['plan' => $plan, 'status' => 'active', 'trial' => false]);
         brevo_upsert_contact($email, 'active', false);
         respond(200, 'Subscriber updated');
 
     case 'subscription.canceled':
-        // Access continues to end of billing period — mark cancelled but keep status active
-        if (isset($subs[$email])) {
-            $subs[$email]['status']       = 'cancelled';
-            $subs[$email]['cancelled_at'] = date('c');
-            $subs[$email]['ends_at']      = $ends_at;
-        }
-        write_json(subscribers_path(), ['subscribers' => $subs]);
+        // Access continues to end of billing period — mark cancelled (still let them in until period ends)
+        set_subscriber_claims($email, ['plan' => $plan, 'status' => 'cancelled', 'trial' => false]);
         brevo_upsert_contact($email, 'cancelled', false);
         respond(200, 'Subscription cancellation recorded');
 
     case 'subscription.revoked':
-        // Immediate access removal
-        if (isset($subs[$email])) {
-            $subs[$email]['status']       = 'inactive';
-            $subs[$email]['cancelled_at'] = date('c');
-        }
-        write_json(subscribers_path(), ['subscribers' => $subs]);
+        set_subscriber_claims($email, ['plan' => '', 'status' => 'inactive', 'trial' => false]);
         brevo_upsert_contact($email, 'inactive', false);
         respond(200, 'Subscription revoked');
 
@@ -133,28 +143,21 @@ switch ($type) {
 // ── Brevo integration ─────────────────────────────────────────────────────────
 
 function brevo_upsert_contact(string $email, string $status, bool $trial): void {
-    $payload = [
+    brevo_post('https://api.brevo.com/v3/contacts', [
         'email'      => $email,
         'listIds'    => [BREVO_LIST_ID],
-        'attributes' => [
-            'SUBSCRIPTION_STATUS' => $status,
-            'IS_TRIAL'            => $trial ? 'yes' : 'no',
-        ],
+        'attributes' => ['SUBSCRIPTION_STATUS' => $status, 'IS_TRIAL' => $trial ? 'yes' : 'no'],
         'updateEnabled' => true,
-    ];
-    brevo_post('https://api.brevo.com/v3/contacts', $payload);
+    ]);
 }
 
 function brevo_send_onboarding(string $email): void {
-    // Sends the onboarding transactional email template
-    // Set BREVO_ONBOARDING_TEMPLATE_ID in config.php once the template is created in Brevo
     if (!defined('BREVO_ONBOARDING_TEMPLATE_ID')) return;
-    $payload = [
+    brevo_post('https://api.brevo.com/v3/smtp/email', [
         'to'         => [['email' => $email]],
         'templateId' => BREVO_ONBOARDING_TEMPLATE_ID,
         'params'     => ['SITE_URL' => SITE_URL],
-    ];
-    brevo_post('https://api.brevo.com/v3/smtp/email', $payload);
+    ]);
 }
 
 function brevo_post(string $url, array $payload): void {
@@ -168,7 +171,7 @@ function brevo_post(string $url, array $payload): void {
             'Content-Type: application/json',
             'api-key: ' . BREVO_API_KEY,
         ],
-        CURLOPT_TIMEOUT        => 10,
+        CURLOPT_TIMEOUT => 10,
     ]);
     curl_exec($ch);
     curl_close($ch);

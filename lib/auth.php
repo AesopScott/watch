@@ -24,35 +24,26 @@ function write_json_file(string $path, array $data): void {
 // Returns true if the current PHP session belongs to an active subscriber.
 function is_active_subscriber(): bool {
     if (session_status() === PHP_SESSION_NONE) session_start();
-    $email = $_SESSION['subscriber_email'] ?? '';
-    if (!$email) return false;
-    return check_subscriber_status($email) === 'active';
+    $email  = $_SESSION['subscriber_email']  ?? '';
+    $status = $_SESSION['subscriber_status'] ?? '';
+    return $email !== '' && $status === 'active';
 }
 
-// Returns 'active', 'cancelled' (within period), 'inactive', or 'not_found'.
-function check_subscriber_status(string $email): string {
-    $store = read_json_file(subscribers_file());
-    $sub   = $store['subscribers'][$email] ?? null;
-    if (!$sub) return 'not_found';
-
-    $status = $sub['status'] ?? 'inactive';
-
-    // 'cancelled' means end-of-period — check if period has passed
-    if ($status === 'cancelled') {
-        $ends_at = $sub['ends_at'] ?? null;
-        if ($ends_at && strtotime($ends_at) > time()) {
-            return 'active';  // Still within paid period
-        }
-        return 'inactive';
-    }
-
-    return $status === 'active' ? 'active' : 'inactive';
+// Returns the subscriber's plan from session ('pro', 'pro_lite', 'cohort', etc.)
+function get_subscriber_plan(): string {
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    return $_SESSION['subscriber_plan'] ?? 'pro';
 }
 
-// Returns the raw subscriber record for $email, or [] on missing/error.
+// Returns the raw subscriber record for $email — used for weekly_claims only.
 function get_subscriber_data(string $email): array {
     $store = read_json_file(subscribers_file());
-    return $store['subscribers'][$email] ?? [];
+    $data  = $store['subscribers'][$email] ?? [];
+    // Merge in plan from session so callers get consistent data
+    if (empty($data['plan'])) {
+        $data['plan'] = $_SESSION['subscriber_plan'] ?? 'pro';
+    }
+    return $data;
 }
 
 // Records a session claim for the given ISO week key (e.g. "2026-W23").
@@ -73,11 +64,8 @@ function record_session_claim(string $email, string $week_key, string $session_i
     }
 }
 
-// Sends a magic link email via Brevo. Returns true, 'not_subscriber', or 'error'.
+// Sends a magic link email via Brevo. Returns true or 'error'.
 function send_magic_link(string $email) {
-    $status = check_subscriber_status($email);
-    if ($status !== 'active') return 'not_subscriber';
-
     $token     = bin2hex(random_bytes(32));
     $token_hash = hash('sha256', $token);
     $expires   = time() + TOKEN_TTL_SECONDS;
@@ -117,9 +105,6 @@ function verify_magic_link(string $email, string $token) {
     // Consume token — one-time use
     unset($store['tokens'][$email]);
     write_json_file(tokens_file(), $store);
-
-    // Confirm still an active subscriber at login time
-    if (check_subscriber_status($email) !== 'active') return 'not_subscriber';
 
     return true;
 }

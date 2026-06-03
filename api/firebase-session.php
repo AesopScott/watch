@@ -37,7 +37,10 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-$status = check_subscriber_status($email);
+// Read subscription status from Firebase custom claims (single source of truth)
+$plan   = $claims['plan']   ?? '';
+$status = $claims['status'] ?? '';
+
 if ($status !== 'active') {
     http_response_code(403);
     echo json_encode(['error' => 'not_subscriber', 'email' => $email]);
@@ -46,6 +49,8 @@ if ($status !== 'active') {
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 $_SESSION['subscriber_email'] = $email;
+$_SESSION['subscriber_plan']  = $plan;
+$_SESSION['subscriber_status'] = $status;
 $_SESSION['logged_in_at']     = time();
 
 echo json_encode(['ok' => true, 'redirect' => '/portal/']);

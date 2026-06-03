@@ -81,5 +81,14 @@
                                          }
                                      ]
                   }
+              ,
+                  {
+                      "id":  2,
+                      "title":  "Route auth emails through Brevo instead of Firebase",
+                      "priority":  60,
+                      "impact":  "standard",
+                      "status":  "ready",
+                      "description":  "Firebase sends password reset and verification emails from noreply@watch-38b66.firebaseapp.com which hits junk mail and causes password managers to associate credentials with firebaseapp.com instead of watchmebuildai.com. Fix: use Firebase Admin SDK server-side to generate reset/verification links (generatePasswordResetLink, generateEmailVerificationLink), then send those links via Brevo from scott@watchmebuildai.com. Also build auth-action.php as a custom Firebase action handler so the reset flow happens on watchmebuildai.com domain."
+                  }
               ]
 }

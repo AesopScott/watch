@@ -12,6 +12,15 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Why Choose Us — Watch Me Build AI</title>
     <meta name="description" content="Don't trust credentials. Show up for free, see if you learn, see if you like the style. Then decide to become a subscriber.">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Why Choose Us — Watch Me Build AI">
+    <meta property="og:description" content="Don't trust credentials. Show up for free, see if you learn, see if you like the style. Then decide to become a subscriber.">
+    <meta property="og:image" content="https://watchmebuildai.com/assets/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://watchmebuildai.com/assets/images/og.png">
     <link rel="stylesheet" href="/assets/css/main.css?v=<?= filemtime(__DIR__ . '/assets/css/main.css') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">

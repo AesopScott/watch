@@ -14,6 +14,7 @@ if (is_active_subscriber()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In — Watch Me Build AI</title>
     <link rel="stylesheet" href="/assets/css/main.css?v=<?= filemtime(__DIR__ . '/assets/css/main.css') ?>">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
 </head>
 <body class="login-page">
     <div class="login-box">

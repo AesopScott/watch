@@ -1,6 +1,46 @@
 {
   "sessions": [
     {
+      "id": "pro-jun3-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-03T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun3-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-04T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun8-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-08T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun8-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-09T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
       "id": "pro-jun9-3pm",
       "title": "Pro Session — Watch Me Build AI",
       "type": "pro",
@@ -8,6 +48,306 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "https://us06web.zoom.us/j/83979200637?pwd=sHLaomkoOAb3yfsFCqBiecwwN3J83C.1",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun10-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-10T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun10-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-11T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun15-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-15T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun15-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-16T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun17-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-17T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun17-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-18T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun22-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-22T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun22-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-23T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun24-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-24T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun24-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-25T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun29-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-29T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jun29-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-06-30T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul1-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-01T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul1-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-02T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul6-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-06T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul6-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-07T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul8-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-08T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul8-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-09T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul13-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-13T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul13-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-14T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul15-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-15T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul15-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-16T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul20-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-20T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul20-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-21T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul22-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-22T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul22-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-23T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul27-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-27T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul27-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-28T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul29-3pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-29T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "description": "Live AI development session. Pro members only."
+    },
+    {
+      "id": "pro-jul29-6pm",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "2026-07-30T00:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
       "description": "Live AI development session. Pro members only."
     }
   ]

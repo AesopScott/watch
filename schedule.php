@@ -147,6 +147,15 @@ $today  = date('Y-m-d');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule — Watch Me Build AI</title>
     <meta name="description" content="Upcoming live sessions and public Meetup events.">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Schedule — Watch Me Build AI">
+    <meta property="og:description" content="Upcoming live AI development sessions. Join a Pro session or catch the next free Meetup.">
+    <meta property="og:image" content="https://watchmebuildai.com/assets/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://watchmebuildai.com/assets/images/og.png">
     <link rel="stylesheet" href="/assets/css/main.css?v=<?= filemtime(__DIR__ . '/assets/css/main.css') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">

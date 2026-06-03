@@ -318,14 +318,27 @@ $today  = date('Y-m-d');
         tip.style.top  = top  + 'px';
     }
 
+    let hideTimer = null;
+
+    function scheduleHide() {
+        hideTimer = setTimeout(() => { tip.style.display = 'none'; }, 200);
+    }
+    function cancelHide() {
+        clearTimeout(hideTimer);
+    }
+
     events.forEach(el => {
         el.addEventListener('mouseenter', () => {
+            cancelHide();
             try { show(el, JSON.parse(el.dataset.tip)); } catch(e) {}
         });
-        el.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+        el.addEventListener('mouseleave', scheduleHide);
     });
 
-    document.addEventListener('scroll', () => { tip.style.display = 'none'; }, { passive: true });
+    tip.addEventListener('mouseenter', cancelHide);
+    tip.addEventListener('mouseleave', scheduleHide);
+
+    document.addEventListener('scroll', () => { cancelHide(); tip.style.display = 'none'; }, { passive: true });
 })();
 </script>
 </body>

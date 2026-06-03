@@ -1,19 +1,4 @@
 <?php
-/**
- * Session join gateway.
- *
- * Request 1 — GET ?id=X
- *   Auth → time gate → capacity → Pro Lite weekly limit
- *   → sets $_SESSION['join_briefed'][id] → shows briefing countdown page
- *
- * Request 2 — GET ?id=X&go=1
- *   Auth → validate briefed flag → re-check capacity
- *   → record attendance → record Pro Lite claim
- *   → 302 to Zoom URL (never in HTML source)
- *
- * Fail-open policy: attendance/claim write errors let the subscriber through.
- */
-
 declare(strict_types=1);
 
 require_once __DIR__ . '/../config/config.php';
@@ -121,31 +106,24 @@ if (is_pro_lite_plan($plan)) {
 
 // ── Request 2: validated go — record and redirect ────────────────────────────
 if ($go) {
-    // Validate briefed flag
     $briefed_at = $_SESSION['join_briefed'][$session_id] ?? 0;
     if (!$briefed_at || (time() - $briefed_at) > 600) {
-        // Briefing expired or skipped — bounce back to briefing
         header('Location: /api/join-session.php?id=' . urlencode($session_id));
         exit;
     }
 
-    // Re-check capacity (could have filled while on briefing page)
     if (!has_capacity($session_id, $plan)) {
         join_error('Sorry, the last seat was just taken. <a href="/portal/">Back to portal</a>');
     }
 
-    // Record attendance (fail open)
     record_join($session_id, $email, $plan);
 
-    // Record Pro Lite weekly claim (fail open)
     if (is_pro_lite_plan($plan)) {
         record_session_claim($email, gmdate('o-W'), $session_id);
     }
 
-    // Clear briefed flag
     unset($_SESSION['join_briefed'][$session_id]);
 
-    // Redirect to Zoom — URL only ever in this header, never in HTML
     header('Location: ' . $zoom_url);
     exit;
 }
@@ -154,10 +132,10 @@ if ($go) {
 if (!isset($_SESSION['join_briefed'])) $_SESSION['join_briefed'] = [];
 $_SESSION['join_briefed'][$session_id] = time();
 
-$title     = htmlspecialchars($session['title'] ?? 'Session');
-$desc      = htmlspecialchars($session['description'] ?? '');
-$date_str  = isset($session['date']) ? format_session_date_brief($session['date']) : '';
-$go_url    = '/api/join-session.php?id=' . urlencode($session_id) . '&go=1';
+$title    = htmlspecialchars($session['title'] ?? 'Session');
+$desc     = htmlspecialchars($session['description'] ?? '');
+$date_str = isset($session['date']) ? format_session_date_brief($session['date']) : '';
+$go_url   = '/api/join-session.php?id=' . urlencode($session_id) . '&go=1';
 
 header('Content-Type: text/html; charset=utf-8');
 ?>
@@ -202,10 +180,10 @@ header('Content-Type: text/html; charset=utf-8');
 
 <script>
 (function () {
-    const go  = <?= json_encode($go_url) ?>;
-    const el  = document.getElementById('count');
-    let   n   = 5;
-    const t   = setInterval(() => {
+    const go = <?= json_encode($go_url) ?>;
+    const el = document.getElementById('count');
+    let   n  = 5;
+    const t  = setInterval(() => {
         n--;
         el.textContent = n;
         if (n <= 0) { clearInterval(t); window.location.href = go; }

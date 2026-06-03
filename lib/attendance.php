@@ -53,7 +53,7 @@ function has_capacity(string $session_id, string $plan): bool {
             return $counts['lite'] < SESSION_CAPACITY_PRO_LITE;
         }
         return $counts['pro'] < SESSION_CAPACITY_PRO;
-    } catch (Throwable) {
+    } catch (Throwable $e) {
         return true;  // fail open
     }
 }
@@ -75,7 +75,7 @@ function record_join(string $session_id, string $email, string $plan): bool {
         $data['sessions'][$session_id]['joins'] = $joins;
         write_json_file(attendance_file(), $data);
         return true;
-    } catch (Throwable) {
+    } catch (Throwable $e) {
         return false;
     }
 }

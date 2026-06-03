@@ -52,11 +52,13 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     </div>
 </section>
 
+<hr class="section-divider">
+
 <!-- ── How It Works ── -->
 <section class="section">
     <div class="container">
         <h2 class="section-title">This is how it actually works here</h2>
-        <div class="value-grid" style="margin-top:0">
+        <div class="value-grid-4">
             <div class="value-card">
                 <div class="value-icon">🎬</div>
                 <h3>You show up for free</h3>
@@ -86,7 +88,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
     <div class="container">
         <h2 class="section-title">What this is not</h2>
         <p class="section-sub">We're not here to teach you concepts or theory.</p>
-        <div class="value-grid" style="margin-top:0">
+        <div class="value-grid-3">
             <div class="value-card">
                 <div class="value-icon">❌</div>
                 <h3>No slides</h3>
@@ -110,7 +112,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
 <section class="section">
     <div class="container">
         <h2 class="section-title">What you're actually getting</h2>
-        <div class="value-grid" style="margin-top:0">
+        <div class="value-grid-4">
             <div class="value-card">
                 <div class="value-icon">🏗</div>
                 <h3>Real production systems</h3>

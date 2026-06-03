@@ -16,6 +16,11 @@ function get_meetup_events(int $limit = 20, bool $force_refresh = false): array 
         }
     }
 
+    // Fallback if curl is not available
+    if (!function_exists('curl_init')) {
+        return _meetup_stale_cache($limit);
+    }
+
     $ch = curl_init(MEETUP_SOURCE_URL);
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,

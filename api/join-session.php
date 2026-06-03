@@ -219,7 +219,7 @@ header('Content-Type: text/html; charset=utf-8');
 exit;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-function join_error(string $message): never {
+function join_error(string $message): void {
     http_response_code(403);
     echo '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -234,7 +234,7 @@ function join_error(string $message): never {
     exit;
 }
 
-function join_info(string $title, string $heading, string $body, ?string $cta_url): never {
+function join_info(string $title, string $heading, string $body, ?string $cta_url): void {
     echo '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>' . $title . ' — Watch Me Build AI</title>

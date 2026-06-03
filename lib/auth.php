@@ -68,7 +68,7 @@ function record_session_claim(string $email, string $week_key, string $session_i
         $store['subscribers'][$email]['weekly_claims'][$week_key] = $claims;
         write_json_file(subscribers_file(), $store);
         return true;
-    } catch (Throwable) {
+    } catch (Throwable $e) {
         return false;
     }
 }

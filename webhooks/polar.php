@@ -63,22 +63,26 @@ switch ($type) {
         brevo_upsert_contact($email, 'active', $trial);
         brevo_send_onboarding($email);
         notify_admin_new_signup($email, $plan, $trial);
+        log_subscriber($email, $plan, 'active', $trial, gmdate('c'), null);
         respond(200, 'Subscriber activated');
 
     case 'subscription.updated':
         set_subscriber_claims($email, ['plan' => $plan, 'status' => 'active', 'trial' => false]);
         brevo_upsert_contact($email, 'active', false);
+        log_subscriber($email, $plan, 'active', false, null, null);
         respond(200, 'Subscriber updated');
 
     case 'subscription.canceled':
         // Access continues to end of billing period — mark cancelled (still let them in until period ends)
         set_subscriber_claims($email, ['plan' => $plan, 'status' => 'cancelled', 'trial' => false]);
         brevo_upsert_contact($email, 'cancelled', false);
+        log_subscriber($email, $plan, 'cancelled', false, null, gmdate('c'));
         respond(200, 'Subscription cancellation recorded');
 
     case 'subscription.revoked':
         set_subscriber_claims($email, ['plan' => '', 'status' => 'inactive', 'trial' => false]);
         brevo_upsert_contact($email, 'inactive', false);
+        log_subscriber($email, $plan, 'inactive', false, null, gmdate('c'));
         respond(200, 'Subscription revoked');
 
     default:
@@ -86,6 +90,23 @@ switch ($type) {
 }
 
 // ── Brevo integration ─────────────────────────────────────────────────────────
+
+function log_subscriber(string $email, string $plan, string $status, bool $trial, ?string $started_at, ?string $ended_at): void {
+    $path  = __DIR__ . '/../data/subscribers.json';
+    $store = file_exists($path) ? (json_decode(file_get_contents($path), true) ?? []) : [];
+    if (!isset($store['subscribers'])) $store['subscribers'] = [];
+
+    $existing = $store['subscribers'][$email] ?? [];
+    $store['subscribers'][$email] = [
+        'status'     => $status,
+        'plan'       => $plan,
+        'trial'      => $trial,
+        'started_at' => $started_at ?? ($existing['started_at'] ?? gmdate('c')),
+        'ends_at'    => $ended_at ?? ($existing['ends_at'] ?? null),
+    ];
+
+    @file_put_contents($path, json_encode($store, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
+}
 
 function notify_admin_new_signup(string $email, string $plan, bool $trial): void {
     $plan_label  = ucfirst($plan) . ($trial ? ' (trial)' : '');

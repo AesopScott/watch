@@ -84,28 +84,28 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
 <!-- ── Outcomes ── -->
 <section class="section section-alt">
     <div class="container">
-        <h2 class="section-title">What watching does for you</h2>
-        <p class="section-sub">Watching someone build the real thing is the fastest way to learn how to build it yourself.</p>
+        <h2 class="section-title">What co-building does for you</h2>
+        <p class="section-sub">Fork the repo. Build alongside us in real time. Ship the same working system the moment we do — not six months later from a tutorial.</p>
         <div class="value-grid" style="margin-top:0">
             <div class="value-card">
                 <div class="value-icon">🧠</div>
                 <h3>You start thinking in systems</h3>
-                <p>You'll stop asking "what prompt do I use?" and start asking "how do I architect this pipeline?" — the shift that separates AI tinkerers from AI builders.</p>
+                <p>Building the pipeline yourself — not just watching a video of it — is what forces the systems-thinking shift. You'll stop asking "what prompt do I use?" and start asking "how do I architect this pipeline?"</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">⚙️</div>
-                <h3>You see how real pipelines actually get built</h3>
-                <p>Watch multi-step agent workflows go from idea to working system in real time. Not a demo. Not a cleaned-up tutorial. The actual build.</p>
+                <h3>You build the pipeline as we build it</h3>
+                <p>Fork the repo, follow each session live, and your code lands the same time ours does. Multi-step agent workflows, end-to-end — built once by us, built once by you, in parallel.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">🗺</div>
-                <h3>You internalize the decisions, not just the code</h3>
-                <p>Every session shows the dead ends, the pivots, the "why not that" moments. That judgment is what you're here to absorb — it can't come from reading docs.</p>
+                <h3>You inherit the decisions, not just the code</h3>
+                <p>Every session shows the dead ends, the pivots, the "why not that" moments — as they happen, with your editor open. When you hit the same fork in the road on your own projects, you already know which way to go.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">🚀</div>
                 <h3>You skip six months of trial and error</h3>
-                <p>Watching someone who's already figured it out means you know what works before you try it yourself. That's the entire value of learning by watching.</p>
+                <p>Co-building with someone who's already figured it out means you ship the working system today, not after six months of false starts. That's the entire value of learning by building together.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">🔬</div>

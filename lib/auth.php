@@ -26,7 +26,13 @@ function is_active_subscriber(): bool {
     if (session_status() === PHP_SESSION_NONE) session_start();
     $email  = $_SESSION['subscriber_email']  ?? '';
     $status = $_SESSION['subscriber_status'] ?? '';
-    return $email !== '' && $status === 'active';
+    if ($email === '' || $status !== 'active') return false;
+
+    // Manual grants carry expires_at in claims; expired grants are no longer active.
+    $expires_at = $_SESSION['subscriber_expires_at'] ?? '';
+    if ($expires_at !== '' && strtotime($expires_at) < time()) return false;
+
+    return true;
 }
 
 // Returns the subscriber's plan from session ('pro', 'pro_lite', 'cohort', etc.)

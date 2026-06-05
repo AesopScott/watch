@@ -38,8 +38,9 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Read subscription status from Firebase custom claims (single source of truth)
-$plan   = $claims['plan']   ?? '';
-$status = $claims['status'] ?? '';
+$plan       = $claims['plan']       ?? '';
+$status     = $claims['status']     ?? '';
+$expires_at = $claims['expires_at'] ?? '';
 
 if ($status !== 'active') {
     http_response_code(403);
@@ -47,10 +48,18 @@ if ($status !== 'active') {
     exit;
 }
 
+// Block expired manual grants at login time too — defense in depth alongside is_active_subscriber().
+if ($expires_at !== '' && strtotime($expires_at) < time()) {
+    http_response_code(403);
+    echo json_encode(['error' => 'not_subscriber', 'email' => $email]);
+    exit;
+}
+
 if (session_status() === PHP_SESSION_NONE) session_start();
-$_SESSION['subscriber_email'] = $email;
-$_SESSION['subscriber_plan']  = $plan;
-$_SESSION['subscriber_status'] = $status;
-$_SESSION['logged_in_at']     = time();
+$_SESSION['subscriber_email']      = $email;
+$_SESSION['subscriber_plan']       = $plan;
+$_SESSION['subscriber_status']     = $status;
+$_SESSION['subscriber_expires_at'] = $expires_at;
+$_SESSION['logged_in_at']          = time();
 
 echo json_encode(['ok' => true, 'redirect' => '/portal/']);

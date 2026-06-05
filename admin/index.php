@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../lib/sessions.php';
+require_once __DIR__ . '/../lib/firebase-admin.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 
@@ -43,6 +44,19 @@ function read_recordings(): array {
 
 function write_recordings(array $recordings): void {
     file_put_contents(recordings_json(), json_encode(['recordings' => array_values($recordings)], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
+}
+
+// Writes Firebase custom claims for $email. Returns 'ok', 'no_user', or 'error'.
+function admin_set_firebase_claims(string $email, array $claims): string {
+    try {
+        $token = firebase_admin_token();
+        if (!$token) return 'error';
+        $uid = firebase_uid_for_email($token, $email);
+        if (!$uid) return 'no_user';
+        return firebase_set_claims($token, $uid, $claims) ? 'ok' : 'error';
+    } catch (Throwable $e) {
+        return 'error';
+    }
 }
 
 // ── POST actions ──────────────────────────────────────────────────────────────
@@ -95,33 +109,84 @@ if ($authenticated && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($action === 'add_subscriber') {
-        $sub_email  = strtolower(trim($_POST['sub_email'] ?? ''));
-        $sub_plan   = trim($_POST['sub_plan'] ?? 'manual');
-        $sub_status = trim($_POST['sub_status'] ?? 'active');
-        if (filter_var($sub_email, FILTER_VALIDATE_EMAIL)) {
-            $path  = __DIR__ . '/../data/subscribers.json';
-            $store = file_exists($path) ? (json_decode(file_get_contents($path), true) ?? []) : [];
-            if (!isset($store['subscribers'])) $store['subscribers'] = [];
-            $store['subscribers'][$sub_email] = [
-                'status'     => $sub_status,
-                'plan'       => $sub_plan,
-                'trial'      => false,
-                'started_at' => date('c'),
-            ];
-            file_put_contents($path, json_encode($store, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
-            $flash = 'Subscriber added: ' . $sub_email;
-        } else {
+        $sub_email   = strtolower(trim($_POST['sub_email'] ?? ''));
+        $sub_plan    = trim($_POST['sub_plan'] ?? '');
+        $sub_expires = trim($_POST['sub_expires'] ?? '');  // YYYY-MM-DD from <input type=date> or ''
+
+        if (!filter_var($sub_email, FILTER_VALIDATE_EMAIL)) {
             $flash = 'Invalid email address.';
+        } elseif (!array_key_exists($sub_plan, TIER_PLANS)) {
+            $flash = 'Invalid tier.';
+        } else {
+            // Normalize expiration to end-of-day UTC ISO 8601, or empty for no expiration.
+            $expires_iso = '';
+            if ($sub_expires !== '') {
+                $ts = strtotime($sub_expires . ' 23:59:59 UTC');
+                if ($ts === false) {
+                    $flash = 'Invalid expiration date.';
+                } else {
+                    $expires_iso = gmdate('c', $ts);
+                }
+            }
+
+            if ($flash === '') {
+                $claims = [
+                    'plan'       => $sub_plan,
+                    'status'     => 'active',
+                    'trial'      => false,
+                    'expires_at' => $expires_iso,
+                ];
+                $result = admin_set_firebase_claims($sub_email, $claims);
+
+                if ($result === 'no_user') {
+                    $flash = 'No Firebase account found for ' . $sub_email . '. Ask them to sign up at /login.php first, then grant access.';
+                } elseif ($result === 'error') {
+                    $flash = 'Firebase update failed. Check the admin key path and try again.';
+                } else {
+                    // Mirror the grant into subscribers.json as an audit log.
+                    $path  = __DIR__ . '/../data/subscribers.json';
+                    $store = file_exists($path) ? (json_decode(file_get_contents($path), true) ?? []) : [];
+                    if (!isset($store['subscribers'])) $store['subscribers'] = [];
+                    $existing = $store['subscribers'][$sub_email] ?? [];
+                    $store['subscribers'][$sub_email] = [
+                        'status'     => 'active',
+                        'plan'       => $sub_plan,
+                        'trial'      => false,
+                        'started_at' => $existing['started_at'] ?? gmdate('c'),
+                        'ends_at'    => $expires_iso ?: null,
+                        'manual'     => true,
+                    ];
+                    file_put_contents($path, json_encode($store, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
+                    $flash = 'Access granted: ' . $sub_email . ' → ' . TIER_PLANS[$sub_plan]
+                           . ($expires_iso ? ' (expires ' . substr($expires_iso, 0, 10) . ')' : ' (no expiration)');
+                }
+            }
         }
     }
 
     if ($action === 'remove_subscriber') {
         $sub_email = strtolower(trim($_POST['sub_email'] ?? ''));
+
+        // Revoke Firebase access first so the local audit row matches reality.
+        $result = admin_set_firebase_claims($sub_email, [
+            'plan'       => '',
+            'status'     => 'inactive',
+            'trial'      => false,
+            'expires_at' => '',
+        ]);
+
         $path  = __DIR__ . '/../data/subscribers.json';
         $store = file_exists($path) ? (json_decode(file_get_contents($path), true) ?? []) : [];
         unset($store['subscribers'][$sub_email]);
         file_put_contents($path, json_encode($store, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
-        $flash = 'Subscriber removed: ' . $sub_email;
+
+        if ($result === 'no_user') {
+            $flash = 'Removed from local audit log. No Firebase account existed for ' . $sub_email . '.';
+        } elseif ($result === 'error') {
+            $flash = 'Removed from local audit log, but Firebase revoke failed for ' . $sub_email . '. Check manually.';
+        } else {
+            $flash = 'Access revoked: ' . $sub_email;
+        }
     }
 }
 
@@ -373,7 +438,11 @@ usort($recordings, fn($a, $b) => strtotime($b['date']) <=> strtotime($a['date'])
 <!-- ── Subscribers tab ── -->
 <div id="tab-subscribers" class="tab-content">
     <div class="card">
-        <h2>Add Subscriber Manually</h2>
+        <h2>Grant Manual Access</h2>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
+            Writes Firebase claims directly. The recipient must have signed up at
+            <code>/login.php</code> first (so a Firebase account exists). Leave expiration blank for no expiration.
+        </p>
         <form method="POST">
             <input type="hidden" name="action" value="add_subscriber">
             <div class="form-row form-row-3">
@@ -382,15 +451,19 @@ usort($recordings, fn($a, $b) => strtotime($b['date']) <=> strtotime($a['date'])
                     <input type="text" name="sub_email" required placeholder="subscriber@example.com">
                 </div>
                 <div>
-                    <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px">Plan</label>
-                    <input type="text" name="sub_plan" value="manual" placeholder="manual / pro / cohort10 / private">
+                    <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px">Tier</label>
+                    <select name="sub_plan" required style="width:100%;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:13px;font-family:var(--font);outline:none">
+                        <?php foreach (TIER_PLANS as $key => $label): ?>
+                        <option value="<?= htmlspecialchars($key) ?>"><?= htmlspecialchars($label) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <div>
-                    <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px">Status</label>
-                    <input type="text" name="sub_status" value="active" placeholder="active / inactive">
+                    <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px">Expires (optional)</label>
+                    <input type="date" name="sub_expires">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" style="margin-top:4px">Add Subscriber</button>
+            <button type="submit" class="btn btn-primary" style="margin-top:4px">Grant Access</button>
         </form>
     </div>
 
@@ -399,10 +472,18 @@ usort($recordings, fn($a, $b) => strtotime($b['date']) <=> strtotime($a['date'])
         <?php if ($subscribers): ?>
         <table class="admin-table">
             <thead>
-                <tr><th>Email</th><th>Status</th><th>Plan</th><th>Trial</th><th>Started</th><th>Ends / Cancelled</th><th></th></tr>
+                <tr><th>Email</th><th>Status</th><th>Tier</th><th>Source</th><th>Started</th><th>Expires</th><th></th></tr>
             </thead>
             <tbody>
                 <?php foreach ($subscribers as $email => $sub): ?>
+                <?php
+                    $plan_key   = $sub['plan'] ?? '';
+                    $plan_label = TIER_PLANS[$plan_key] ?? ($plan_key ?: '—');
+                    $is_manual  = !empty($sub['manual']);
+                    $is_trial   = !empty($sub['trial']);
+                    $source     = $is_manual ? 'Manual' : ($is_trial ? 'Trial' : 'Polar');
+                    $expires    = $sub['ends_at'] ?? $sub['cancelled_at'] ?? '';
+                ?>
                 <tr>
                     <td style="font-family:var(--mono)"><?= htmlspecialchars($email) ?></td>
                     <td>
@@ -410,19 +491,15 @@ usort($recordings, fn($a, $b) => strtotime($b['date']) <=> strtotime($a['date'])
                             <?= htmlspecialchars($sub['status']) ?>
                         </span>
                     </td>
-                    <td><?= ($sub['trial'] ?? false) ? 'Yes' : '—' ?></td>
+                    <td><?= htmlspecialchars($plan_label) ?></td>
+                    <td style="font-size:12px;color:var(--text-muted)"><?= htmlspecialchars($source) ?></td>
                     <td style="font-size:12px;color:var(--text-muted)"><?= htmlspecialchars($sub['started_at'] ?? '—') ?></td>
-                    <td style="font-size:12px;color:var(--text-muted)">
-                        <?= htmlspecialchars($sub['ends_at'] ?? $sub['cancelled_at'] ?? '—') ?>
-                    </td>
-                    <td style="font-size:12px;color:var(--text-muted)">
-                        <?= htmlspecialchars($sub['plan'] ?? '—') ?>
-                    </td>
+                    <td style="font-size:12px;color:var(--text-muted)"><?= $expires ? htmlspecialchars(substr($expires, 0, 10)) : '—' ?></td>
                     <td>
-                        <form method="POST" onsubmit="return confirm('Remove <?= htmlspecialchars($email) ?>?')">
+                        <form method="POST" onsubmit="return confirm('Revoke access for <?= htmlspecialchars($email) ?>?')">
                             <input type="hidden" name="action" value="remove_subscriber">
                             <input type="hidden" name="sub_email" value="<?= htmlspecialchars($email) ?>">
-                            <button type="submit" class="btn btn-sm btn-outline" style="color:var(--red);border-color:var(--red)">Remove</button>
+                            <button type="submit" class="btn btn-sm btn-outline" style="color:var(--red);border-color:var(--red)">Revoke</button>
                         </form>
                     </td>
                 </tr>

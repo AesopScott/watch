@@ -22,10 +22,17 @@ define('POLAR_PRODUCT_IDS',   [
 ]);
 // Maps Polar product ID → Firebase custom claim plan name
 define('POLAR_PRODUCT_PLANS', [
-    '1995f61c-e56f-4487-8962-78608bd0b56c' => 'pro',       // Weekly
-    '3bbf8000-9928-486f-890b-edb630b7733d' => 'pro',       // Monthly
-    'a9b65de6-64c2-4921-86d2-443db4eb0a05' => 'cohort',    // Cohort 10
-    '5fa68e31-e670-4492-90da-6495fa4170ea' => 'cohort',    // Cohort Private
+    '1995f61c-e56f-4487-8962-78608bd0b56c' => 'pro_lite',        // Weekly
+    '3bbf8000-9928-486f-890b-edb630b7733d' => 'pro',             // Monthly
+    'a9b65de6-64c2-4921-86d2-443db4eb0a05' => 'cohort10',        // Cohort 10
+    '5fa68e31-e670-4492-90da-6495fa4170ea' => 'cohort_private',  // Cohort Private
+]);
+// Canonical tier list — used by the admin form's manual-grant dropdown.
+define('TIER_PLANS', [
+    'pro_lite'       => 'Pro Lite',
+    'pro'            => 'Pro',
+    'cohort10'       => 'Cohort 10',
+    'cohort_private' => 'Cohort Private',
 ]);
 
 // Brevo

@@ -25,6 +25,7 @@ foreach ($upcoming as $s) {
         'type'     => 'pro',
         'title'    => $s['title'],
         'time'     => $mt . ' / ' . $utc,
+        'sort_ts'  => $ts,
         'duration' => '1 hour',
         'desc'     => $s['description'] ?? '',
         'url'      => $logged_in ? '/portal/#session-' . htmlspecialchars($s['id']) : null,
@@ -51,6 +52,7 @@ foreach ($meetup_events as $e) {
         'title'    => $e['title'],
         'group'    => $group_label,
         'time'     => $mt . ' / ' . $utc,
+        'sort_ts'  => $ts,
         'duration' => '2 hours',
         'desc'     => $desc_full ?: $rsvp_line,
         'url'      => !empty($e['eventUrl']) ? $e['eventUrl'] : $e['url'],
@@ -79,6 +81,7 @@ while ($cursor <= $end) {
                 'type'     => 'pro',
                 'title'    => 'Pro Session',
                 'time'     => $mt . ' / ' . $utc,
+                'sort_ts'  => $ts,
                 'duration' => '1 hour',
                 'desc'     => 'Pro Members Only',
                 'url'      => $logged_in ? '/portal/' : null,
@@ -107,6 +110,7 @@ while ($cursor <= $end) {
                 'type'     => 'cohort',
                 'title'    => 'Cohort 10 Session',
                 'time'     => $mt . ' / ' . $utc,
+                'sort_ts'  => $ts,
                 'duration' => '1 hour',
                 'desc'     => 'Cohort 10 Members Only',
                 'url'      => $logged_in ? '/portal/' : null,
@@ -117,9 +121,13 @@ while ($cursor <= $end) {
     $cursor->modify('+1 day');
 }
 
-// Sort each day's events by time so they appear in chronological order
+// Sort each day's events by timestamp so they appear in chronological order
 foreach ($event_map as &$day_events) {
-    usort($day_events, fn($a, $b) => strcmp($a['time'], $b['time']));
+    usort($day_events, fn($a, $b) => ($a['sort_ts'] ?? 0) <=> ($b['sort_ts'] ?? 0));
+    foreach ($day_events as &$event) {
+        unset($event['sort_ts']);
+    }
+    unset($event);
 }
 unset($day_events);
 

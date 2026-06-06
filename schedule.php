@@ -37,6 +37,9 @@ foreach ($meetup_events as $e) {
     if (!$ts) continue;
     $dt        = (new DateTime('@' . $ts))->setTimezone($mountain_tz);
     $day       = $dt->format('Y-m-d');
+    if ($day === '2026-06-09' && $dt->format('H:i') === '15:00') {
+        continue;
+    }
     $mt        = $dt->format('g:i a T');
     $utc       = gmdate('g:i a', $ts) . ' UTC';
     $rsvp_line = $e['rsvps'] > 0 ? $e['rsvps'] . ' RSVPs across the network' : '';

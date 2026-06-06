@@ -41,16 +41,6 @@
       "description": "Live AI development session. Pro members only."
     },
     {
-      "id": "pro-jun9-3pm",
-      "title": "Pro Session — Watch Me Build AI",
-      "type": "pro",
-      "date": "2026-06-09T21:00:00Z",
-      "duration": 60,
-      "timezone": "America/Denver",
-      "zoom_url": "https://us06web.zoom.us/j/83979200637?pwd=sHLaomkoOAb3yfsFCqBiecwwN3J83C.1",
-      "description": "Live AI development session. Pro members only."
-    },
-    {
       "id": "pro-jun10-3pm",
       "title": "Pro Session — Watch Me Build AI",
       "type": "pro",

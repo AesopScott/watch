@@ -8,6 +8,7 @@
     "test:portal-times": "node scripts/assert-portal-times.js",
     "test:calendar-exports": "node scripts/assert-calendar-exports.js",
     "test:free-pass-ctas": "node scripts/assert-free-pass-ctas.js",
-    "test:portal-month-calendar": "node scripts/assert-portal-month-calendar.js"
+    "test:portal-month-calendar": "node scripts/assert-portal-month-calendar.js",
+    "test:meetup-network-sessions": "node scripts/assert-meetup-network-sessions.js"
   }
 }

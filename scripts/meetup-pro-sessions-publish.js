@@ -193,6 +193,15 @@ async function repairGroupEvent(token, event) {
 
 async function main() {
   const publish = process.argv.includes('--publish');
+  const allowDirectGroupPush = process.argv.includes('--allow-direct-group-push');
+  if (publish && !allowDirectGroupPush) {
+    throw new Error([
+      'Refusing to create direct group events.',
+      'Meetup Pro sessions must be published as true network events from the Meetup Pro UI.',
+      'Use scripts/assert-meetup-network-sessions.js to verify network coverage.',
+      'Pass --allow-direct-group-push only for an intentional emergency repair.',
+    ].join(' '));
+  }
   const limitArg = process.argv.find((arg) => arg.startsWith('--limit='));
   const limit = limitArg ? Number(limitArg.split('=')[1]) : Infinity;
   const env = loadEnv();

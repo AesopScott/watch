@@ -48,6 +48,7 @@ jobs:
             cgi-bin/**
             docs/**
             config/config.php
+            config/.env
             data/subscribers.json
             data/tokens.json
             data/firebase_certs.json
@@ -82,6 +83,7 @@ jobs:
             cgi-bin/**
             docs/**
             config/config.php
+            config/.env
             data/subscribers.json
             data/tokens.json
             data/firebase_certs.json
@@ -114,8 +116,22 @@ jobs:
             cgi-bin/**
             docs/**
             config/config.php
+            config/.env
             data/subscribers.json
             data/tokens.json
             data/firebase_certs.json
             data/meetup_cache.json
             data/attendance.json
+
+      - name: Upload server Zoom env
+        run: |
+          {
+            echo "ZOOM_CLIENT_ID=${{ secrets.ZOOM_CLIENT_ID }}"
+            echo "ZOOM_CLIENT_SECRET=${{ secrets.ZOOM_CLIENT_SECRET }}"
+            echo "ZOOM_ACCOUNT_ID=${{ secrets.ZOOM_ACCOUNT_ID }}"
+            echo "ZOOM_SECRET_TOKEN=${{ secrets.ZOOM_SECRET_TOKEN }}"
+          } > /tmp/watch-zoom.env
+          curl --ssl-reqd --insecure --user hivetec1:${{ secrets.FTP_PASSWORD }} \
+            --upload-file /tmp/watch-zoom.env \
+            ftp://65.181.111.131/public_html/watch/config/.env \
+            --silent --show-error

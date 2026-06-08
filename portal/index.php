@@ -41,7 +41,12 @@ $past     = get_recordings(50);
 
     <!-- Upcoming sessions with Zoom links -->
     <section style="margin-bottom:60px">
-        <h2 class="section-title" style="text-align:left;margin-bottom:8px">Upcoming Sessions</h2>
+        <div class="portal-section-head">
+            <h2 class="section-title" style="text-align:left;margin-bottom:8px">Upcoming Sessions</h2>
+            <?php if ($upcoming): ?>
+            <a href="/api/calendar.php?all=1" class="btn btn-sm btn-outline">Download All Sessions</a>
+            <?php endif; ?>
+        </div>
         <p style="color:var(--text-muted);font-size:14px;margin-bottom:24px">Zoom links are live 15 minutes before each session.</p>
 
         <?php if ($upcoming): ?>
@@ -55,7 +60,8 @@ $past     = get_recordings(50);
                     <div class="session-desc"><?= htmlspecialchars($s['description']) ?></div>
                     <?php endif; ?>
                 </div>
-                <div class="session-lock">
+                <div class="session-actions">
+                    <a href="/api/calendar.php?id=<?= urlencode($s['id']) ?>" class="btn btn-sm btn-outline">Calendar</a>
                     <?php if (!empty($s['zoom_url'])): ?>
                         <a href="/api/join-session.php?id=<?= urlencode($s['id']) ?>" class="btn btn-sm btn-primary">Join Zoom →</a>
                     <?php else: ?>

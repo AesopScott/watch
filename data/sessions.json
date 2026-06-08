@@ -8,7 +8,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jun3-6pm",
@@ -18,7 +19,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jun8-3pm",
@@ -28,7 +30,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jun8-6pm",
@@ -38,10 +41,33 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
-      "id": "pro-jun9-3pm",
+      "id": "pro-20260609-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-09T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260609-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-09T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-jun9-3pm-legacy",
       "title": "Pro Session — Watch Me Build AI",
       "type": "pro",
       "date": "2026-06-09T21:00:00Z",
@@ -59,7 +85,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jun10-6pm",
@@ -69,7 +96,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260611-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-11T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260611-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-11T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jun15-3pm",
@@ -79,7 +129,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jun15-6pm",
@@ -89,7 +140,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260616-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-16T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260616-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-16T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jun17-3pm",
@@ -99,7 +173,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jun17-6pm",
@@ -109,7 +184,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260618-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-18T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260618-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-18T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jun22-3pm",
@@ -119,7 +217,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jun22-6pm",
@@ -129,7 +228,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260623-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-23T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260623-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-23T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jun24-3pm",
@@ -139,7 +261,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jun24-6pm",
@@ -149,7 +272,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260625-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-25T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260625-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-25T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jun29-3pm",
@@ -159,7 +305,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jun29-6pm",
@@ -169,7 +316,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260630-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-30T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260630-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-06-30T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jul1-3pm",
@@ -179,7 +349,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jul1-6pm",
@@ -189,7 +360,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260702-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-02T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260702-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-02T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jul6-3pm",
@@ -199,7 +393,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jul6-6pm",
@@ -209,7 +404,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260707-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-07T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260707-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-07T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jul8-3pm",
@@ -219,7 +437,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jul8-6pm",
@@ -229,7 +448,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260709-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-09T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260709-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-09T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jul13-3pm",
@@ -239,7 +481,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jul13-6pm",
@@ -249,7 +492,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260714-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-14T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260714-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-14T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jul15-3pm",
@@ -259,7 +525,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jul15-6pm",
@@ -269,7 +536,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260716-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-16T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260716-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-16T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jul20-3pm",
@@ -279,7 +569,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jul20-6pm",
@@ -289,7 +580,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260721-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-21T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260721-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-21T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jul22-3pm",
@@ -299,7 +613,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jul22-6pm",
@@ -309,7 +624,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260723-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-23T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260723-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-23T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jul27-3pm",
@@ -319,7 +657,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jul27-6pm",
@@ -329,7 +668,30 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260728-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-28T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260728-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-28T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
     },
     {
       "id": "pro-jul29-3pm",
@@ -339,7 +701,8 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
     },
     {
       "id": "pro-jul29-6pm",
@@ -349,7 +712,217 @@
       "duration": 60,
       "timezone": "America/Denver",
       "zoom_url": "",
-      "description": "Live AI development session. Pro members only."
+      "description": "Live AI development session. Pro members only.",
+      "join_session_id": "pro-sess"
+    },
+    {
+      "id": "pro-20260730-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-30T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260730-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-07-30T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260804-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-04T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260804-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-04T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260806-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-06T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260806-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-06T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260811-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-11T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260811-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-11T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260813-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-13T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260813-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-13T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260818-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-18T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260818-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-18T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260820-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-20T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260820-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-20T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260825-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-25T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260825-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-25T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260827-8am",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-27T14:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-20260827-3pm",
+      "title": "Pro Session",
+      "type": "pro",
+      "date": "2026-08-27T21:00:00Z",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "",
+      "join_session_id": "pro-sess",
+      "description": "Pro Members Only"
+    },
+    {
+      "id": "pro-sess",
+      "title": "Pro Session — Watch Me Build AI",
+      "type": "pro",
+      "date": "",
+      "duration": 60,
+      "timezone": "America/Denver",
+      "zoom_url": "https://us06web.zoom.us/j/84525705312?pwd=hS6LBDTcFMVGJpQARtLZ6xlzRIEyIy.1",
+      "description": "Shared Zoom room for Watch Me Build AI Pro sessions.",
+      "hidden": true
     }
   ]
 }

@@ -127,8 +127,8 @@ $months = portal_months(3);
                         <?php endif; ?>
                         <div class="portal-cal-actions">
                             <a href="/api/calendar.php?id=<?= urlencode($s['id']) ?>" class="btn btn-sm btn-outline">Calendar</a>
-                            <?php if (!empty($s['zoom_url'])): ?>
-                                <a href="/api/join-session.php?id=<?= urlencode($s['id']) ?>" class="btn btn-sm btn-primary">Join Zoom →</a>
+                            <?php if (session_zoom_url($s) !== ''): ?>
+                                <a href="<?= htmlspecialchars(session_join_path($s)) ?>" class="btn btn-sm btn-primary">Join Zoom →</a>
                             <?php else: ?>
                                 <span class="lock-badge">Link coming soon</span>
                             <?php endif; ?>

@@ -14,6 +14,31 @@ function get_all_sessions(): array {
     return $data['sessions'] ?? [];
 }
 
+function find_session_by_id(string $session_id): ?array {
+    foreach (get_all_sessions() as $session) {
+        if (($session['id'] ?? '') === $session_id) return $session;
+    }
+    return null;
+}
+
+function session_join_id(array $session): string {
+    return (string) ($session['join_session_id'] ?? $session['id'] ?? '');
+}
+
+function session_zoom_url(array $session): string {
+    $join_id = session_join_id($session);
+    if ($join_id !== '' && $join_id !== ($session['id'] ?? '')) {
+        $target = find_session_by_id($join_id);
+        return trim((string) ($target['zoom_url'] ?? ''));
+    }
+
+    return trim((string) ($session['zoom_url'] ?? ''));
+}
+
+function session_join_path(array $session): string {
+    return '/api/join-session.php?id=' . urlencode((string) ($session['id'] ?? ''));
+}
+
 function get_upcoming_sessions(int $limit = 10): array {
     $sessions = get_all_sessions();
     $now      = time();

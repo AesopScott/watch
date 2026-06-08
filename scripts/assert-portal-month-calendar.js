@@ -23,8 +23,8 @@ if (!portal.includes('/api/calendar.php?id=') || !portal.includes('/api/calendar
   failures.push('portal calendar must keep individual and all-session calendar downloads');
 }
 
-if (!portal.includes('/api/join-session.php?id=')) {
-  failures.push('portal calendar must keep gated join links');
+if (!portal.includes('session_join_path($s)')) {
+  failures.push('portal calendar must keep gated join links through session_join_path');
 }
 
 if (failures.length) {

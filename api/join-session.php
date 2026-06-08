@@ -33,7 +33,7 @@ if ($session === null) {
     join_error('Session not found. <a href="/portal/">Back to portal</a>');
 }
 
-$zoom_url = trim($session['zoom_url'] ?? '');
+$zoom_url = session_zoom_url($session);
 if ($zoom_url === '') {
     join_error('The Zoom link for this session isn\'t available yet — check back closer to the session time. <a href="/portal/">Back to portal</a>');
 }

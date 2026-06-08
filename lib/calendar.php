@@ -9,6 +9,10 @@ function calendar_session_url(string $session_id): string {
     return calendar_base_url() . '/api/join-session.php?id=' . rawurlencode($session_id);
 }
 
+function calendar_session_join_url(array $session): string {
+    return calendar_base_url() . session_join_path($session);
+}
+
 function calendar_escape_text(string $value): string {
     $value = str_replace("\\", "\\\\", $value);
     $value = str_replace(["\r\n", "\r", "\n"], "\\n", $value);
@@ -41,7 +45,7 @@ function calendar_event_lines(array $session): array {
 
     $id = (string) ($session['id'] ?? ('session-' . $ts));
     $duration = max(1, (int) ($session['duration'] ?? 60));
-    $join_url = calendar_session_url($id);
+    $join_url = calendar_session_join_url($session);
     $summary = trim((string) ($session['title'] ?? 'Watch Me Build AI Session'));
     $description = trim((string) ($session['description'] ?? ''));
     $description = trim($description . "\n\nJoin session: " . $join_url);

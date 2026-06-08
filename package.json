@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2"
+  },
+  "scripts": {
+    "test:critical-sessions": "node scripts/assert-critical-sessions.js"
   }
 }

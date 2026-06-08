@@ -17,7 +17,7 @@ function get_all_sessions(): array {
 function get_upcoming_sessions(int $limit = 10): array {
     $sessions = get_all_sessions();
     $now      = time();
-    $upcoming = array_filter($sessions, fn($s) => strtotime($s['date']) >= strtotime('today'));
+    $upcoming = array_filter($sessions, fn($s) => empty($s['hidden']) && strtotime($s['date']) >= strtotime('today'));
     usort($upcoming, fn($a, $b) => strtotime($a['date']) <=> strtotime($b['date']));
     return array_slice(array_values($upcoming), 0, $limit);
 }

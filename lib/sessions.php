@@ -37,9 +37,19 @@ function get_recordings(int $limit = 50): array {
 function format_session_date(string $date): string {
     $ts = strtotime($date);
     if (!$ts) return $date;
-    $today    = strtotime('today');
-    $tomorrow = strtotime('tomorrow');
-    if ($ts >= $today && $ts < $tomorrow)    return 'Today — ' . date('g:ia T', $ts);
-    if ($ts >= $tomorrow && $ts < $tomorrow + 86400) return 'Tomorrow — ' . date('g:ia T', $ts);
-    return date('D, M j', $ts) . (strpos($date, ':') !== false ? ' — ' . date('g:ia T', $ts) : '');
+    $eastern_tz = new DateTimeZone('America/New_York');
+    $utc_tz     = new DateTimeZone('UTC');
+    $eastern    = (new DateTimeImmutable('@' . $ts))->setTimezone($eastern_tz);
+    $utc        = (new DateTimeImmutable('@' . $ts))->setTimezone($utc_tz);
+    $today      = new DateTimeImmutable('today', $eastern_tz);
+    $prefix     = $eastern->format('D, M j');
+
+    if ($eastern >= $today && $eastern < $today->modify('+1 day')) {
+        $prefix = 'Today';
+    } elseif ($eastern >= $today->modify('+1 day') && $eastern < $today->modify('+2 days')) {
+        $prefix = 'Tomorrow';
+    }
+
+    if (strpos($date, ':') === false) return $prefix;
+    return $prefix . ' — ' . $eastern->format('g:ia T') . ' / ' . $utc->format('g:ia T');
 }

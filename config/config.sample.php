@@ -45,5 +45,10 @@ define('BREVO_ONBOARDING_TEMPLATE_ID', 0);  // Brevo template ID for onboarding 
 // Admin
 define('ADMIN_PASSWORD_HASH', '');     // Generate with: php -r "echo password_hash('yourpassword', PASSWORD_DEFAULT);"
 
+// Zoom Server-to-Server OAuth (optional constants; .env / server env also work)
+define('ZOOM_CLIENT_ID',     '');
+define('ZOOM_CLIENT_SECRET', '');
+define('ZOOM_ACCOUNT_ID',    '');
+
 // Site
 define('SITE_URL',            'https://watchmebuildai.com');

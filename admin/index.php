@@ -298,6 +298,14 @@ usort($recordings, fn($a, $b) => strtotime($b['date']) <=> strtotime($a['date'])
 <!-- ── Sessions tab ── -->
 <div id="tab-sessions" class="tab-content active">
     <div class="card">
+        <h2>Instructor Room</h2>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
+            Start the shared Pro Zoom room as host. This opens a fresh Zoom instructor link for the account that owns the meeting.
+        </p>
+        <a href="/api/start-pro-session.php" target="_blank" rel="noopener" class="btn btn-primary">Start Pro Session as Instructor</a>
+    </div>
+
+    <div class="card">
         <h2>Add Session</h2>
         <form method="POST">
             <input type="hidden" name="action" value="add_session">

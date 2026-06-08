@@ -38,7 +38,7 @@ $logged_in = is_active_subscriber();
                 <a href="/portal/" class="btn btn-sm">Member Portal →</a>
             <?php else: ?>
                 <a href="/login.php" class="btn btn-sm btn-outline">Log In</a>
-                <a href="https://buy.polar.sh/polar_cl_3bbf8000-9928-486f-890b-edb630b7733d" class="btn btn-sm">Start Free Trial</a>
+                <a href="/free-pass.php" class="btn btn-sm">Start Free Trial</a>
             <?php endif; ?>
         </div>
     </div>
@@ -122,7 +122,7 @@ $logged_in = is_active_subscriber();
             <div class="faq-item">
                 <button class="faq-q" onclick="toggleFaq(this)">What's the refund policy? <span class="faq-chevron">›</span></button>
                 <div class="faq-a">
-                    <p>You have a 7-day free trial — no charge until it ends. If you decide it's not for you during that window, just cancel and you won't be billed. After the trial, subscriptions are non-refundable but you can cancel to stop future charges.</p>
+                    <p>You can start with a 7-day pass without entering a credit card. If it works for you, choose a paid plan when you're ready. Paid subscriptions are non-refundable, but you can cancel to stop future charges.</p>
                 </div>
             </div>
 

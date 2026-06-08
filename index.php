@@ -3,7 +3,7 @@ require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/lib/auth.php';
 
 $logged_in      = is_active_subscriber();
-$polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-edb630b7733d';
+$free_pass_url  = '/free-pass.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,7 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
                 <a href="/portal/" class="btn btn-sm">Member Portal →</a>
             <?php else: ?>
                 <a href="/login.php" class="btn btn-sm btn-outline">Log In</a>
-                <a href="<?= htmlspecialchars($polar_checkout) ?>" class="btn btn-sm">Start Free Trial</a>
+                <a href="<?= htmlspecialchars($free_pass_url) ?>" class="btn btn-sm">Start Free Trial</a>
             <?php endif; ?>
         </div>
     </div>
@@ -70,8 +70,8 @@ $polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-ed
             the decisions, the dead ends, the agent pipelines that actually ship.
         </p>
         <div class="hero-cta">
-            <a href="<?= htmlspecialchars($polar_checkout) ?>" class="btn btn-primary btn-lg">Start 7-Day Free Trial</a>
-            <span class="hero-cta-note">$100/month after trial &nbsp;·&nbsp; Cancel any time</span>
+            <a href="<?= htmlspecialchars($free_pass_url) ?>" class="btn btn-primary btn-lg">Start 7-Day Pass</a>
+            <span class="hero-cta-note">No credit card required &nbsp;·&nbsp; $100/month when you choose to subscribe</span>
         </div>
         <div class="hero-proof">
             <span>Real production systems</span>

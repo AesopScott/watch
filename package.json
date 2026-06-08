@@ -4,8 +4,9 @@
   },
   "scripts": {
     "test:critical-sessions": "node scripts/assert-critical-sessions.js",
-    "test": "npm run test:critical-sessions && npm run test:portal-times && npm run test:calendar-exports",
+    "test": "npm run test:critical-sessions && npm run test:portal-times && npm run test:calendar-exports && npm run test:free-pass-ctas",
     "test:portal-times": "node scripts/assert-portal-times.js",
-    "test:calendar-exports": "node scripts/assert-calendar-exports.js"
+    "test:calendar-exports": "node scripts/assert-calendar-exports.js",
+    "test:free-pass-ctas": "node scripts/assert-free-pass-ctas.js"
   }
 }

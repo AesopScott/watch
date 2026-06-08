@@ -8,7 +8,7 @@ $logged_in      = is_active_subscriber();
 $force_refresh  = isset($_GET['refresh']) && $_GET['refresh'] !== 'false';
 $upcoming       = get_upcoming_sessions(60);
 $meetup_events  = get_meetup_events(60, $force_refresh);
-$polar_checkout = 'https://buy.polar.sh/polar_cl_' . '3bbf8000-9928-486f-890b-edb630b7733d';
+$free_pass_url  = '/free-pass.php';
 
 // ── Build event map keyed by YYYY-MM-DD ──────────────────────────────────────
 $event_map   = [];
@@ -185,7 +185,7 @@ $today  = date('Y-m-d');
                 <a href="/portal/" class="btn btn-sm">Member Portal →</a>
             <?php else: ?>
                 <a href="/login.php" class="btn btn-sm btn-outline">Log In</a>
-                <a href="<?= htmlspecialchars($polar_checkout) ?>" class="btn btn-sm">Start Free Trial</a>
+                <a href="<?= htmlspecialchars($free_pass_url) ?>" class="btn btn-sm">Start Free Trial</a>
             <?php endif; ?>
         </div>
     </div>
@@ -264,7 +264,7 @@ $today  = date('Y-m-d');
             <span style="font-size:12px;color:var(--text-muted)">🔒 Subscribers only</span>
             <div style="display:flex;gap:8px;margin-top:10px">
                 <a href="/login.php" class="btn btn-sm btn-outline" style="flex:1;text-align:center;font-size:12px">Log In →</a>
-                <a href="<?= htmlspecialchars($polar_checkout) ?>" class="btn btn-sm btn-primary" style="flex:1;text-align:center;font-size:12px">Subscribe</a>
+                <a href="/pricing.php" class="btn btn-sm btn-primary" style="flex:1;text-align:center;font-size:12px">Subscribe</a>
             </div>
         </span>
     </div>

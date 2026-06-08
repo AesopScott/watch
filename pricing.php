@@ -35,7 +35,7 @@ $plans = [
         'amount'      => '$100',
         'period'      => '/month',
         'limit'       => '30 seats per live session — first in',
-        'trial'       => 'Start with a 7-day free trial',
+        'trial'       => 'Start with a 7-day pass — no credit card required',
         'callout'     => 'Real client work. Every Pro Session is built around an actual project commissioned by one of our customers — so you learn to ship real AI products, exactly like working at your own AI agency.',
         'callout_color' => '#7c3aed',
         'features'    => [
@@ -45,8 +45,8 @@ $plans = [
             'Email reminder before every session',
             'Cancel any time — access through end of billing month',
         ],
-        'cta'      => 'Start Free Trial',
-        'checkout' => 'https://buy.polar.sh/polar_cl_3bbf8000-9928-486f-890b-edb630b7733d',
+        'cta'      => 'Start 7-Day Pass',
+        'checkout' => '/free-pass.php',
     ],
     [
         'id'          => 'cohort10',

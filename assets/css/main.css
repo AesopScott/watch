@@ -659,7 +659,8 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
 .login-box h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
 .login-sub { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
 .login-box label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: var(--text-muted); }
-.login-box input[type="email"] {
+.login-box input[type="email"],
+.login-box input[type="password"] {
     width: 100%;
     padding: 10px 14px;
     background: var(--bg);
@@ -672,7 +673,8 @@ a.stage-item:hover { text-decoration: none; opacity: 0.85; }
     outline: none;
     transition: border-color 0.15s;
 }
-.login-box input[type="email"]:focus { border-color: var(--accent); }
+.login-box input[type="email"]:focus,
+.login-box input[type="password"]:focus { border-color: var(--accent); }
 .login-box button[type="submit"] {
     width: 100%;
     padding: 12px;
